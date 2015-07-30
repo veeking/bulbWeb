@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="bulbApp">
 <head lang="en">
     <meta charset="UTF-8">
-    <title>照明灯泡</title>
+    <!--Less.js编译.less文件并进行本地存储-->
+    <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
+    <title>Bulb App</title>
 </head>
 <body>
+  <div ng-controller="carouselDemoCtrl">
+        <div style="height: 305px;">
+             <carousel interval="myInterval" no-wrap="noWrapSlides">
+                 <slide ng-repeat="slide in slides" active="slide.active">
+                     <img ng-src="{{slide.image}}" style="margin:auto;"/>
+                     <div class="carousel-caption">
+                         <h4>Slide {{$index}}</h4>  <!--轮播小点-->
+                          <p>{{slide.text}}</p>  <!--轮播文字说明-->
+                     </div>
+                 </slide>
+             </carousel>
+        </div>
+  </div><!--end carouseDemoCtrl-->
 
+  <script src="less/less.js"></script>
+  <script src="lib/framework/jquery-1.9.1.js"></script>
+  <script src="lib/framework/angular.js"></script>
+  <script src="lib/framework/ui-bootstrap-0.11.0.js"></script>
+  <script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
+  <script src="script/app.js"></script>
 </body>
 </html>
