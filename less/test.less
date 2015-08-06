@@ -74,6 +74,12 @@ ul{
          .float(left);
          padding-top:@h;
          padding-bottom:@h;
+         &.active{
+           background-color:@fore-color;
+         }
+         &:hover{
+           background-color:@fore-color;
+         }
          a{
            .font();
            .border(right);
@@ -81,15 +87,9 @@ ul{
            text-align:center;
            padding-left:@p10 * 2;
            padding-right:@p10 * 2;
-
          }  // end a
-         &:hover{
-           background-color:@fore-color;
-         }
        } // end li
-       li.active{
-         background-color:@fore-color;
-       }
+
      }
   } // end menu
 
