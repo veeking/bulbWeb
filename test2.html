@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+     var arr =  [3,5,83,81]
+//     function arrNext(currentArr){
+//        var current = currentArr;
+//        var nextNum;
+//        var pos = arr.indexOf(current);
+//         if(pos > -1){
+//            if(arr[pos+1] != undefined){
+//                nextNum = arr[pos+1];
+//                console.log(arr[2] + "的下一个元素是" + nextNum);
+//            }else{
+//                console.log(currentArr + "已经是最后一个元素啦");
+//            }
+//         }
+//         return nextNum;
+//
+//     }
+     function arrNext(currentArr){
+         var nextNum = currentArr + 1;
+         console.log(arr[currentArr] + "的下一个元素是" + arr[nextNum]);
+         return arr[nextNum];
+
+     }
+     var res = arrNext(2);
+     console.log("当前数组为" + arr);
+
+</script>
+</body>
+</html>

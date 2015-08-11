@@ -3,28 +3,78 @@
 <head lang="en">
     <meta charset="UTF-8">
     <!--Less.js编译.less文件并进行本地存储-->
+    <link rel="stylesheet/less" href="less/main.less"/>
     <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
     <title>Bulb App</title>
 </head>
-<body>
-  <div ng-controller="carouselDemoCtrl">
-        <div style="height: 305px;">
-             <carousel interval="myInterval" no-wrap="noWrapSlides">
-                 <slide ng-repeat="slide in slides" active="slide.active">
-                     <img ng-src="{{slide.image}}" style="margin:auto;"/>
-                     <div class="carousel-caption">
-                         <h4>Slide {{$index}}</h4>  <!--轮播小点-->
-                          <p>{{slide.text}}</p>  <!--轮播文字说明-->
-                     </div>
-                 </slide>
-             </carousel>
+<body ng-controller="mainCtrl">
+  <div class="head container-fluid">
+        <div class="head-inner container">
+            <div class="logo col-md-8">
+                <h1>
+                    <a href="/index">BUIB<font color="#FEC60D">X·</font></a>
+                    <span>THE BEST QUILITY PRODUCT!</span>
+                </h1>
+            </div>
+            <!--end logo-->
+            <div class="other col-md-4">
+                 <P>WWW.BULBX.COM</P>
+                 <div class="other-box">
+                     <button class="btn btn-primary">登 录</button>
+                     <button class="btn btn-default">注 册</button>
+                 </div>
+            </div>
+            <!--end other-->
+        </div> <!-- end head-inner-->
+  </div><!--head-->
+
+  <div class="main container">
+        <div class="main-top row">
+         <div class="nav col-md-8">
+
+             <ul class="nav-menu">
+                 <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == 0}" ng-mouseover="moveSelect($index)">
+                     <a href="###" class="navItemLink">{{navMenu.navName}}</a>
+                     <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
+                     <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
+                         <li ng-repeat="navChildTwo in navMenu.navChild"><a href="###">{{navChildTwo.navName}}</a></li>
+                     </ul>  <!--end nav-menu-two -->
+
+                 </li>
+             </ul><!--end nav-menu-->
+
+
+         </div><!--end nav-->
+
+         <div class="search col-md-4">
+             <form class="form-group" action="/">
+                 <input type="text" class="form-control" placeholder="请输入关键字.." />
+                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                 <input type="submit" hidden="hidden"/>
+             </form>
+         </div><!--end search-->
+      </div> <!--end main-top -->
+
+     <div class="main-slider row">
+        <div class="slider col-md-12" ng-controller="sliderCtrl">
+            <carousel>
+                <slide ng-repeat="slide in slides">
+                    <img ng-src="{{slide.src}}"/>
+                </slide>
+            </carousel>
         </div>
-  </div><!--end carouseDemoCtrl-->
+     </div>
+  </div><!--end main-->
+  <div class="footer container-fluid">
+
+  </div>
+  <!--end footer-->
+
 
   <script src="less/less.js"></script>
   <script src="lib/framework/jquery-1.9.1.js"></script>
   <script src="lib/framework/angular.js"></script>
-  <script src="lib/framework/ui-bootstrap-0.11.0.js"></script>
+  <script src="lib/framework/angular-route.js"></script>
   <script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
   <script src="script/app.js"></script>
 </body>

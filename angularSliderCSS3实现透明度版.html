@@ -23,10 +23,15 @@
             background: #e6e6e6;
         }
         #slideBox li{
+            transition:opacity 0.6s linear;
             position: absolute;
             width: 800px;
             top:0;
             left:0;
+            opacity: 0;
+        }
+        #slideBox li.slideanimate{
+            opacity: 1;
         }
         #slideBox li img{
           width:100%;
@@ -72,7 +77,7 @@
 <body>
    <div id="carousel" ng-controller="slideCtrl" interval="500">
        <ul id="slideBox">
-           <li ng-repeat="slideItem in slideItems" class="slide-animate" ng-hide="!isCurrent($index)">
+           <li ng-repeat="slideItem in slideItems" ng-class="{slideanimate:$index == current}" ng-hide="!isCurrent($index)">
                <img ng-src="{{slideItem.url}}" alt="{{slideItem.text}}"/>
                <p>{{slideItem.text}}</p>
            </li>
@@ -90,7 +95,10 @@
 <script src="lib/framework/angular-animate.js"></script>
 
   <script>
-       // 整体性的滑动轮播
+       // 单张滑动轮播,
+       // 缺点：
+       // 1、快速切换回出现闪白BUG 原因估计是ng-hide没有及时显示元素
+       // 2、切换上下张时 滑动的元素之间出现空白区域，原因是 两个对象(当前的和上下张)的animate帧数不一致
        var testApp = angular.module('testApp',['ngAnimate']);
        testApp.controller('slideCtrl',function($scope,$attrs){
            $scope.interval = $attrs.interval;  //  定时 帧数
@@ -124,39 +132,39 @@
        //逻辑：右滑时，当前的向右(800)滑动消失，上一张的从左侧(-800)滑动进来当前(0)
        //说明：最左侧x：-800，最右侧x: 800
        //对象：①当前的   ②上/下一张的
-       testApp.animation('.slide-animate',function(){
-           var scope;
-           return {
-               addClass: function (element, className, done) {  //  当前的滑动
-                   scope = element.scope();
-                   if (className == 'ng-hide') { //如果切换到下一张(下一张是隐藏的)
-                   var slideWidth = element.parent().width();
-                   if(scope.direction === "left"){  //  方向右时  向右滑动
-                       slideWidth = -slideWidth;
-                   }
-                        element.animate({
-                          left:slideWidth
-                        },scope.interval,done)
-                   }else{
-                       done();
-                   }  // end className
-               },  // end addClass
-               removeClass:function(element,className,done){  // 上/下一张的 滑动
-                   if(className == 'ng-hide'){
-                       element.removeClass('ng-hide');
-                       var startPoint = element.parent().width();  // 上/下一张的滑向起始点
-                       if(scope.direction === "right"){
-                           startPoint = -startPoint;
-                       }
-                       element.css({  // 为左时从右侧滑向当前，为右时从最左滑向当前(0)
-                           left:startPoint
-                       }).animate({
-                           left:0
-                       },scope.interval,done)
-                   }
-               }
-             }  // end return
-       });
+//       testApp.animation('.slide-animate',function(){
+//           var scope;
+//           return {
+//               addClass: function (element, className, done) {  //  当前的滑动
+//                   scope = element.scope();
+//                   if (className == 'ng-hide') { //如果切换到下一张(下一张是隐藏的)
+//                   var slideWidth = element.parent().width();
+//                   if(scope.direction === "left"){  //  方向右时  向右滑动
+//                       slideWidth = -slideWidth;
+//                   }
+//                        element.animate({
+//                          left:slideWidth
+//                        },scope.interval,done)
+//                   }else{
+//                       done();
+//                   }  // end className
+//               },  // end addClass
+//               removeClass:function(element,className,done){  // 上/下一张的 滑动
+//                   if(className == 'ng-hide'){
+//                       element.removeClass('ng-hide');
+//                       var startPoint = element.parent().width();  // 上/下一张的滑向起始点
+//                       if(scope.direction === "right"){
+//                           startPoint = -startPoint;
+//                       }
+//                       element.css({  // 为左时从右侧滑向当前，为右时从最左滑向当前(0)
+//                           left:startPoint
+//                       }).animate({
+//                           left:0
+//                       },scope.interval,done)
+//                   }
+//               }
+//             }  // end return
+//       });
   </script>
 </body>
 </html>
