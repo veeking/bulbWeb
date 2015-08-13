@@ -5,6 +5,7 @@
     <!--Less.js编译.less文件并进行本地存储-->
     <link rel="stylesheet/less" href="less/main.less"/>
     <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
+    <link rel="stylesheet/less" href="lib/css/media.css"/>
     <title>Bulb App</title>
 </head>
 <body ng-controller="mainCtrl">
@@ -59,11 +60,62 @@
         <div class="slider col-md-12" ng-controller="sliderCtrl">
             <carousel>
                 <slide ng-repeat="slide in slides">
-                    <img ng-src="{{slide.src}}"/>
+                    <a href="###"><img ng-src="{{slide.src}}"/></a>
                 </slide>
             </carousel>
         </div>
-     </div>
+     </div><!--end main-slider-->
+
+      <div class="main-info row" ng-controller="infoCtrl">
+          <div class="info-title">
+              <h3>高新技术的现代化设备和团队</h3>
+          </div>
+          <div class="info-cont">
+             <div class="col-md-8">
+                <div class="cont-img" ng-repeat="infoCont in infoConts">
+                    <img ng-src="{{infoCont.src}}"/>
+                </div>
+             </div>
+             <div class="col-md-4">
+                 <h4>{{infoTitle}}</h4>
+                 <div class="cont-txt">{{infoCont}}</div>
+                 <div class="cont-txt-main">{{infoContMain}}</div>
+                 <button class="btn btn-primary">更多</button>
+             </div>
+          </div>
+      </div><!--end main-info-->
+
+      <div class="main-point row" ng-controller="pointCtrl">
+          <div class="point-head">
+              <h3>产品与服务优势</h3>
+          </div>
+
+          <div class="point-cont">
+             <div class="col-md-12">
+
+                 <div class="point-cont-item" ng-repeat="point in points" ng-class="{clearRightMargin:$index == points.length - 1}">
+                     <h4>{{point.title}}</h4>
+                     <div class="cont-item-icon">
+                         <a class="glyphicon {{point.icon}}"></a>
+                         <span>{{point.intro}}</span>
+                     </div>
+                     <div class="cont-item-desc">{{point.desc}}</div>
+                     <button class="btn btn-default">更多</button>
+                 </div>  <!--end point-cont-item-->
+
+
+             </div>
+          </div>  <!-- end point-cont-->
+      </div><!--end main-point-->
+
+      <div class="main-other row">
+          <div class="other-news col-md-8">
+
+          </div><!--end other-news -->
+          <div class="other-list col-md-4">
+
+          </div><!--end other-list -->
+      </div>  <!--end main-other -->
   </div><!--end main-->
   <div class="footer container-fluid">
 

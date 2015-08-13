@@ -1,0 +1,60 @@
+/*header -> other*/
+@media (max-width: 768px){
+    .head .head-inner .other .other-box button {
+        width: 100%;
+    }
+}
+/*main -> slide*/
+@media (min-width: 768px) and (max-width: 992px) {
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 300px;
+    }
+}
+                 /*小于768时*/
+@media (max-width: 768px){
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 250px;
+    }
+}
+
+/*main -> info*/
+@media (max-width: 1200px){
+    .main .main-info .info-cont .col-md-4 div.cont-txt,.main .main-info .info-cont .col-md-4 div.cont-txt-main{
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .main .main-info .info-cont .col-md-4 div.cont-txt{
+       max-height:30px;
+         /*设置最大高度  让超出此高度的元素隐藏*/
+    }
+    .main .main-info .info-cont .col-md-4 div.cont-txt-main{
+       max-height:80px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .main .main-info .info-cont .col-md-8,.main .main-info .info-cont .col-md-4{
+        width: 100%;
+    }
+}
+@media (max-width: 768px){
+    .main .main-info .info-cont .col-md-8,.main .main-info .info-cont .col-md-4{
+        width: 100%;
+    }
+}
+/*main -> item*/
+@media(max-width: 992px){
+    .main .main-point .point-cont .col-md-12 div.point-cont-item:nth-child(even){
+            margin-right:0;
+    }
+    .main .main-point .point-cont .col-md-12 div.point-cont-item{
+         width:48.6%;
+         margin-bottom:20px;
+     }
+}
+@media(max-width: 768px){
+    .main .main-point .point-cont .col-md-12 div.point-cont-item{
+        width:100%;
+        margin-right:0;
+    }
+}
+/*main -> other*/

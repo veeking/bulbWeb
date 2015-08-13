@@ -48,8 +48,8 @@ bulbApp.directive('carousel',function(){
         transclude:true,
         template:"<div class=\"carousel\">" +
                  "<ul class=\"carousel-inner\" ng-transclude></ul>"+
-                 "<div class=\"carousel-index\">" +
-                 "<a href=\"###\" ng-class=\"{selectActive:slideActive($index)}\" ng-repeat=\"slide in slides\" ng-click=\"select($index)\">{{$index}}</a>" +
+                 "<div class=\"carousel-index row\">" +
+                 "<a href=\"###\" ng-class=\"{selectActive:slideActive($index)}\" ng-repeat=\"slide in slides track by $index\" ng-click=\"select($index)\">■</a>" +
                  "</div>" +
                  "</div>",
         controller : function($scope){
@@ -58,7 +58,7 @@ bulbApp.directive('carousel',function(){
              carousel.select = $scope.select = function(index){
                  carousel.currIndex = index;
              } // end select
-             carousel.indexActive = $scope.indexIsActive = function(index){
+             carousel.slideActive = $scope.slideActive = function(index){
                  return (index === carousel.currIndex);
              }// end indexIsActive
         }
@@ -73,3 +73,47 @@ bulbApp.directive('slide',function(){
         template:"<li ng-class=\"{slideActive:slideActive($index)}\" ng-transclude></li>"
     }
 });
+bulbApp.controller('infoCtrl',function($scope){
+    $scope.infoConts = [
+        {
+           "src":"img/info/i1.jpg",
+        },
+        {
+            "src":"img/info/i2.jpg",
+        },
+        {
+            "src":"img/info/i3.jpg",
+        }
+    ];
+   $scope.infoTitle = "精湛的技术成就完美产品";
+   $scope.infoCont = "采用CWA电器点灯线路，可以减少因电流波动过大对灯电极的损耗，从而提高光源的使用寿命.可以减少因电流波动过大对灯电极的损耗。";
+   $scope.infoContMain = "采用CWA电器点灯线路，可以减少因电流波动过大对灯电极的损耗，从而提高光源的使用寿命.采用CWA电器点灯线路，可以减少因电流波动过大对灯电极的损耗。采用CWA电器点灯线路，可以减少因电流波动过大对灯电极的损耗，从而提高光源的使用寿命.采用CWA电,采用CWA电器点灯线路...";
+});
+bulbApp.controller('pointCtrl',function($scope){
+      $scope.points = [
+          {
+            "title":"精致工艺",
+            "icon":"glyphicon-asterisk",
+            "intro":"外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息.",
+            "desc":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息"
+          },
+          {
+              "title":"先进设备",
+              "icon":"glyphicon-cog",
+              "intro":"外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息.",
+              "desc":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息"
+          },
+          {
+              "title":"现代技术",
+              "icon":"glyphicon-cd",
+              "intro":"外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息.",
+              "desc":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息"
+          },
+          {
+              "title":"质量控制",
+              "icon":"glyphicon-repeat",
+              "intro":"外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息.",
+              "desc":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息"
+          }
+      ];
+})
