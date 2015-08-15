@@ -5,6 +5,11 @@
     }
 }
 /*main -> slide*/
+@media (max-width: 1200px){
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 350px;
+    }
+}
 @media (min-width: 768px) and (max-width: 992px) {
     .main .main-slider .slider .carousel ul.carousel-inner{
         height: 300px;
@@ -57,4 +62,53 @@
         margin-right:0;
     }
 }
+
+
 /*main -> other*/
+@media(max-width: 992px){
+    .main .main-other .other-news,.main .main-other .other-list{
+        float:left;
+    }
+    .main .main-other .other-news{
+         width: 65%
+     }
+    .main .main-other .other-list{
+        margin-left:5%;
+        width: 30%;
+    }
+}
+
+@media(max-width: 768px){
+    .main .main-other .other-news,.main .main-other .other-list{
+      width: 100%;
+      float: none;
+    }
+    .main .main-other .other-list{
+        margin-top:20px;
+        margin-left:0;
+    }
+    .main .main-other .other-list .list{
+        margin-top:20px;
+    }
+    .main .main-other .other-list .list ul li{
+          width: 100%;
+          margin-bottom: 10px;
+          background: #1F1F1F;
+          height: 50px;
+          line-height: 50px;
+    }
+    .main .main-other .other-list .list ul li span{
+           height: 100%;
+    }
+    .main .main-other .other-list .list ul li a{
+           color: #fff;
+    }
+}
+
+/*foot*/
+@media(max-width: 992px){
+    .copy-right,.social{
+        width: 50%;
+        float: left;
+    }
+}

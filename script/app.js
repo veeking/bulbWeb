@@ -25,6 +25,7 @@ bulbApp.controller('mainCtrl',function($scope){
     $scope.moveSelect = function(index){
         $scope.moveCurrent = index;
     }
+
 });  // end controller
 bulbApp.controller('sliderCtrl',function($scope){
      $scope.slides = [
@@ -52,15 +53,28 @@ bulbApp.directive('carousel',function(){
                  "<a href=\"###\" ng-class=\"{selectActive:slideActive($index)}\" ng-repeat=\"slide in slides track by $index\" ng-click=\"select($index)\">■</a>" +
                  "</div>" +
                  "</div>",
-        controller : function($scope){
+        controller : function($scope,$timeout,$attrs){
              var carousel = this;
              carousel.currIndex = 0;
+             carousel.interval = $attrs.interval;
              carousel.select = $scope.select = function(index){
                  carousel.currIndex = index;
              } // end select
              carousel.slideActive = $scope.slideActive = function(index){
                  return (index === carousel.currIndex);
              }// end indexIsActive
+
+            function startTimeout(){
+                $timeout(function(){
+                    if(carousel.currIndex < $scope.slides.length-1){
+                       carousel.currIndex++;
+                    }else{
+                       carousel.currIndex = 0
+                    }
+                    startTimeout();
+                },carousel.interval)
+            }
+            startTimeout();
         }
     }
 });
@@ -117,3 +131,45 @@ bulbApp.controller('pointCtrl',function($scope){
           }
       ];
 })
+
+bulbApp.controller('otherCtrl',function($scope){
+         $scope.otherNews = [
+             {
+                "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息1"
+             },
+             {
+                 "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息2"
+             },
+             {
+                 "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息3"
+             }
+         ]
+});
+bulbApp.controller('listCtrl',function($scope){
+        $scope.newProducts = [
+            {
+               "name":"飞利浦灯泡1"
+            },
+            {
+                "name":"飞利浦漆漆灯泡1"
+            },
+            {
+                "name":"飞利浦漆漆加烤漆灯泡1"
+            },
+            {
+                "name":"加烤漆灯泡灯泡1"
+            },
+            {
+                "name":"飞利飞利浦漆漆加烤漆灯的绯闻绯闻二个人个人泡泡1"
+            },
+            {
+                "name":"利浦漆漆加烤漆灯泡灯泡1"
+            },
+            {
+                "name":"飞利浦灯飞烤漆灯泡泡1"
+            },
+            {
+                 "name":"飞利浦灯泡1"
+            }
+        ];
+});

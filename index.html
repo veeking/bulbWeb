@@ -58,7 +58,7 @@
 
      <div class="main-slider row">
         <div class="slider col-md-12" ng-controller="sliderCtrl">
-            <carousel>
+            <carousel interval="2000">
                 <slide ng-repeat="slide in slides">
                     <a href="###"><img ng-src="{{slide.src}}"/></a>
                 </slide>
@@ -108,17 +108,51 @@
           </div>  <!-- end point-cont-->
       </div><!--end main-point-->
 
-      <div class="main-other row">
+      <div class="main-other row" ng-controller="otherCtrl">
           <div class="other-news col-md-8">
+               <h3>提供专业化的工业设计生产服务和顶尖的<br/>国内制造团队</h3>
+               <div class="news-cont">
+                    <div class="news-cont-txt">
+                       <span class="txt-a">工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员</span>
+                       <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员风微风菲菲</span>
+                    </div>
+                    <div class="news-cont-main">
+                        <a href="###" ng-repeat="otherNew in otherNews">● {{otherNew.content}}</a>
+                    </div>
+                   <div class="news-cont-txt">
+                       <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员</span>
+                       <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员风微风菲菲</span>
+                   </div>
 
+                    <button class="btn btn-default">更多</button>
+               </div>
           </div><!--end other-news -->
-          <div class="other-list col-md-4">
-
+          <div class="other-list col-md-4" ng-controller="listCtrl">
+              <h3>产品列表</h3>
+              <div class="list">
+                  <ul>
+                      <li ng-repeat="newProduct in newProducts track by $index">
+                         <span class="listIcon"> > </span>
+                         <a href="/product/{{newProduct.name}}">{{newProduct.name}}</a>
+                      </li>
+                  </ul>
+              </div>
           </div><!--end other-list -->
       </div>  <!--end main-other -->
   </div><!--end main-->
   <div class="footer container-fluid">
-
+      <div class="footer-inner container">
+         <div class="copy-right col-md-8">
+             <a href="###">BUIBX</a>
+             <span> © 2015 | XXX版权所有</span>
+         </div>
+         <div class="social col-md-4">
+             <a href="###" class="glyphicon glyphicon-phone"></a>
+             <a href="###" class="glyphicon glyphicon-heart"></a>
+             <a href="###" class="glyphicon glyphicon-star"></a>
+             <a href="###" class="glyphicon glyphicon-cloud"></a>
+         </div>
+      </div>
   </div>
   <!--end footer-->
 
