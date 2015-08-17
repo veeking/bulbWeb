@@ -5,21 +5,21 @@ var bulbApp = angular.module('bulbApp',[]);
 bulbApp.controller('mainCtrl',function($scope){
         $scope.moveCurrent = 0;
         $scope.navMenus = [
-            {"navId":1,"navName":"首 页","navChild":[]},
-            {"navId":2,"navName":"概 况","navChild":[]},
-            {"navId":3,"navName":"服 务","navChild":[
-               {"navId":31,"navName":"服务1"},
-               {"navId":32,"navName":"服务2"},
-               {"navId":33,"navName":"服务3"},
-               {"navId":34,"navName":"服务4"}
+            {"navId":1,"navName":"首 页","navUrl":"/index","navChild":[]},
+            {"navId":2,"navName":"概 况","navUrl":"/intro","navChild":[]},
+            {"navId":3,"navName":"服 务","navUrl":"/service","navChild":[
+               {"navId":31,"navName":"服务1","navUrl":"/service-1"},
+               {"navId":32,"navName":"服务2","navUrl":"/service-2"},
+               {"navId":33,"navName":"服务3","navUrl":"/service-3"},
+               {"navId":34,"navName":"服务4","navUrl":"/service-4"}
             ]},
-            {"navId":4,"navName":"产 品","navChild":[
-                {"navId":41,"navName":"产品1"},
-                {"navId":42,"navName":"产品2"},
-                {"navId":43,"navName":"产品3"},
-                {"navId":44,"navName":"产品4"}
+            {"navId":4,"navName":"产 品","navUrl":"/product","navChild":[
+                {"navId":41,"navName":"产品1","navUrl":"/product-1"},
+                {"navId":42,"navName":"产品2","navUrl":"/product-2"},
+                {"navId":43,"navName":"产品3","navUrl":"/product-3"},
+                {"navId":44,"navName":"产品4","navUrl":"/product-4"}
             ]},
-            {"navId":5,"navName":"关于我们","navChild":[]}
+            {"navId":5,"navName":"关于我们","navUrl":"/about","navChild":[]}
         ];
 
     $scope.moveSelect = function(index){
@@ -31,14 +31,14 @@ bulbApp.controller('sliderCtrl',function($scope){
      $scope.slides = [
          {
            "src":"img/slide-1.jpg",
-           "txt":"图片测试1"
+           "txt":"图片说明测试1"
          },
          {
            "src":"img/slide-2.jpg",
-           "txt":"图片测试2"
+           "txt":"图片说明测试2"
          },{
            "src":"img/slide-3.jpg",
-           "txt":"图片测试3"
+           "txt":"图片说明测试3"
          }
      ];
 });
@@ -64,17 +64,20 @@ bulbApp.directive('carousel',function(){
                  return (index === carousel.currIndex);
              }// end indexIsActive
 
-            function startTimeout(){
+            function startNext(){
                 $timeout(function(){
-                    if(carousel.currIndex < $scope.slides.length-1){
-                       carousel.currIndex++;
-                    }else{
-                       carousel.currIndex = 0
-                    }
-                    startTimeout();
+                  goNext();
+                  startNext();
                 },carousel.interval)
-            }
-            startTimeout();
+            } // end startTimeout
+            function goNext(){
+                if(carousel.currIndex < $scope.slides.length-1){
+                    carousel.currIndex++;
+                }else{
+                    carousel.currIndex = 0
+                }
+            }  // end goNext
+            startNext();
         }
     }
 });

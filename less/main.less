@@ -2,6 +2,7 @@
 
 @fore-color:@brand-primary;
 @back-color:#1F1F1F;
+@my-font-color:#D0D0D0;
 @middleMargin:0 auto;
 @p30:30px;
 @p10:10px;
@@ -28,10 +29,10 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
   -webkit-transition:@style @interval @type;
   -moz-transition:@style @interval @type;
 }
-.box-shadow(@x,@y,@b,@color:@gray-lighter){
-  box-shadow:@x @y @b @color;
-  -webkit-box-shadow:@x @y @b @color;
-  -moz-box-shadow:@x @y @b @color;
+.box-shadow(@x,@y,@b,@color:@gray-lighter,@type:none){
+  box-shadow:@x @y @b @color @type;
+  -webkit-box-shadow:@x @y @b @color @type;
+  -moz-box-shadow:@x @y @b @color @type;
 }
 .container .row{  // 清除bootstrap默认的边距 统一所有
   margin-left:0;
@@ -67,8 +68,55 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
   margin-top:@p10 + 2;
 }
 
-//开始!!!
+//移动导航
+.nav-mobile{
+  @navH:100px;
+  z-index:200;
+  position: absolute;
+  right: 0;
+  transform:translateX(118px);
+  top: 6px;
+  .transition(transform,0.4s,ease-out);
+  .clearfix();
+  &.showNav{
+    transform:translateX(0px);
+  }
+  button.nav-mobile-btn{
+    display: block;
+    border: 1px solid @gray-dark;
+    font-size: @font-size-h1;
+    &:active{
+      color:#fff;
+      background-color: @fore-color;
+    }
+  }
+  button.nav-mobile-btn,ul.nav-mobile-menu{
+    float: left;
+  }
+  button.nav-mobile-btn,ul.nav-mobile-menu li a{
+    background:@back-color;
+    text-align: center;
+    display: block;
+    color: @my-font-color;
+    height: @navH;
+    line-height: @navH;
+    padding-left: @p10 * 3;
+    padding-right: @p10 * 3;
+  }
+  ul.nav-mobile-menu{
+     li{
+      .transition(all,0.3s,ease-out);
+      border: 1px solid @gray-darker;
+      &.activeNav{
+      border-right: 8px solid @fore-color;
+      }
+    }
+  }
 
+} // end nav-mobile
+
+
+//开始!!!
 .head{
   @white-color:#fff;
   .border(top,6px,solid,@fore-color);
@@ -92,7 +140,7 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
          }
          span{
            font-size:@font-size-base;
-           color:#D0D0D0;
+           color:@my-font-color;
          }
        }  // end h1
      } // end logo
@@ -209,7 +257,7 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
       }
       // end nav-menu-two
     }
-    // end nav
+    // end big-nav
 
     .search {
       margin-top: @h - 5;
@@ -247,6 +295,41 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
             position: absolute;
             opacity: 0;
             .transition(opacity,0.7s,linear);
+            a{
+              display: block;
+              position: relative;
+              div.slider-txt-box{
+                .transition(right,0.8s,ease-out);
+                position: absolute;
+                right:-100%;
+                top:0;
+                &.sliderTxtActive{
+                  right:0;
+                }
+                .clearfix();
+                span{
+                  color: #fff;
+                  text-align: center;
+                  display:block;
+                  float: left;
+                  background: rgba(0,0,0,0.4);
+                  @h:40px;
+                  height:@h;
+                  line-height:@h;
+                }
+                span.glyphicon{
+                   top:0px;
+                   padding-left: @p10+5;
+                   padding-right: @p10+5;
+                   border-right:1px solid rgba(0,0,0,0.2);
+                }
+                span.slider-txt{
+                  padding-left: @p30 + 10;
+                  padding-right: @p30 + 10;
+                  .text-overflow(193px);
+                }
+              }
+            }
             img{
               width: 100%;
               min-width: 768px;
@@ -516,5 +599,25 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
        }
      }
    }
+  a.glyphicon{
+    top:0;
+  }
+  a.back-top{
+    @h:40px;
+    position:fixed;
+    right:3%;
+    top:80%;
+    display: block;
+    height:@h;
+    padding-left: @p10;
+    padding-right: @p10;
+    line-height:@h;
+    background-color: #2B2B2B;
+    color: #fff;
+    font-size:@font-size-large;
+    &:hover{
+      background-color: @fore-color;
+    }
+  }
 }
 

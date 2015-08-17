@@ -2,6 +2,7 @@
 <html ng-app="bulbApp">
 <head lang="en">
     <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!--Less.js编译.less文件并进行本地存储-->
     <link rel="stylesheet/less" href="less/main.less"/>
     <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
@@ -9,6 +10,16 @@
     <title>Bulb App</title>
 </head>
 <body ng-controller="mainCtrl">
+
+  <div class="nav-mobile visible-xs" ng-class="{showNav:showNav}">
+    <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
+    <ul class="nav-mobile-menu">
+        <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:$index == moveCurrent}" ng-mouseover="moveSelect($index)">
+            <a href="{{navMenu.navUrl}}">{{navMenu.navName}}</a>
+        </li>
+    </ul>
+ </div><!--end nav-mobile-->
+
   <div class="head container-fluid">
         <div class="head-inner container">
             <div class="logo col-md-8">
@@ -33,12 +44,12 @@
         <div class="main-top row">
          <div class="nav col-md-8">
 
-             <ul class="nav-menu">
+             <ul class="nav-menu hidden-xs">
                  <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == 0}" ng-mouseover="moveSelect($index)">
-                     <a href="###" class="navItemLink">{{navMenu.navName}}</a>
+                     <a href="{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
                      <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
                      <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
-                         <li ng-repeat="navChildTwo in navMenu.navChild"><a href="###">{{navChildTwo.navName}}</a></li>
+                         <li ng-repeat="navChildTwo in navMenu.navChild"><a href="{{navChildTwo.navUrl}}">{{navChildTwo.navName}}</a></li>
                      </ul>  <!--end nav-menu-two -->
 
                  </li>
@@ -58,9 +69,15 @@
 
      <div class="main-slider row">
         <div class="slider col-md-12" ng-controller="sliderCtrl">
-            <carousel interval="2000">
+            <carousel interval="20000">
                 <slide ng-repeat="slide in slides">
-                    <a href="###"><img ng-src="{{slide.src}}"/></a>
+                    <a href="###">
+                       <img ng-src="{{slide.src}}"/>
+                       <div class="slider-txt-box" ng-class="{sliderTxtActive:slideActive($index)}">
+                         <span class="glyphicon glyphicon-pushpin"></span>
+                         <span class="slider-txt">{{slide.txt}}</span>
+                       </div> <!--end slider-txt-->
+                    </a>
                 </slide>
             </carousel>
         </div>
@@ -153,8 +170,10 @@
              <a href="###" class="glyphicon glyphicon-cloud"></a>
          </div>
       </div>
+      <a class="back-top glyphicon glyphicon-triangle-top visible-lg" href="#top"></a>
   </div>
   <!--end footer-->
+
 
 
   <script src="less/less.js"></script>
