@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html ng-app="slideApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>slideApp</title>
+    <style>
+        *{
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+        .main .carousel{
+            position: relative;
+        }
+        .main .carousel-inner{
+           width:100%;
+
+           position: relative;
+           border: 4px solid #000000;
+        }
+        .main .carousel-inner .slide{
+            position: absolute;
+            width: 100%;
+            left:-100%;
+            transition: left 0.6s ease-in-out 0s;
+        }
+        .main .carousel-inner .slideActive{
+            left:0;
+        }
+        .main .carousel-inner .slideLeaving{
+            left:-100%;
+        }
+        .main .carousel-inner .slide img{
+            display: block;
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+    /*slideIndex */
+
+        .slide-index{
+            z-index:99;
+            left: 50%;
+            top:480px;
+            list-style: outside none none;
+            margin-left: -30%;
+            padding-left: 0;
+            position: absolute;
+            text-align: center;
+            width: 60%;
+        }
+        .slide-index a{
+            background-color: rgba(0, 0, 0, 0);
+            border: 1px solid #fff;
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            height: 30px;
+            margin-right:10px;
+            text-indent: -9999px;
+            width: 30px;
+        }
+        .slide-index a.activeIndex{
+            background-color: #fff;
+            height: 32px;
+            width: 32px;
+        }
+
+        /*文字说明*/
+        .carousel-caption {
+            left: 20%;
+            padding-bottom: 30px;
+            right: 20%;
+        }
+        .carousel-caption {
+            bottom: 20px;
+            color: #ffffff;
+            left: 15%;
+            padding-bottom: 20px;
+            padding-top: 20px;
+            position: absolute;
+            right: 15%;
+            text-align: center;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+            z-index: 10;
+        }
+
+        h4, .h4 {
+            font-size: 18px;
+        }
+        h4, .h4, h5, .h5, h6, .h6 {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            color: inherit;
+            font-family: inherit;
+            font-weight: 500;
+            line-height: 1.1;
+        }
+        p{
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+<div ng-controller="carouselDemoCtrl">
+    <div style="height: 305px;" class="main">
+        <carousel interval="myInterval">
+            <slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}" style="margin:auto;"/>
+                <div class="carousel-caption">
+                    <h4>Slide {{$index}}</h4>  <!--轮播小点-->
+                    <p>{{slide.text}}</p>  <!--轮播文字说明-->
+                </div>
+            </slide>
+        </carousel>
+    </div>
+</div><!--end carouseDemoCtrl-->
+
+<!--<script src="less/less.js"></script>-->
+<script src="../lib/framework/jquery-1.9.1.js"></script>
+<script src="../lib/framework/angular.js"></script>
+<script>
+    var slideApp = angular.module('slideApp',[]);
+    slideApp.controller('carouselDemoCtrl',function($scope){
+        $scope.slides = [
+             {
+                image :"../img/slide-1.jpg",
+                text :"图片说明1111"
+             },
+             {
+                 image :"../img/slide-2.jpg",
+                 text :"图片说明22222"
+             },
+             {
+                 image :"../img/slide-3.jpg",
+                 text :"图片说明33333333"
+             }
+         ];
+    });
+    slideApp.directive('carousel',function(){
+        return{
+            restrict:"AE",
+            replace : true,
+            transclude : true,
+            scope : {}, //  单独的作用域 为了与全局控制器的slides数据避开，以便更好的操作数据
+            template:"<div class=\"carousel\">" +  //  使用scope单独作用域的原因是 我需要操作所有scope里面的active变量，而不是slides数据对象
+                     "<div class=\"slide-index\" ng-show=\"slides.length > 1\">" +
+                     "<a href=\"###\" ng-repeat=\"slide in slides\" ng-class=\"{activeIndex:isActive(slide)}\" ng-click=\"select(slide)\">{{$index}}</a>" +
+                     "</div>" +
+                     "<div class=\"carousel-inner\" ng-transclude></div>" +
+                     "</div>",
+            controller : function($scope,$timeout){
+                var carousel = this;
+                var slides = $scope.slides = [];  //  与 全局控制器的slides数据避开
+                carousel.interval = $scope.myInterval = 600;
+                carousel.currentIndex = 0;
+                carousel.currentSlide = null;
+
+                carousel.isActive = $scope.isActive = function(slide){
+                    return carousel.currentSlide === slide;
+                }
+                carousel.select = $scope.select = function(nextSlide,direction){
+                    var nextSlidePos = slides.indexOf(nextSlide);
+                    if(direction == undefined){
+                       direction = (nextSlidePos > carousel.currentIndex)? "next":"prev";
+                    }
+                    if(nextSlide && nextSlide !== carousel.currentSlide){  //初始化时让默认的slide显示执行了一次，以后每点击一次就触发
+                       goNext();
+                    }
+                    // 初始化时nextSlide为第一个scope
+                    function goNext(){
+                       if(carousel.currentSlide != null){  //  再次点击的时候进行切换
+//                           carousel.currentSlide.$element.addClass('slideLeaving');
+
+                           nextSlide.active = true;
+                           carousel.currentSlide.active = false;
+                       }
+                       carousel.currentSlide = nextSlide;
+                       carousel.currentIndex = nextSlidePos;
+                    } // end goNext()
+
+                }  // end select()
+                carousel.addSlide = function(slide,element){ // 将所有作用域添加到slides中
+                      slide.$element = element;
+                      slides.push(slide);
+                      if(slides.length === 1){ // 第一张的时候
+                         slide.active = true;
+                         carousel.select(slides[slides.length - 1]);//slides[0] 只触发一次，nextSlide为初始化时第一个slide的下一个元素
+                      }else{
+                         slide.active = false;
+                      }
+                }  // end addSlide
+
+
+            }
+        }  // end return
+    });
+    slideApp.directive('slide',function(){
+        return{
+            restrict:"AE",
+            replace : true,
+            require:"^?carousel",
+            transclude : true,
+            scope :{        // 作用域为单独作用域，只有active作用域是共享
+                active:"="  // active 与控制器作用域双向绑定 ,控制器 改变active 指令里的active取值也会改变
+            },
+            template : "<div ng-transclude class=\"slide\" ng-class=\"{slideActive:active}\"></div>",
+            link : function(scope,element,attrs,carouselCtrl){  //link的目的是 获取所有轮播元素的scope 并且监听每个元素中先关变
+                carouselCtrl.addSlide(scope,element);   //  初始化时添加
+//                scope.$watch('active',function(active){  // 初始化第一个slide 的active的true变为false时 触发了一次
+//                         if(active){
+//                           console.log(scope)
+//                           carouselCtrl.select(scope);
+//                         }
+//                });
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>

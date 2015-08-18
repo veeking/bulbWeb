@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <link rel="stylesheet/less" href="less/test.less"/>
+    <meta charset="UTF-8">
+    <title>less+angular轮播图vbjkjkjk</title>
+    <style>
+       div.view-slide-in{
+          width: 160px;
+          height: 160px;
+          background: #00b3ee;
+
+        }
+        .ng-enter{
+          transition:0.75s;
+          opacity: 0;
+        }
+        .ng-enter-stagger{
+          transition-delay:0.1s;
+        }
+        .ng-enter-active{
+          opacity:1;
+        }
+        .ng-leave{
+          transition:0.75s;
+          opacity:1;
+        }
+       .ng-leave-stagger{
+           transition-delay:0.1s;
+       }
+       .ng-leave-active{
+          opacity:0;
+       }
+    </style>
+</head>
+<body>
+    <div class="head">
+        <div class="banner">
+            <div class="topLine"></div>
+            <div class="logo">BulbApp</div>
+        </div>
+        <div class="menu">
+            <ul>
+                <li class="active"><a href="###">菜单1</a></li>
+                <li><a href="###">菜单1</a></li>
+                <li><a href="###">菜单1</a></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div ng-controller="animationCtrl">
+        <button ng-click="addItem()">add</button>
+        <button ng-click="clearItem()">clear</button>
+        <hr/>
+        <button ng-repeat="item in items" ng-click="removeItem($index)" ng>item {{item.id}}</button>
+    </div>
+
+
+<script src="../less/less.js"></script>
+<script src="../lib/framework/angular.js"></script>
+<script src="../lib/framework/angular-animate.js"></script>
+<script>
+    var testApp = angular.module('testApp',['ngAnimate']);
+    testApp.controller('animationCtrl',function($scope){
+          var items = $scope.items = [];
+
+          $scope.addItem = function(){
+              for(var i=0;i<10;i++){
+                  items.push({id:i});
+              }
+          }
+          $scope.clearItem = function(){
+              items = $scope.items = []
+         }
+         $scope.removeItem = function(index){
+             items.splice(index,1);
+         }
+    });
+</script>
+</body>
+</html>

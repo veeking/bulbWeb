@@ -1,0 +1,125 @@
+/*header -> other*/
+@media (max-width: 1200px){
+    .head .head-inner .other .other-box button {
+        width: 40%;
+    }
+}
+@media (max-width: 992px){
+    .head .head-inner .other .other-box button {
+        width: 50%;
+    }
+}
+@media (max-width: 768px){
+    .head .head-inner .other .other-box button {
+        width: 100%;
+    }
+}
+
+/*main -> slide*/
+@media (max-width: 1200px){
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 300px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 250px;
+    }
+}
+                 /*小于768时*/
+@media (max-width: 768px){
+    .main .main-slider .slider .carousel ul.carousel-inner{
+        height: 200px;
+    }
+}
+
+/*main -> info*/
+@media (max-width: 1200px){
+    .main .main-info .info-cont .col-md-4 div.cont-txt,.main .main-info .info-cont .col-md-4 div.cont-txt-main{
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+    .main .main-info .info-cont .col-md-4 div.cont-txt{
+       max-height:30px;
+         /*设置最大高度  让超出此高度的元素隐藏*/
+    }
+    .main .main-info .info-cont .col-md-4 div.cont-txt-main{
+       max-height:80px;
+    }
+}
+@media (min-width: 768px) and (max-width: 992px) {
+    .main .main-info .info-cont .col-md-8,.main .main-info .info-cont .col-md-4{
+        width: 100%;
+    }
+}
+@media (max-width: 768px){
+    .main .main-info .info-cont .col-md-8,.main .main-info .info-cont .col-md-4{
+        width: 100%;
+    }
+}
+/*main -> item*/
+@media(max-width: 992px){
+    .main .main-point .point-cont .col-md-12 div.point-cont-item:nth-child(even){
+            margin-right:0;
+    }
+    .main .main-point .point-cont .col-md-12 div.point-cont-item{
+         width:48.6%;
+         margin-bottom:20px;
+     }
+}
+@media(max-width: 768px){
+    .main .main-point .point-cont .col-md-12 div.point-cont-item{
+        width:100%;
+        margin-right:0;
+    }
+}
+
+
+/*main -> other*/
+@media(max-width: 992px){
+    .main .main-other .other-news,.main .main-other .other-list{
+        float:left;
+    }
+    .main .main-other .other-news{
+         width: 65%
+     }
+    .main .main-other .other-list{
+        margin-left:5%;
+        width: 30%;
+    }
+}
+
+@media(max-width: 768px){
+    .main .main-other .other-news,.main .main-other .other-list{
+      width: 100%;
+      float: none;
+    }
+    .main .main-other .other-list{
+        margin-top:20px;
+        margin-left:0;
+    }
+    .main .main-other .other-list .list{
+        margin-top:20px;
+    }
+    .main .main-other .other-list .list ul li{
+          width: 100%;
+          margin-bottom: 10px;
+          background: #1F1F1F;
+          height: 50px;
+          line-height: 50px;
+    }
+    .main .main-other .other-list .list ul li span{
+           height: 100%;
+    }
+    .main .main-other .other-list .list ul li a{
+           color: #fff;
+    }
+}
+
+/*foot*/
+@media(max-width: 992px){
+    .copy-right,.social{
+        width: 50%;
+        float: left;
+    }
+}

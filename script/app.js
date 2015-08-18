@@ -30,14 +30,14 @@ bulbApp.controller('mainCtrl',function($scope){
 bulbApp.controller('sliderCtrl',function($scope){
      $scope.slides = [
          {
-           "src":"img/slide-1.jpg",
+           "src":"../img/slide-1.jpg",
            "txt":"图片说明测试1"
          },
          {
-           "src":"img/slide-2.jpg",
+           "src":"../img/slide-2.jpg",
            "txt":"图片说明测试2"
          },{
-           "src":"img/slide-3.jpg",
+           "src":"../img/slide-3.jpg",
            "txt":"图片说明测试3"
          }
      ];
@@ -93,13 +93,13 @@ bulbApp.directive('slide',function(){
 bulbApp.controller('infoCtrl',function($scope){
     $scope.infoConts = [
         {
-           "src":"img/info/i1.jpg",
+           "src":"../img/info/i1.jpg",
         },
         {
-            "src":"img/info/i2.jpg",
+            "src":"../img/info/i2.jpg",
         },
         {
-            "src":"img/info/i3.jpg",
+            "src":"../img/info/i3.jpg",
         }
     ];
    $scope.infoTitle = "精湛的技术成就完美产品";
@@ -149,7 +149,7 @@ bulbApp.controller('otherCtrl',function($scope){
          ]
 });
 bulbApp.controller('listCtrl',function($scope){
-        $scope.newProducts = [
+        $scope.hotNews = [
             {
                "name":"飞利浦灯泡1"
             },
@@ -175,4 +175,28 @@ bulbApp.controller('listCtrl',function($scope){
                  "name":"飞利浦灯泡1"
             }
         ];
+});
+bulbApp.controller('productItemCtrl',function($scope){
+      $scope.pLeft = {
+          "img":"../img/index-product/p1.jpg",
+          "txt":"玄关过道"
+      };
+      $scope.pRights = [
+          {
+              "img":"../img/index-product/p2.jpg",
+              "txt":"厨房"
+          },
+          {
+              "img":"../img/index-product/p3.jpg",
+              "txt":"卧室"
+          },
+          {
+              "img":"../img/index-product/p4.jpg",
+              "txt":"客厅"
+          },
+          {
+              "img":"../img/index-product/p5.jpg",
+              "txt":"餐厅"
+          }
+      ]
 });

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+          margin:0;
+          padding: 0;
+        }
+        ul{
+           list-style: none;
+        }
+        #carousel{
+           width: 800px;
+           height: 370px;
+           margin: 0 auto;
+           overflow: hidden;
+           position: relative;
+        }
+        #slideBox{
+            position: relative;
+            background: #e6e6e6;
+        }
+        #slideBox li{
+            position: absolute;
+            width: 800px;
+            top:0;
+            left:0;
+        }
+        #slideBox li img{
+          width:100%;
+        }
+        #slideBox li p{
+            position: absolute;
+            left:0;
+            top: 120px;
+            width: 250px;
+            height: 40px;
+            line-height:40px;
+            color: #fff;
+            text-align: center;
+            background: rgba(0,0,0,0.4);
+        }
+        #slideIndex{
+            position: absolute;
+            left:240px;
+            top:270px;
+        }
+        #slideIndex a{
+            transition:opacity 0.1s linear;
+            display: block;
+            float:left;
+            width: 100px;
+            height: 70px;
+            border: 5px solid #000000;
+            background-color: rgba(0, 0, 0, 0.9);
+            margin-right:10px;
+            cursor: pointer;
+            opacity: 0.5;
+        }
+        #slideIndex a img{
+            width: 100%;
+            height: 100%;
+        }
+        #slideIndex a.currentIndex{
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+   <div id="carousel" ng-controller="slideCtrl" interval="500">
+       <ul id="slideBox">
+           <li ng-repeat="slideItem in slideItems" class="slide-animate" ng-hide="!isCurrent($index)">
+               <img ng-src="{{slideItem.url}}" alt="{{slideItem.text}}"/>
+               <p>{{slideItem.text}}</p>
+           </li>
+       </ul>
+  <!--end slideBox-->
+       <div id="slideIndex">
+           <a href="###" ng-repeat="slideItem in slideItems" ng-click="changePic($index);" ng-class="{currentIndex : $index == current}">
+               <img ng-src="{{slideItem.url}}" alt="{{slideItem.text}}"/>
+           </a>
+       </div>
+       <!--end slideIndex-->
+   </div>
+<script src="../lib/framework/jquery-1.9.1.js"></script>
+<script src="../lib/framework/angular.js"></script>
+<script src="../lib/framework/angular-animate.js"></script>
+
+  <script>
+       // 单张滑动轮播,
+       // 缺点：
+       // 1、快速切换回出现闪白BUG 原因估计是ng-hide没有及时显示元素
+       // 2、切换上下张时 滑动的元素之间出现空白区域，原因是 两个对象(当前的和上下张)的animate帧数不一致
+       var testApp = angular.module('testApp',['ngAnimate']);
+       testApp.controller('slideCtrl',function($scope,$attrs){
+           $scope.interval = $attrs.interval;  //  定时 帧数
+           $scope.direction = "left";  // 方向
+           $scope.current = 0;
+           $scope.index = 0;
+           $scope.slideItems = [
+               {
+                 url : '../img/slide-1.jpg',
+                 text : '第一张'
+               },
+               {
+                 url : '../img/slide-2.jpg',
+                 text : '第二张'
+               },
+               {
+                 url : '../img/slide-3.jpg',
+                 text : '第三张'
+               }
+           ];
+          $scope.isCurrent = function(index){  // 显示当前
+               return $scope.current === index;
+          }
+          $scope.changePic = function(index){
+                 $scope.direction = (index > $scope.current)?"left":"right";
+                 console.log($scope.direction)
+                 $scope.current = index;
+          }
+       });
+       //逻辑：左滑时，当前的向左(-800)滑动消失，下一张的从右侧(800)滑动进来当前(0)
+       //逻辑：右滑时，当前的向右(800)滑动消失，上一张的从左侧(-800)滑动进来当前(0)
+       //说明：最左侧x：-800，最右侧x: 800
+       //对象：①当前的   ②上/下一张的
+       testApp.animation('.slide-animate',function(){
+           var scope;
+           return {
+               addClass: function (element, className, done) {  //  当前的滑动
+                   scope = element.scope();
+                   if (className == 'ng-hide') { //如果切换到下一张(下一张是隐藏的)
+                   var slideWidth = element.parent().width();
+                   if(scope.direction === "left"){  //  方向右时  向右滑动
+                       slideWidth = -slideWidth;
+                   }
+                        element.animate({
+                          left:slideWidth
+                        },scope.interval,done)
+                   }else{
+                       done();
+                   }  // end className
+               },  // end addClass
+               removeClass:function(element,className,done){  // 上/下一张的 滑动
+                   if(className == 'ng-hide'){
+                       element.removeClass('ng-hide');
+                       var startPoint = element.parent().width();  // 上/下一张的滑向起始点
+                       if(scope.direction === "right"){
+                           startPoint = -startPoint;
+                       }
+                       element.css({  // 为左时从右侧滑向当前，为右时从最左滑向当前(0)
+                           left:startPoint
+                       }).animate({
+                           left:0
+                       },scope.interval,done)
+                   }
+               }
+             }  // end return
+       });
+  </script>
+</body>
+</html>
