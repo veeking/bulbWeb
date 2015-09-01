@@ -27,6 +27,11 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
   -webkit-transition:@style @interval @type;
   -moz-transition:@style @interval @type;
 }
+.translateX(@pix){
+  -webkit-transform: translateX(@pix);
+  -moz-transform:translateX(@pix) ;
+  transform:translateX(@pix);
+};
 .box-shadow(@x,@y,@b,@color:@gray-lighter,@type:none){
   box-shadow:@x @y @b @color @type;
   -webkit-box-shadow:@x @y @b @color @type;

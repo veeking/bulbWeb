@@ -234,17 +234,18 @@
             width: 100%;
             position: absolute;
             opacity: 0;
-            .transition(opacity,0.7s,linear);
+            .transition(opacity,0.8s,ease-out);
             a{
               display: block;
               position: relative;
               div.slider-txt-box{
-                .transition(right,0.8s,ease-out);
+                .transition(transform,0.8s,ease-out);
+                .translateX(500px);
                 position: absolute;
-                right:-100%;
+                right:0;
                 top:0;
                 &.sliderTxtActive{
-                  right:0;
+                 .translateX(0);
                 }
                 .clearfix();
                 span{

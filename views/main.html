@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="bulbApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <!--Less.js编译.less文件并进行本地存储-->
+    <!--<link rel="stylesheet/less" href="../less/main.less"/>-->
+    <!--<link rel="stylesheet/less" href="../less/bootstrapLess/bootstrap.less"/>-->
+    <link rel="stylesheet" href="../less/css/main.css"/>
+    <link rel="stylesheet" href="../less/css/media.css"/>
+    <title>Bulb App</title>
+</head>
+<body ng-controller="bulbMainCtrl">
+
+  <div class="nav-mobile visible-xs" ng-class="{showNav:showNav}">
+    <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
+    <ul class="nav-mobile-menu" ng-hide="!showNav">
+        <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:$index == moveCurrent}" ng-mouseover="moveSelect($index)">
+            <a href="{{navMenu.navUrl}}">{{navMenu.navName}}</a>
+        </li>
+    </ul>
+ </div><!--end nav-mobile-->
+  <div class="head container-fluid">
+      {{num}}
+        <div class="head-inner container">
+            <div class="logo col-md-8">
+                <h1>
+                    <a href="/index">BUIB<font color="#FEC60D">X·</font></a>
+                    <span>THE BEST QUILITY PRODUCT!</span>
+                </h1>
+            </div>
+            <!--end logo-->
+            <div class="other col-md-4">
+                 <P>WWW.BULBX.COM</P>
+                 <div class="other-box">
+                     <button class="btn btn-primary"><span class="glyphicon glyphicon-bell"></span>服务中心</button>
+                     <button class="btn btn-default"><span class="glyphicon glyphicon-earphone"></span>联系我们</button>
+                 </div>
+            </div>
+            <!--end other-->
+        </div> <!-- end head-inner-->
+  </div><!--head-->
+
+  <div class="main container">
+        <div class="main-top row">
+         <div class="nav col-md-8">
+
+             <ul class="nav-menu hidden-xs">
+                 <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == 0}" ng-mouseover="moveSelect($index)">
+                     <a href="{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
+                     <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
+                     <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
+                         <li ng-repeat="navChildTwo in navMenu.navChild"><a href="{{navChildTwo.navUrl}}">{{navChildTwo.navName}}</a></li>
+                     </ul>  <!--end nav-menu-two -->
+
+                 </li>
+             </ul><!--end nav-menu-->
+
+
+         </div><!--end nav-->
+
+         <div class="search col-md-4">
+             <form class="form-group" action="/">
+                 <input type="text" class="form-control" placeholder="请输入关键字.." />
+                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                 <input type="submit" hidden="hidden"/>
+             </form>
+         </div><!--end search-->
+
+      </div> <!--end main-top -->
+
+    <div ng-view></div>
+
+  </div><!--end main-->
+  <div class="footer container-fluid">
+      <div class="footer-inner container">
+         <div class="copy-right col-md-8">
+             <a href="###">BUIBX</a>
+             <span> © 2015 | XXX版权所有</span>
+         </div>
+         <div class="social col-md-4">
+             <a href="###" class="glyphicon glyphicon-phone"></a>
+             <a href="###" class="glyphicon glyphicon-heart"></a>
+             <a href="###" class="glyphicon glyphicon-star"></a>
+             <a href="###" class="glyphicon glyphicon-cloud"></a>
+         </div>
+      </div>
+      <a class="back-top glyphicon glyphicon-triangle-top visible-lg" href="#top"></a>
+  </div>
+  <!--end footer-->
+
+
+  <!--<script src="../less/less.js"></script>-->
+  <script src="../lib/framework/jquery-1.9.1.js"></script>
+  <script src="../lib/framework/angular.js"></script>
+  <script src="../lib/framework/angular-route.js"></script>
+  <script src="../lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
+  <script src="../script/app.js"></script>
+  <script src="../script/controllers.js"></script>
+  <script src="../script/directive.js"></script>
+</body>
+</html>

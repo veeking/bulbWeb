@@ -1,0 +1,116 @@
+<div class="main-slider row">
+    {{num}}
+    <div class="slider col-md-12">
+        <carousel interval="20000">
+            <slide ng-repeat="slide in slides">
+                <a href="###">
+                    <img ng-src="{{slide.src}}"/>
+                    <div class="slider-txt-box" ng-class="{sliderTxtActive:slideActive($index)}">
+                        <span class="glyphicon glyphicon-pushpin"></span>
+                        <span class="slider-txt">{{slide.txt}}</span>
+                    </div> <!--end slider-txt-->
+                </a>
+            </slide>
+        </carousel>
+    </div>
+</div><!--end main-slider-->
+
+<div class="main-info row">
+    <div class="info-title">
+        <h3>高新技术的现代化设备和团队</h3>
+    </div>
+    <div class="info-cont">
+        <div class="col-md-8">
+            <div class="cont-img" ng-repeat="infoCont in infoConts">
+                <img ng-src="{{infoCont.src}}"/>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h4>{{infoTitle}}</h4>
+            <div class="cont-txt">{{infoCont}}</div>
+            <div class="cont-txt-main">{{infoContMain}}</div>
+            <button class="btn btn-primary">更多</button>
+        </div>
+    </div>
+</div><!--end main-info-->
+
+<div class="main-productItem row">
+    <div class="productItem-head">
+        <h3>产品推荐方案</h3>
+    </div>
+
+    <div class="productItem-cont">
+
+        <div class="p-left col-md-4">
+            <a href="###" class="p-item p-right-item">
+                <img ng-src="{{pLeft.img}}"/>
+                <span>{{pLeft.txt}}</span>
+            </a>
+        </div>
+
+        <div class="p-right col-md-8">
+            <a href="###" ng-repeat="pRight in pRights" class="p-item p-left-item">
+                <img ng-src="{{pRight.img}}"/>
+                <span>{{pRight.txt}}</span>
+            </a>
+        </div>
+
+    </div><!--end productItem-cont-->
+</div><!--end main-product -->
+
+
+<div class="main-point row">
+    <div class="point-head">
+        <h3>核心技术服务</h3>
+    </div>
+
+    <div class="point-cont">
+        <div class="col-md-12">
+
+            <div class="point-cont-item" ng-repeat="point in points" ng-class="{clearRightMargin:$index == points.length - 1}">
+                <h4>{{point.title}}</h4>
+                <div class="cont-item-icon">
+                    <a class="glyphicon {{point.icon}}"></a>
+                    <span>{{point.intro}}</span>
+                </div>
+                <div class="cont-item-desc">{{point.desc}}</div>
+                <button class="btn btn-default">更多</button>
+            </div>  <!--end point-cont-item-->
+
+
+        </div>
+    </div>  <!-- end point-cont-->
+</div><!--end main-point-->
+
+
+<div class="main-other row">
+    <div class="other-news col-md-8">
+        <h3>提供专业化的工业设计生产服务和顶尖的<br/>国内制造团队</h3>
+        <div class="news-cont">
+            <div class="news-cont-txt">
+                <span class="txt-a">工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员</span>
+                <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员风微风菲菲</span>
+            </div>
+            <div class="news-cont-main">
+                <a href="###" ng-repeat="otherNew in otherNews">● {{otherNew.content}}</a>
+            </div>
+            <div class="news-cont-txt">
+                <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员</span>
+                <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员风微风菲菲</span>
+            </div>
+
+            <button class="btn btn-default">更多</button>
+        </div>
+    </div><!--end other-news -->
+    <div class="other-list col-md-4">
+        <h3>热点新闻</h3>
+        <div class="list">
+            <ul>
+                <li ng-repeat="hotNew in hotNews track by $index">
+                    <span class="listIcon"> > </span>
+                    <a href="/product/{{hotNew.name}}">{{hotNew.name}}</a>
+                </li>
+            </ul>
+        </div>
+    </div><!--end other-list -->
+</div>  <!--end main-other -->
