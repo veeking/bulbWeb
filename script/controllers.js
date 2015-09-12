@@ -4,31 +4,23 @@
 var bulbCtrl = angular.module('bulbCtrl',[]);
 
 bulbCtrl.controller('bulbMainCtrl',function($scope,$timeout){
-    $scope.num=0;
-    function countNum(){
-        $timeout(function(){
-            $scope.num++;
-            countNum()
-        },100)
-    }
-    countNum()
     $scope.moveCurrent = 0;
     $scope.navMenus = [
-        {"navIdv":1,"navName":"首 页","navUrl":"/","navChild":[]},
-        {"navId":2,"navName":"概 况","navUrl":"/intro","navChild":[]},
-        {"navId":3,"navName":"服 务","navUrl":"/service","navChild":[
-            {"navId":31,"navName":"服务1","navUrl":"/service-1"},
-            {"navId":32,"navName":"服务2","navUrl":"/service-2"},
-            {"navId":33,"navName":"服务3","navUrl":"/service-3"},
-            {"navId":34,"navName":"服务4","navUrl":"/service-4"}
+        {"navIdv":1,"navName":"首 页","navUrl":"#/","navChild":[]},
+        {"navId":2,"navName":"概 况","navUrl":"#/intro","navChild":[]},
+        {"navId":3,"navName":"资 讯","navUrl":"#/news","navChild":[
+            {"navId":31,"navName":"资讯1","navUrl":"#/news-1"},
+            {"navId":32,"navName":"资讯2","navUrl":"#/news-2"},
+            {"navId":33,"navName":"资讯3","navUrl":"#/news-3"},
+            {"navId":34,"navName":"资讯4","navUrl":"#/news-4"}
         ]},
-        {"navId":4,"navName":"产 品","navUrl":"/product","navChild":[
-            {"navId":41,"navName":"产品1","navUrl":"/product-1"},
-            {"navId":42,"navName":"产品2","navUrl":"/product-2"},
-            {"navId":43,"navName":"产品3","navUrl":"/product-3"},
-            {"navId":44,"navName":"产品4","navUrl":"/product-4"}
+        {"navId":4,"navName":"产 品","navUrl":"#/product","navChild":[
+            {"navId":41,"navName":"产品1","navUrl":"#/product-1"},
+            {"navId":42,"navName":"产品2","navUrl":"#/product-2"},
+            {"navId":43,"navName":"产品3","navUrl":"#/product-3"},
+            {"navId":44,"navName":"产品4","navUrl":"#/product-4"}
         ]},
-        {"navId":5,"navName":"关于我们","navUrl":"/about","navChild":[]}
+        {"navId":5,"navName":"关于我们","navUrl":"#/about","navChild":[]}
     ];
 
     $scope.moveSelect = function(index){
@@ -164,3 +156,23 @@ bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
     ]
 
 });  // end controller
+bulbCtrl.controller('bulbIntroCtrl',function($scope){
+
+});
+bulbCtrl.controller('bulbNewsCtrl',function($scope){
+    $scope.newItems = [
+        {
+           "title":"新闻分类1",
+           "url":"#/news/news1"
+        },
+        {
+            "title":"新闻分类2",
+            "url":"#/news/news2"
+        },
+        {
+            "title":"新闻分类3",
+            "url":"#/news/news3"
+        }
+
+    ];
+});

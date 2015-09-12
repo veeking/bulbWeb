@@ -9,8 +9,12 @@ bulbApp.config(['$routeProvider',function($routeProvider){
         controller:'bulbIndexCtrl'
       }).
       when('/intro',{
-        templateUrl : 'template/intro.html',
+        templateUrl : 'template/intro/intro.html',
         controller:'bulbIntroCtrl'
+      }).
+      when('/news',{
+         templateUrl : 'template/news/news-type.html',
+         controller:'bulbNewsCtrl'
       }).
       otherwise({
         redirectTo: '/'

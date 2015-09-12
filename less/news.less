@@ -1,0 +1,31 @@
+@import "bootstrapLess/bootstrap.less";
+@import "common.less"; //多页面共用模块
+@import "main.less";
+// news page
+.news-type{
+  margin-top:@p10*5;
+  float: left;
+  position: relative;
+  left: 50%;
+  .news-type-item{
+    float: left;
+    position: relative;
+    right: 50%;
+    margin-right:@p10*2;
+    margin-bottom:@p10*2;
+    &:last-child{
+      margin-right:0;
+    }
+    a{
+      @h:110px;
+      display: block;
+      padding-left: @p10*2;
+      padding-right: @p10*2;
+      height: @h;
+      line-height: @h;
+      text-align: center;
+      color:@fore-color;
+      background:@back-color;
+    }
+  }
+} // end news-type

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script>
+     // 冒泡排序
+    function bubbleSort(resArr){  // 往后冒泡
+      for(var i=0;i<resArr.length;i++){  //顺序遍历
+        for(var j=resArr.length-1;j>=i;j--){ // 对比 替换
+           if(resArr[j+1] < resArr[j]){
+               swap(resArr,j,j+1);
+           }
+        }
+      }
+        return resArr;
+    }  // end bubbleSort
+    function swap(arr,a1,a2){
+       var tmp = arr[a1];
+        arr[a1] = arr[a2];
+        arr[a2] = tmp;
+    }
+
+    function insertSort(resArr){
+       for(var i=0;i<resArr.length;i++){
+          var key = resArr[i]; // 抽一个数
+          var j = i;  // j从当前数开始不断递减
+          while(j > 0 && resArr[j-1] > key){ //  上一个如果大于当前
+               resArr[j] = resArr[j - 1];
+               --j;
+          }
+          resArr[j] = key;  // 更新数组
+       }
+       return resArr;
+    }
+    var testArr = [6,2,5,9,1,0,7];
+    var a2 = [324,54,789,9,1223,667]
+    console.log(insertSort(testArr));
+    console.log(bubbleSort(a2));
+</script>
+</body>
+</html>
