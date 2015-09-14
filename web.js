@@ -20,7 +20,7 @@ app.use(app.router);
 app.use(express.static(path.join(__dirname, '/'))); // 其他静态文件的目录，这里设为根目录下的文件夹
 
 app.get('/',function(req,res){
-    res.sendfile(__dirname + '/views/index.html');
+    res.sendfile(__dirname + 'app/main.html');
 })
 // development only
 if ('development' == app.get('env')) {

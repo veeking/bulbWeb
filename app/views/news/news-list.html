@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>news列表页</title>
+    <link rel="stylesheet/less" href="less/news.less"/>
+
+</head>
+<body>
+<div class="news-type-list">
+    <ul>
+     <li ng-repeat="newList in newLists">
+         <a href="#/news/{{newsTypeUrl}}/{{newList.id}}">{{newList.title}}</a>
+     </li>
+    </ul>
+</div>
+
+
+<!-- end news-type-->
+<script src="less/less.js"></script>
+</body>
+</html>

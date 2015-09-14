@@ -125,8 +125,11 @@
           padding-bottom: @h;
           text-align: center;
           position: relative;
-          &.navActive {
+          &:first-child{
             background-color: @fore-color;
+          }
+          &.navActive {
+            color: @gray-base;
           }
           & a.navItemLink:hover {
             color: @gray-base;

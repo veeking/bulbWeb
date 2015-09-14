@@ -6810,11 +6810,10 @@ div a:focus {
   z-index: 200;
   position: absolute;
   right: 0;
-  transform: translateX(118px);
   top: 6px;
-  transition: transform 0.4s ease-out;
-  -webkit-transition: transform 0.4s ease-out;
-  -moz-transition: transform 0.4s ease-out;
+  transition: all 0.4s ease-out;
+  -webkit-transition: all 0.4s ease-out;
+  -moz-transition: all 0.4s ease-out;
 }
 .nav-mobile:before,
 .nav-mobile:after {
@@ -6833,7 +6832,7 @@ div a:focus {
   clear: both;
 }
 .nav-mobile.showNav {
-  transform: translateX(0px);
+  right: 0;
 }
 .nav-mobile button.nav-mobile-btn {
   display: block;
@@ -6931,8 +6930,11 @@ div a:focus {
   text-align: center;
   position: relative;
 }
-.main .main-top .nav ul.nav-menu li.navItem.navActive {
+.main .main-top .nav ul.nav-menu li.navItem:first-child {
   background-color: #fec60d;
+}
+.main .main-top .nav ul.nav-menu li.navItem.navActive {
+  color: #000000;
 }
 .main .main-top .nav ul.nav-menu li.navItem a.navItemLink:hover {
   color: #000000;
@@ -7026,24 +7028,29 @@ div a:focus {
   width: 100%;
   position: absolute;
   opacity: 0;
-  transition: opacity 0.7s linear;
-  -webkit-transition: opacity 0.7s linear;
-  -moz-transition: opacity 0.7s linear;
+  transition: opacity 0.8s ease-out;
+  -webkit-transition: opacity 0.8s ease-out;
+  -moz-transition: opacity 0.8s ease-out;
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a {
   display: block;
   position: relative;
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box {
-  transition: right 0.8s ease-out;
-  -webkit-transition: right 0.8s ease-out;
-  -moz-transition: right 0.8s ease-out;
+  transition: transform 0.8s ease-out;
+  -webkit-transition: transform 0.8s ease-out;
+  -moz-transition: transform 0.8s ease-out;
+  -webkit-transform: translateX(500px);
+  -moz-transform: translateX(500px);
+  transform: translateX(500px);
   position: absolute;
-  right: -100%;
+  right: 0;
   top: 0;
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box.sliderTxtActive {
-  right: 0;
+  -webkit-transform: translateX(0);
+  -moz-transform: translateX(0);
+  transform: translateX(0);
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box:before,
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box:after {
@@ -7210,6 +7217,10 @@ div a:focus {
   float: left;
   cursor: pointer;
   margin-bottom: 10px;
+}
+.main .main-productItem .productItem-cont a.p-item:hover span {
+  color: #fff;
+  background: #fec60d;
 }
 .main .main-productItem .productItem-cont a.p-item span {
   position: absolute;

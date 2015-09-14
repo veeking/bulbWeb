@@ -6930,8 +6930,11 @@ div a:focus {
   text-align: center;
   position: relative;
 }
-.main .main-top .nav ul.nav-menu li.navItem.navActive {
+.main .main-top .nav ul.nav-menu li.navItem:first-child {
   background-color: #fec60d;
+}
+.main .main-top .nav ul.nav-menu li.navItem.navActive {
+  color: #000000;
 }
 .main .main-top .nav ul.nav-menu li.navItem a.navItemLink:hover {
   color: #000000;
@@ -7034,9 +7037,9 @@ div a:focus {
   position: relative;
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box {
-  transition: all 0.8s ease-out;
-  -webkit-transition: all 0.8s ease-out;
-  -moz-transition: all 0.8s ease-out;
+  transition: transform 0.8s ease-out;
+  -webkit-transition: transform 0.8s ease-out;
+  -moz-transition: transform 0.8s ease-out;
   -webkit-transform: translateX(500px);
   -moz-transform: translateX(500px);
   transform: translateX(500px);

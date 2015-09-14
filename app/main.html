@@ -6,8 +6,8 @@
     <!--Less.js编译.less文件并进行本地存储-->
     <!--<link rel="stylesheet/less" href="../less/main.less"/>-->
     <!--<link rel="stylesheet/less" href="../less/bootstrapLess/bootstrap.less"/>-->
-    <link rel="stylesheet" href="../less/css/main.css"/>
-    <link rel="stylesheet" href="../less/css/media.css"/>
+    <link rel="stylesheet" href="less/css/main.css"/>
+    <link rel="stylesheet" href="less/css/media.css"/>
     <title>Bulb App</title>
 </head>
 <body ng-controller="bulbMainCtrl">
@@ -45,8 +45,8 @@
          <div class="nav col-md-8">
 
              <ul class="nav-menu hidden-xs">
-                 <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == 0}" ng-mouseover="moveSelect($index)">
-                     <a href="{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
+                 <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == moveCurrent}" ng-click="moveSelect($index)">
+                     <a href="#/{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
                      <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
                      <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
                          <li ng-repeat="navChildTwo in navMenu.navChild"><a href="{{navChildTwo.navUrl}}">{{navChildTwo.navName}}</a></li>
@@ -89,13 +89,15 @@
   <!--end footer-->
 
 
-  <script src="../less/less.js"></script>
-  <script src="../lib/framework/jquery-1.9.1.js"></script>
-  <script src="../lib/framework/angular.js"></script>
-  <script src="../lib/framework/angular-route.js"></script>
-  <script src="../lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
-  <script src="../script/app.js"></script>
-  <script src="../script/controllers.js"></script>
-  <script src="../script/directive.js"></script>
+  <script src="less/less.js"></script>
+  <script src="lib/framework/jquery-1.9.1.js"></script>
+  <script src="lib/framework/angular.js"></script>
+  <script src="lib/framework/angular-resource.js"></script>
+  <script src="lib/framework/angular-route.js"></script>
+  <script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
+  <script src="script/app.js"></script>
+  <script src="script/controllers.js"></script>
+  <script src="script/directive.js"></script>
+  <script src="script/services.js"></script>
 </body>
 </html>
