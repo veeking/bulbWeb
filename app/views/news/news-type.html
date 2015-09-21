@@ -9,9 +9,10 @@
 <body>
 <div class="news-type">
     <div ng-repeat="newItem in newItems" class="news-type-item" ng-hide="$index >= 6">
-        <a href="#/news/{{newItem.url}}">{{newItem.title}}</a>
+        <a href="#/news/{{newItem.url}}?page=1">{{newItem.title}}</a>
     </div>
 </div>
+
 <!-- end news-type-->
 <script src="less/less.js"></script>
 </body>

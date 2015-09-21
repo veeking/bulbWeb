@@ -2,7 +2,7 @@
 // controller
 
 var bulbCtrl = angular.module('bulbCtrl',[]);
-bulbCtrl.controller('bulbMainCtrl',function($scope,$timeout){
+bulbCtrl.controller('bulbMainCtrl',function($scope,$location,$timeout,githubServices,$http){
     $scope.moveCurrent = 0;
     $scope.navMenus = [
         {"navIdv":1,"navName":"首 页","navUrl":"/","navChild":[]},
@@ -25,6 +25,21 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$timeout){
     $scope.moveSelect = function(index){
         $scope.moveCurrent = index;
     }
+  githubServices.events('地方 ').success(function(data,status,headers){
+        console.log(data);
+  });
+
+   $scope.getRequest = function(page,size){
+      return $http({
+          params:{
+              page:page,
+              size:size
+          },
+          url:'#/testnews/newsList'
+      }).success(function(data,status,header,config){
+         console.log(config.params.size)
+      });
+   }
 });
 bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
     $scope.slides = [
@@ -167,16 +182,52 @@ bulbCtrl.controller('bulbNewsCtrl',function($scope){
 
     ];
 });
-bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,New){
+bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,$location,New){
     var newsType = $routeParams.newsType;
-    $scope.newLists = New.get({newsType:newsType},function(news){
-        console.log(news); // 成功后的回调
+    var pageData = []; // 用于临时存放当前页的所有数据列表，便于模拟显示数据列表
+    $scope.Pages = {};  // 与Pager 构造对象对应
+    pageData = New.get({newsType:newsType},function(news){
+        $scope.newsTypeUrl = newsType;
+        $scope.Pages = new Pager(news,2);
     });
-    $scope.newsTypeUrl = newsType;
-//   console.log($scope.newLists)
+    function Pager(listData,showItems){
+       this.currPage = parseInt($routeParams.page);
+       this.sizePage = showItems; // 每页显示数
+       this.dataLen = listData.length; // 总数据数
+       this.pageLen =  Math.ceil(this.dataLen/showItems); //向上取整防止奇数时计算遗漏 总页数 = 总数据数/每页显示数
+       this.currentPageItems =  listData.slice(0,this.pageLen); // 取符合总页数的数据，生成相应数量的
+       this.pages = this.currentPageItems;
+
+       var _calLoadPage = (this.currPage-1) * showItems; // 读取规律0 , 2 , 4
+       var pageTemp = listData.slice(_calLoadPage,_calLoadPage + showItems);  // 0,2  2,4  4,6
+       $scope.newLists = pageTemp;
+
+       this.indexPage = function(){
+         $location.search('page',1);
+       };
+       this.lastPage = function(){
+         $location.search('page',this.pageLen);
+       };
+       this.nextPage = function(){
+            if(this.currPage < this.pageLen){
+              $location.search('page',++this.currPage);
+            }
+       };
+       this.prevPage = function(){
+            if(this.currPage > 1){
+              $location.search('page',--this.currPage);
+            }
+       };
+       this.loadPage = function(pageIndex){
+           $location.search('page',pageIndex);
+       };
+       this.pageActive = function(index){
+           return this.currPage === index;
+       }
+    }
 });
 bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,New){
     var newsLists = New.get({newsType:$routeParams.newsType},function(news){
-        $scope.newDetails = newsLists[$routeParams.id-1];  //  news数组的下标从0开始，所以id-1来定位
+        $scope.newDetails = news[$routeParams.id-1];  //  news数组的下标从0开始，所以id-1来定位
     });
 });

@@ -31,12 +31,37 @@
 } // end news-type
 
 .news-type-list{
-  ul{
+  li{
+    background: #00b3ee;
+    color: #fff;
+    cursor:pointer;
+  }
+  .news-list{
     li{
       padding: @p10;
       background: #00b3ee;
-      color: #fff;
       margin-bottom:@p10;
+    }
+  }
+  .news-page{
+    ul {
+      .clearfix();
+      li {
+        @bc:#eb9316;
+        float: left;
+        padding-left:@p10 * 2;
+        padding-right:@p10 * 2;
+        padding-top:@p10;
+        padding-bottom:@p10;
+        text-align: center;
+        margin-right: @p10 * 2;
+        &:active{
+          background:  @bc;
+        }
+        &.pageActive {
+          background:  @bc;
+        }
+      }
     }
   }
 }

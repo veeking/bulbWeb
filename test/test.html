@@ -31,6 +31,16 @@
        .ng-leave-active{
           opacity:0;
        }
+        .t{
+            width: 100px;
+            text-overflow:ellipsis;
+            word-break:break-all;
+
+            display:-webkit-box; !important;
+            overflow:hidden;
+            -webkit-box-orient:vertical;
+            -webkit-line-clamp:4;
+        }
     </style>
 </head>
 <body>
@@ -55,7 +65,10 @@
         <hr/>
         <button ng-repeat="item in items" ng-click="removeItem($index)" ng>item {{item.id}}</button>
     </div>
+ <div class="t">
 
+     fmwenokfnewofnweoubfeouwbfouewbiherbihegherbgohrebgourbgoubreogub
+ </div>
 
 <script src="../less/less.js"></script>
 <script src="../lib/framework/angular.js"></script>

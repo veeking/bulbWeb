@@ -8,13 +8,25 @@
 </head>
 <body>
 <div class="news-type-list">
-    <ul>
+
+    <ul class="news-list">
      <li ng-repeat="newList in newLists">
          <a href="#/news/{{newsTypeUrl}}/{{newList.id}}">{{newList.title}}</a>
      </li>
     </ul>
-</div>
 
+
+     <div class="news-page">
+         <ul>
+             <li ng-click="Pages.indexPage()">首页</li>
+             <li ng-click="Pages.prevPage()">上一页</li>
+             <li ng-repeat="page in Pages.pages" ng-click="Pages.loadPage($index+1)" ng-class="{pageActive:Pages.pageActive($index+1)}">{{$index+1}}</li>
+             <li ng-click="Pages.nextPage()">下一页</li>
+             <li ng-click="Pages.lastPage()">尾页</li>
+         </ul>
+     </div>
+
+</div>
 
 <!-- end news-type-->
 <script src="less/less.js"></script>
