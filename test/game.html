@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <link rel="stylesheet" href="css/game.css"/>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+    <script src="js/jquery.transit.js"></script>
+    <script src="js/swipe.js"></script>
+    <script src="js/boyWalk.js"></script>
+</head>
+<body>
+  <div class="container">
+           <ul class="slide-main">
+               <li>
+                   <div>top</div>
+                   <div class="middle">middle</div>
+                   <div>bottom</div>
+               </li>
+               <li>第二个页面</li>
+               <li>第三个页面</li>
+           </ul>
+      <!--end slide-main -->
+      <div class="boy" id="boy"></div>
+  </div>
+  <button id="startSwipe" style="position: absolute;bottom: 0;left:0;">切换</button>
+</body>
+<script>
+    var container = $('.container');
+    var swipe = Swipe(container);
+
+    //
+    var boy = BoyWalk();
+    $('#startSwipe').click(function(){
+        boy.walkTo(9000,0.5).then(function(){
+            swipe.scrollTo(container.width(),1000);
+        }).then(function(){
+            return boy.walkTo(2000,0.9);
+        });
+    })
+
+
+</script>
+</html>

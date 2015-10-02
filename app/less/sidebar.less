@@ -1,0 +1,54 @@
+@import "bootstrapLess/bootstrap.less";
+@import "common.less"; //多页面共用模块
+@import "main.less";
+
+.side-bar{
+  height:100%;
+  background-color: @back-color;
+  .side-bar-top{
+    @m:30px;
+    width: 100%;
+    padding-top: @p10 * 2;
+    padding-bottom: @p10 * 2;
+    background-color: @back-color;
+    text-align: center;
+    color:@gray-small-light;
+    .border(bottom,1px,solid,@gray);
+//    .border(bottom,2px,dotted,@gray-light);
+    span{
+      font-size:@font-size-h3;
+    }
+    span.glyphicon{
+
+    }
+  }
+  .side-bar-middle{
+    ul{
+      margin-bottom:0;
+      li{
+        a{
+          @h:60px;
+          height: @h;
+          line-height: @h;
+          display:block;
+          font-size:@font-size-large;
+          color:@gray-light;
+          text-align: center;
+//          .border(bottom,1px,solid,#e7e7e7);
+          &.sideNavActive{
+            color: #fff;
+            background:@fore-color;
+          }
+        }
+      }
+    }
+  } //end middle
+
+  .side-bar-bottom{
+      display:none;
+      margin-top:@p10;
+    p{
+      text-align: center;
+    }
+  }
+}// end side-bar

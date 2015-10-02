@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html ng-app="viewApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>view测试</title>
+        <style>
+            *{
+                margin:0;
+                padding:0;
+            }
+             div{
+                 width: 100%;
+                 height: 200px;
+                 color: #ffffff;
+             }
+            .header{
+                background: #00b3ee;
+            }
+            .footer{
+                background: #222222;
+            }
+            @keyframes slideInView{
+                0%{
+                    transform:translateX(100%);
+                }
+                100%{
+                    transform:translateX(0);
+                }
+            }
+            @keyframes slideOutView{
+               0%{
+                 transform:translateX(100%);
+               }
+               100%{
+                 transform:translateX(0);
+                }
+            }
+            .main{
+                position: relative;
+            }
+            .view-main{
+                position: absolute;
+                text-align:center;
+                animation-duration:0.8s;
+                animation-iteration-count: 1;
+                animation-timing-function:ease-out;
+                animation-fill-mode: both;
+            }
+            .view-main div{
+                position: absolute;
+            }
+
+            .view-main.ng-enter{
+                animation-name:slideInView;
+            }
+
+        </style>
+</head>
+<body>
+  <div class="header">
+      头部
+      <a href="#/">首页</a>
+      <a href="#/news">资讯</a>
+  </div>
+  <div class="main">
+      <div ng-view class="view-main"></div>
+  </div>
+  <div class="footer">尾部</div>
+
+  <script src="../app/lib/framework/angular.js"></script>
+  <script src="../app/lib/framework/angular-route.js"></script>
+<script src="../app/lib/framework/angular-animate.js"></script>
+  <script>
+    var viewApp = angular.module('viewApp',['ngRoute','ngAnimate']);
+    viewApp.config(function($routeProvider){
+        $routeProvider.when('/',{
+            'template':"<div style='background: red;font-size:32px;'>这里是首页</div>",
+            'controller':'mainCtrl'
+        })
+        .when('/news',{
+          'template':"<div ng-controller='few' style='background: green;font-size:32px;'>这里是资讯" +
+                    "<div ng-include=\"'includeTest.html'\"></div>" +
+                    "<a href='#/news/1'>页1</span><a href='#/news/2'>页2</span>" +
+                    "<button>下一页</button>" +
+                    "</div>",
+          'controller':'newsCtrl'
+                })
+       .when('/news/:n',{
+           'template':"<div>这里是页1</div>",
+           'controller':'listCtrl'
+        })
+       .otherwise({
+                    redirectTo:'/'
+             })
+    });
+    viewApp.controller('few',function($scope){
+
+    })
+    viewApp.controller('mainCtrl',function($scope){
+
+    })
+    viewApp.controller('newsCtrl',function($scope){
+
+    })
+    viewApp.controller('listCtrl',function($scope){
+
+    })
+  </script>
+</body>
+</html>

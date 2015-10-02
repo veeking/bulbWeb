@@ -7,26 +7,35 @@
 
 </head>
 <body>
-<div class="news-type-list">
+<!--<div class="news-top" ng-include="'views/news/news-top.html'"></div>-->
+<!--<hr/>-->
+<div class="main-news row">
 
-    <ul class="news-list">
-     <li ng-repeat="newList in newLists">
-         <a href="#/news/{{newsTypeUrl}}/{{newList.id}}">{{newList.title}}</a>
-     </li>
-    </ul>
+    <div class="col-md-3" class="side" ng-include="'views/sidebar/sidebar.html'"></div>
+    <div class="col-md-9">
+        <div class="news-type-list">
+            <ul class="news-list">
+                <li ng-repeat="newList in newLists">
+                    <a href="#/news/{{newsTypeUrl}}/{{newList.id}}"><span class="glyphicon glyphicon-triangle-right"></span>{{newList.title}}</a>
+                    <span class="date">{{newList.date}}</span>
+                </li>
+            </ul>
 
 
-     <div class="news-page">
-         <ul>
-             <li ng-click="Pages.indexPage()">首页</li>
-             <li ng-click="Pages.prevPage()">上一页</li>
-             <li ng-repeat="page in Pages.pages" ng-click="Pages.loadPage($index+1)" ng-class="{pageActive:Pages.pageActive($index+1)}">{{$index+1}}</li>
-             <li ng-click="Pages.nextPage()">下一页</li>
-             <li ng-click="Pages.lastPage()">尾页</li>
-         </ul>
-     </div>
+            <div class="news-page">
+                <ul>
+                    <li><a href="javascript:void(0);" ng-click="Pages.indexPage()">首页</a></li>
+                    <li ng-click="Pages.prevPage()"><a href="javascript:void(0);" ng-click="Pages.prevPage()">上一页</a></li>
+                    <li ng-repeat="page in Pages.pageItem"><a href="javascript:void();" ng-click="Pages.loadPage($index+1)" ng-class="{pageActive:Pages.pageActive($index+1)}">{{$index+1}}</a></li>
+                    <li ng-click="Pages.nextPage()"><a href="javascript:void(0);" ng-click="Pages.nextPage()">下一页</a></li>
+                    <li ng-click="Pages.lastPage()"><a href="javascript:void(0);" ng-click="Pages.lastPage()">尾页</a></li>
+                </ul>
+            </div>
 
+        </div>
+    </div>
 </div>
+
 
 <!-- end news-type-->
 <script src="less/less.js"></script>

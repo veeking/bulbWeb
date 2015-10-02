@@ -2,17 +2,28 @@
 // controller
 
 var bulbCtrl = angular.module('bulbCtrl',[]);
-bulbCtrl.controller('bulbMainCtrl',function($scope,$location,$timeout,githubServices,$http){
+bulbCtrl.controller('bulbMainCtrl',function($scope,$location,$timeout,$http){
     $scope.moveCurrent = 0;
+    $scope.newsTypeMenus = [
+        {
+            "navName":"新闻分类1",
+            "navUrl":"#/news/news1?page=1"
+        },
+        {
+            "navName":"新闻分类2",
+            "navUrl":"#/news/news2?page=1"
+        },
+        {
+            "navName":"新闻分类3",
+            "navUrl":"#/news/news3?page=1"
+        }
+
+    ];
+
     $scope.navMenus = [
         {"navIdv":1,"navName":"首 页","navUrl":"/","navChild":[]},
         {"navId":2,"navName":"概 况","navUrl":"intro","navChild":[]},
-        {"navId":3,"navName":"资 讯","navUrl":"news","navChild":[
-            {"navId":31,"navName":"资讯1","navUrl":"#/news-1"},
-            {"navId":32,"navName":"资讯2","navUrl":"#/news-2"},
-            {"navId":33,"navName":"资讯3","navUrl":"#/news-3"},
-            {"navId":34,"navName":"资讯4","navUrl":"#/news-4"}
-        ]},
+        {"navId":3,"navName":"资 讯","navUrl":"news","navChild":$scope.newsTypeMenus},
         {"navId":4,"navName":"产 品","navUrl":"product","navChild":[
             {"navId":41,"navName":"产品1","navUrl":"#/product-1"},
             {"navId":42,"navName":"产品2","navUrl":"#/product-2"},
@@ -25,22 +36,11 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$location,$timeout,githubServ
     $scope.moveSelect = function(index){
         $scope.moveCurrent = index;
     }
-  githubServices.events('地方 ').success(function(data,status,headers){
-        console.log(data);
-  });
 
-   $scope.getRequest = function(page,size){
-      return $http({
-          params:{
-              page:page,
-              size:size
-          },
-          url:'#/testnews/newsList'
-      }).success(function(data,status,header,config){
-         console.log(config.params.size)
-      });
-   }
+
+
 });
+
 bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
     $scope.slides = [
         {
@@ -166,68 +166,56 @@ bulbCtrl.controller('bulbIntroCtrl',function($scope){
 
 });
 bulbCtrl.controller('bulbNewsCtrl',function($scope){
-    $scope.newItems = [
-        {
-           "title":"新闻分类1",
-           "url":"news1"
-        },
-        {
-            "title":"新闻分类2",
-            "url":"news2"
-        },
-        {
-            "title":"新闻分类3",
-            "url":"news3"
-        }
-
-    ];
+    var i;
+    var imgPreSrc = 'img/list-type/';
+    var imgType = '.jpg';
+    for(i=0;i < $scope.newsTypeMenus.length;i++){ // 加载分类图片
+        $scope.newsTypeMenus[i].img = imgPreSrc + "l" + (i+1) + imgType;
+    }
 });
-bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,$location,New){
+bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
+    var sideNavIndex = 0;
+    $scope.Side = {
+        typeIcon : "glyphicon-bookmark",
+        typeTxt : "新闻中心NEWS",
+        sideNavs : $scope.newsTypeMenus
+    };
+
+    $scope.activeSideNav = function(index){
+        sideNavIndex = index;
+        var nowPath = $routeParams.newsType;
+        var nowUrl = $scope.Side.sideNavs[index].navUrl;
+        if(nowUrl.indexOf(nowPath) !=-1){  // 根据url和path是否匹配来定位当前
+            return true;
+        }else{
+            return false;
+        }
+  } // end activeSlideNav
+});
+bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,$location,New,Pager){
     var newsType = $routeParams.newsType;
     var pageData = []; // 用于临时存放当前页的所有数据列表，便于模拟显示数据列表
     $scope.Pages = {};  // 与Pager 构造对象对应
+
     pageData = New.get({newsType:newsType},function(news){
         $scope.newsTypeUrl = newsType;
-        $scope.Pages = new Pager(news,2);
+        $scope.Pages = Pager(news,6);
+        $scope.newLists = $scope.Pages.pageDataTemp;
     });
-    function Pager(listData,showItems){
-       this.currPage = parseInt($routeParams.page);
-       this.sizePage = showItems; // 每页显示数
-       this.dataLen = listData.length; // 总数据数
-       this.pageLen =  Math.ceil(this.dataLen/showItems); //向上取整防止奇数时计算遗漏 总页数 = 总数据数/每页显示数
-       this.currentPageItems =  listData.slice(0,this.pageLen); // 取符合总页数的数据，生成相应数量的
-       this.pages = this.currentPageItems;
-
-       var _calLoadPage = (this.currPage-1) * showItems; // 读取规律0 , 2 , 4
-       var pageTemp = listData.slice(_calLoadPage,_calLoadPage + showItems);  // 0,2  2,4  4,6
-       $scope.newLists = pageTemp;
-
-       this.indexPage = function(){
-         $location.search('page',1);
-       };
-       this.lastPage = function(){
-         $location.search('page',this.pageLen);
-       };
-       this.nextPage = function(){
-            if(this.currPage < this.pageLen){
-              $location.search('page',++this.currPage);
-            }
-       };
-       this.prevPage = function(){
-            if(this.currPage > 1){
-              $location.search('page',--this.currPage);
-            }
-       };
-       this.loadPage = function(pageIndex){
-           $location.search('page',pageIndex);
-       };
-       this.pageActive = function(index){
-           return this.currPage === index;
-       }
-    }
 });
-bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,New){
-    var newsLists = New.get({newsType:$routeParams.newsType},function(news){
-        $scope.newDetails = news[$routeParams.id-1];  //  news数组的下标从0开始，所以id-1来定位
+bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,$q,New){
+    var _loadDetail = function(){  // promise封装
+       var deferred = $q.defer();
+       New.get({newsType:$routeParams.newsType},function(news){
+         deferred.resolve(news[$routeParams.id-1]);
+       });
+       return deferred.promise;
+    }; // end _loadDetail
+
+    var detailPromise = _loadDetail().then(function(data){
+          $scope.newDetails = data;
+          if($scope.newDetails.content){
+             $scope.content = $scope.newDetails.content;
+          }
     });
 });

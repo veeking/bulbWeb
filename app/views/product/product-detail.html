@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新闻详情</title>
+    <link rel="stylesheet/less" href="less/news.less"/>
+</head>
+<body>
+  <div class="container" style="text-align: center;">
+      <div class="row">
+         <p>{{newDetails.title}}</p>
+      </div>
+      <div class="row">
+          <p>
+             <span>{{newDetails.author}}</span>
+             <span>{{newDetails.date}}</span>
+          </p>
+      </div>
+      <div class="row">
+          <p>
+              {{newDetails.content}}
+          </p>
+      </div>
+  </div>
+<script src="less/less.js"></script>
+</body>
+</html>

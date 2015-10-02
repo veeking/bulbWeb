@@ -7,11 +7,20 @@
 
 </head>
 <body>
+<div class="news-top" ng-include="'views/news/news-top.html'"></div>
 <div class="news-type">
-    <div ng-repeat="newItem in newItems" class="news-type-item" ng-hide="$index >= 6">
-        <a href="#/news/{{newItem.url}}?page=1">{{newItem.title}}</a>
+
+    <div ng-repeat="newsTypeMenu in newsTypeMenus" class="news-type-item" ng-hide="$index >= 6">
+        <img ng-src="{{newsTypeMenu.img}}" alt="{{newsTypeMenu.navName}}"/>
+        <a href="{{newsTypeMenu.navUrl}}">
+            <!--使用src={{}}的话会出现解析顺序的错误 ，所以使用ng-src-->
+            <span>{{newsTypeMenu.navName}}</span>
+            <button class="btn btn-primary">进入列表</button>
+        </a>
     </div>
 </div>
+
+
 
 <!-- end news-type-->
 <script src="less/less.js"></script>

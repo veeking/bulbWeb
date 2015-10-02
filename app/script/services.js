@@ -7,17 +7,53 @@ bulbService.factory('New',function($resource){
         get: {isArray: true }
     }); // 注意路径也是相对于main.html位置来定位的
 });
-bulbService.service('Pager',function(data,showCount){
-         // do some
-})
-bulbService.factory('githubServices',function($http){
-   var doRequest = function(userName,path){
-      return $http({
-         method:'JSONP',
-         url : 'https://api.github.com/users/' + userName + '/' + path + '?callback=JSON_CALLBACK'
-      });
-   }// end doRequest
-   return{ // 暴露接口
-      events : function(username){return doRequest(username,'events')}
-   }
+bulbService.factory('Pager',function($routeParams,$location){
+    return function(pageData,pageCount){
+        var Pager = {
+            currPage : parseInt($routeParams.page),
+            sizePage : pageCount,
+            dataLen : pageData.length,
+            pageLen : 0,
+            currentPageItems : 0, // 当前页数数
+            pageItem : null,  // 页数数据，用于生成数字连接
+            pageDataTemp : null,  // 暴露 临时页数的列表数据
+            _calLoad : function(){
+             this.pageLen = Math.ceil(this.dataLen / pageCount)
+             this.currentPageItems = pageData.slice(0,this.pageLen)
+             this.pageItem = this.currentPageItems;
+
+             var _calLoadPage = (this.currPage - 1) * pageCount; // 读取规律0 , 2 , 4
+             this.pageDataTemp = pageData.slice(_calLoadPage, _calLoadPage + pageCount);  // 0,2  2,4  4,6
+            },
+            indexPage : function(){
+                $location.search('page',1);
+            },
+            lastPage : function(){
+                $location.search('page',this.pageLen);
+            },
+            nextPage : function(){
+                if(this.currPage < this.pageLen){
+                    $location.search('page',++this.currPage);
+                }
+            },
+            prevPage : function(){
+                if(this.currPage > 1){
+                    $location.search('page',--this.currPage);
+                }
+            },
+            loadPage : function(pageIndex){
+                $location.search('page',pageIndex);
+            },
+            pageActive : function(index){
+                return this.currPage === index;
+            }
+       } // end pages
+        Pager._calLoad();  // 默认调用一次 加载第一页
+        return Pager;
+    } // end function
 });
+//bulbService.factory('news')
+//
+
+
+

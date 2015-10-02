@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+ <div id="od"></div>
+ <div id="od2"></div>
+ <script>
+     var op2 = document.getElementById('od2');
+
+   function formatSection2(option){  // 数字累加法
+       var op = option.parentDiv;
+       var strDom = option.strDom;
+       var textIndex = 0; // 重要索引
+       var newStrDom = "";
+       var arrDom;
+       op.innerHTML = strDom;
+       arrDom = [].slice.apply(op.childNodes); // 类型转换
+       for(var i =0;i<arrDom.length;i++){
+           var tmpDiv = document.createElement('div');
+           if(arrDom[i].nodeName == "#text") {  //p标签包围普通
+             textIndex = i;
+             var tmpP = document.createElement('p');
+             tmpP.appendChild(arrDom[textIndex]);
+             tmpDiv.appendChild(tmpP);
+             arrDom.splice(textIndex,1,tmpDiv.innerHTML);
+           }
+
+           if(i != textIndex){
+             tmpDiv.appendChild(arrDom[i]);
+             arrDom.splice(i,1,tmpDiv.innerHTML);
+           }
+           newStrDom += arrDom[i];
+       }  // END FOR
+       op.innerHTML = newStrDom;
+       return op.childNodes;
+   }
+
+    function formatSection(option){  // 普通替换数组法
+        var op = option.parentDiv;
+        var strDom = option.strDom;
+        var arrDom;
+        op.innerHTML = strDom;
+        arrDom = [].slice.apply(op.childNodes); // 类型转换
+        for(var i =0;i<arrDom.length;i++){
+            if(arrDom[i].nodeName == "#text"){  //p标签包围普通
+                var textIndex = i;
+                var tmpP = document.createElement('p');
+                tmpP.appendChild(arrDom[textIndex]);
+                arrDom.splice(textIndex,1,tmpP);  // 替换掉原来
+            }
+        }
+       return arrDom;
+    }
+    var ses = formatSection2({
+        parentDiv:document.getElementById('od'),
+        strDom:"单位费无非为<p><a>dc肥肉不负</a>附件二发觉</p>风微风"
+    });
+//   for(var i=0;i<ses.length;i++){
+//       op2.appendChild(ses[i])
+//   }
+
+   // 第一种方法返回的是普通数组，需要遍历插入元素 (推荐)
+   // 第二种方法返回的是NodeList元素数组，无需遍历插入即可使用
+ </script>
+</body>
+</html>

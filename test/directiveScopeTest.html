@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="testCtrl">
+      <div format-sections="{{content}}" hello-say="helloSay()"></div>
+
+<script src="../app/lib/framework/angular.js"></script>
+      <script>
+          var testApp = angular.module('testApp',[]);
+          testApp.controller('testCtrl',function($scope){
+              $scope.content = "加不上班";
+
+              $scope.woshite = "第三方";
+              $scope.helloSay = function(){
+                  alert('hello world!!')
+              }
+              $scope.test = function(){
+                  alert("fnhdjf")
+              }
+              alert("我是控制器" + $scope.content)
+          })
+          testApp.directive('formatSections',function(){
+              return{
+                  restrict:"A",
+                  replace :true,
+                  transclude:true,
+                  template:"<div ng-transclude><span>{{woshite}}</span></Span></div>",
+                  scope:{
+                      cont:"=formatSections",
+                      sayHello:'&helloSay'   // sayHello引用模板hello-say的属性值，而hello-say的属性值是一个函数，该函数在 父级cotroller里定义
+                  },
+                  controller:function($scope,$attrs){
+
+                  },
+                  link:function(scope,element,attrs){
+                      scope.sayHello();
+                      alert("指令" + scope.cont);
+                      scope.cont = "哈哈哈我修改了cont"
+                      alert("修改后指令" + scope.cont);
+                      console .log(scope)
+                  }
+              }
+          })
+      </script>
+</body>
+</html>

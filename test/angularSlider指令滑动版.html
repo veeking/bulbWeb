@@ -118,12 +118,26 @@
         </carousel>
     </div>
 </div><!--end carouseDemoCtrl-->
+   <div ng-controller="pa">
+       <!--测试controller通信关系-->
 
+      <div ng-controller="paa"></div>
+      <div ng-controller="pab"> {{pabTxt}}</div>
+   </div>
 <!--<script src="less/less.js"></script>-->
-<script src="../lib/framework/jquery-1.9.1.js"></script>
-<script src="../lib/framework/angular.js"></script>
+<script src="../app/lib/framework/jquery-1.9.1.js"></script>
+<script src="../app/lib/framework/angular.js"></script>
 <script>
     var slideApp = angular.module('slideApp',[]);
+    slideApp.controller('pa',function($scope){
+
+    });
+    slideApp.controller('paa',function($scope){
+
+    });
+    slideApp.controller('pab',function($scope){
+        $scope.pabTxt = "件好事啊";
+    });
     slideApp.controller('carouselDemoCtrl',function($scope){
         $scope.slides = [
              {

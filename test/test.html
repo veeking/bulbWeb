@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="testApp">
 <head lang="en">
-    <link rel="stylesheet/less" href="less/test.less"/>
+    <!--<link rel="stylesheet/less" href="../app/less/test.less"/>-->
     <meta charset="UTF-8">
     <title>less+angular轮播图vbjkjkjk</title>
     <style>
@@ -58,7 +58,6 @@
         </div>
     </div>
 
-
     <div ng-controller="animationCtrl">
         <button ng-click="addItem()">add</button>
         <button ng-click="clearItem()">clear</button>
@@ -67,13 +66,24 @@
     </div>
  <div class="t">
 
-     fmwenokfnewofnweoubfeouwbfouewbiherbihegherbgohrebgourbgoubreogub
+     fmwenokfnewofnaweoubfeouwbfouewbiherbihegherbgohrebgourbgoubreogub
  </div>
 
-<script src="../less/less.js"></script>
-<script src="../lib/framework/angular.js"></script>
-<script src="../lib/framework/angular-animate.js"></script>
+<script src="../app/less/less.js"></script>
+<script src="../app/lib/framework/angular.js"></script>
+<script src="../app/lib/framework/angular-animate.js"></script>
 <script>
+
+    var domStr = "<p><strong>单发或的房间<a href='##'>fwefn2j</a></strong>收购热固铂二局和个人比古人<p>收购热固铂二局和个人比古人</p>";
+    document.body.appendChild(parseDom(domStr)[0])
+
+    function parseDom(str){
+        alert(typeof str)
+       var div = document.createElement('div');
+       div.innerHTML = str;
+       console.log(div.childNodes)
+       return div.childNodes;
+    }
     var testApp = angular.module('testApp',['ngAnimate']);
     testApp.controller('animationCtrl',function($scope){
           var items = $scope.items = [];
@@ -90,6 +100,8 @@
              items.splice(index,1);
          }
     });
+
+
 </script>
 </body>
 </html>
