@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html ng-app="tabApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>angular选项卡测试</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tab{
+            position: relative;
+            width: 800px;
+            margin:0 auto;
+            margin-top:20px;
+            clear: both;
+        }
+        .tab .tab-item{
+            float: left;
+            width: 50%;
+        }
+        .tab .tab-item .tab-item-title{
+            width: 100%;
+            height: 40px;
+            border-left: 1px solid #fff;
+            line-height: 40px;
+            display: block;
+            text-align: center;
+            background: #222222;
+            color: #fff;;
+        }
+        .tab .tab-item .tabTitleActive{
+            background: #FEC60D;
+        }
+        .tab .tab-item .tab-item-title:hover{
+            background: #FEC60D;
+        }
+        .content{
+            position: absolute; !important;
+            padding: 10%;
+            width: 80%;
+            left: 0;
+            outline: 1px solid #222222;
+        }
+        .content-item{
+            width:100%;
+            margin-bottom:20px;
+        }
+        .content-item:after{
+            clear:both;
+            content: "";
+            height: 0;
+            visibility: hidden;
+            display: block;
+        }
+
+        .content-img,.content-txt{
+            float:left;
+        }
+        .content-img{
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #222222;
+        }
+        .content-img img{
+            width: 100%;
+        }
+
+
+    </style>
+</head>
+<body ng-controller="tabCtrl">
+
+ <div class="tab">
+     <div ng-repeat="tab in tabs" class="tab-item">
+         <a href="###" class="tab-item-title" ng-click="changeTab($index)" ng-class="{tabTitleActive:currIndex == $index}">{{tab.typeTitle}}<span>({{tab.count}})</span></a>
+        <div style="clear: both;">
+         <div class="content" ng-show="currIndex == $index">
+            <div ng-repeat="tabList in tab.typeList" class="content-item">
+                <a ng-hide="tabList.img == undefined" class="content-img"><img ng-src="{{tabList.img}}" /></a>
+                <div class="content-txt">
+                    <a href="###">{{tabList.title}}</a>
+                    <p>{{tabList.content}}</p>
+                </div>
+            </div> <!--end tabList-->
+        </div> <!--end conetent-->
+        </div>
+     </div>
+ </div>
+
+ <Div style="width:500px;height: 200px;background: #00b3ee;clear: both;position: absolute;"></Div>
+
+<script src="../app/lib/framework/angular.js"></script>
+<script>
+    var tabApp = angular.module('tabApp',[]);
+    tabApp.controller('tabCtrl',function($scope){
+        $scope.tabs = [
+            {
+                "typeTitle":"新闻",
+                "count":14,
+                "typeList":[
+                    {
+                        "title":"新闻标题1姜你军哦过你热哦竟然能化工",
+                        "content":"新闻内容1你付金额为念佛呢我非农额外你佛恩万佛恩我非我就把v"
+                    },
+                    {
+                        "title":"新闻标题2姜你军哦过你热哦竟然能化工",
+                        "content":"新闻内容2你付金额为念佛呢我非农额外你佛恩万佛恩我非我就把v"
+                    }
+                ]
+            },
+            {
+                "typeTitle":"产品",
+                "count":20,
+                "typeList":[
+                    {
+                        "title":"产品LEDFGFEHUORGH",
+                        "content":"产品内容1你付金额为念佛呢我非农额外你佛恩万佛恩我非我就把v",
+                        "img":"img/led-p1.jpg"
+                    },
+                    {
+                        "title":"产品3集聚点灯",
+                        "content":"产品内容3你付金额为念佛呢我非农额外你佛恩万佛恩我非我就把v",
+                        "img":"img/led-p2.jpg"
+                    }
+                ]
+            }
+        ]; //选项卡数据
+
+      $scope.currIndex = 0;
+      $scope.changeTab = function(index){
+          $scope.currIndex = index;
+      }
+    });
+</script>
+</body>
+</html>

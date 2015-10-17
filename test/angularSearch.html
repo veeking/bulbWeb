@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .appView{
+            position: absolute;
+            animation-duration:0.8s;
+            animation-iteration-count: 1;
+            animation-timing-function:ease-out;
+            animation-fill-mode: both;
+        }
+        @keyframes slideIn{
+            0%{
+               transform:translateX(100%);
+            }
+            100%{
+                transform:translateX(0);
+            }
+        }
+        @keyframes slideOut{
+            0%{
+                transform:translateX(0);
+            }
+            100%{
+                transform:translateX(100%);
+            }
+        }
+        .appView.ng-enter{
+            animation-name:slideIn;
+        }
+        .appView.ng-leave{
+            animation-name:slideOut;
+        }
+    </style>
+</head>
+<body ng-controller="mainCtrl" style='background:red;'>
+
+<form ng-submit="_search()" >
+    <input type="text" ng-model="searchText "/>
+
+    <form action=""></form>
+    <a href="#/search?word={{searchText}}">{{searchText}}</a>
+    <button type="submit">搜索</button>
+</form>
+
+  <div ng-view class="appView"></div>
+
+<script src="../app/lib/framework/angular.js"></script>
+<script src="../app/lib/framework/angular-route.js"></script>
+<script src="../app/lib/framework/angular-animate.js"></script>
+<script>
+    var sApp = angular.module('sApp',['ngRoute','ngAnimate']);
+    sApp.config(function($routeProvider){
+        $routeProvider.when('/search',{
+            templateUrl:"searchMain.html",
+            controller:'searchCtrl'
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
+    })
+    sApp.controller('mainCtrl',function($scope,$timeout,$location){
+            $scope.enties = [
+                {
+                    id:1,
+                    name:"啊是男孩还是"
+                },
+                {
+                    id:2,
+                    name:"侧王妃"
+                },
+                {
+                    id:3,
+                    name:"个特别特别"
+                },
+                {
+                    id:4,
+                    name:"木ikea分为发"
+                }
+            ]
+        $scope._search = function(){
+            if($scope.searchText != ""){
+                $location.path('/search').search('word='+$scope.searchText)
+            }
+        }
+        var filterText = '';
+        var tmpText = '';
+        var tmpTime;
+        $scope.$watch('searchText',function(val){
+            if(tmpTime){
+                $timeout.cancel(tmpTime);
+            }
+            tmpText = val;
+            tmpTime = $timeout(function(){  // 模拟延迟搜索
+                $scope.filterText = tmpText;
+
+            },1000);
+        });
+    })
+    sApp.controller('searchCtrl',function($scope,$timeout){
+
+    });
+    angular.element(document).ready(function(){ //手动启动
+        angular.bootstrap(document,['sApp']);
+    });
+</script>
+</body>
+</html>

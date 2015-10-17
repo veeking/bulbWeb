@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="test">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body ng-controller="tst">
+
+  <div ng-repeat="data in testData | orderBy:'count':true">
+      <a href="">{{data.name}}</a>
+      <span>{{data.count}}</span>
+  </div>
+
+  <div test="freg()">
+    dw
+  </div>
+
+  <script src="../app/lib/framework/angular.js"></script>
+  <script>
+      var test = angular.module('test',[]);
+      test.controller('tst',function($scope){
+
+          var s = ["A","B","C"];
+          var ss = ["ada","auo","wang","buhu","sb","cao","cc"];
+          var so = {};
+          for(var i=0;i< s.length;i++){
+              so[s[i]] = [];
+          }
+          for(var key in so){
+            for(var i=0;i<ss.length;i++){
+                 if(ss[i].toUpperCase().indexOf(key) != -1){
+                     so[key].push(ss[i]);
+                 }
+            }
+          }
+        console.log(so)
+          $scope.testData = [
+              {
+                name:"新闻",
+                count:19
+              },
+              {
+                  name:"产品",
+                  count:40
+              }
+          ];
+          $scope.order = "count";
+
+          $scope.freg = function(){
+              console.log(1);
+          }
+      })
+      test.directive('test',function(){
+          return{
+              restrict:"A",
+              link:function(scope,element,attr){
+                  var fnName = attr.test;
+                  fnName = fnName.split('(')[0];
+                  if(scope[fnName]){
+                     scope[fnName]();
+                  }
+              }
+          }
+      })
+  </script>
+</body>
+</html>

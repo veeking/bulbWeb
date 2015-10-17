@@ -96,3 +96,13 @@ bulbDirective.directive('sectionFormat',function(){  // 格式化文章内容
        }// end link
     } // end return
 });
+
+//bulbDirective.directive('adaptHeight',function(){
+//    return{
+//        restrict:"A",
+//        link : function(scope,element,attr){
+//               console.log($('.tab'))
+//               element.css({height:300});
+//        }
+//    }
+//})

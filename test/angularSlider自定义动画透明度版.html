@@ -79,15 +79,15 @@
        </ul>
   <!--end slideBox-->
        <div id="slideIndex">
-           <a href="###" ng-repeat="slideItem in slideItems" ng-click="changePic($index);" ng-class="{currentIndex : $index == current}">
+           <a href="###" ng-repeat="slideItem in slideItems" ng-show="test()" ng-click="changePic($index);" ng-class="{currentIndex : $index == current}">
                <img ng-src="{{slideItem.url}}" alt="{{slideItem.text}}"/>
            </a>
        </div>
        <!--end slideIndex-->
    </div>
-<script src="../lib/framework/jquery-1.9.1.js"></script>
-<script src="../lib/framework/angular.js"></script>
-<script src="../lib/framework/angular-animate.js"></script>
+   <script src="../app/lib/framework/jquery-1.9.1.js"></script>
+   <script src="../app/lib/framework/angular.js"></script>
+   <script src="../app/lib/framework/angular-animate.js"></script>
 
   <script>
        // 单张滑动轮播,
@@ -117,6 +117,9 @@
           $scope.isCurrent = function(index){  // 显示当前
                return $scope.current === index;
           }
+           $scope.test = function(){
+               alert(1)
+           }
           $scope.changePic = function(index){
                  console.log($scope.direction)
                  $scope.current = index;

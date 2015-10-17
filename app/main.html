@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!--Less.js编译.less文件并进行本地存储-->
-    <!--<link rel="stylesheet/less" href="../less/main.less"/>-->
-    <!--<link rel="stylesheet/less" href="../less/bootstrapLess/bootstrap.less"/>-->
-    <link rel="stylesheet" href="less/css/main.css"/>
+    <link rel="stylesheet/less" href="less/main.less"/>
+    <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
+    <!--<link rel="stylesheet" href="less/css/main.css"/>-->
     <link rel="stylesheet" href="less/css/media.css"/>
     <title>Bulb App</title>
 </head>
@@ -16,7 +16,7 @@
     <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
     <ul class="nav-mobile-menu" ng-hide="!showNav">
         <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:$index == moveCurrent}" ng-mouseover="moveSelect($index)">
-            <a href="{{navMenu.navUrl}}">{{navMenu.navName}}</a>
+            <a href="#/{{navMenu.navUrl}}">{{navMenu.navName}}</a>
         </li>
     </ul>
  </div><!--end nav-mobile-->
@@ -59,8 +59,8 @@
          </div><!--end nav-->
 
          <div class="search col-md-4">
-             <form class="form-group" action="/">
-                 <input type="text" class="form-control" placeholder="请输入关键字.." />
+             <form class="form-group" ng-submit="search()">
+                 <input type="text" ng-model="searchWord" class="form-control" placeholder="请输入关键字.." required/>
                  <span class="glyphicon glyphicon-search form-control-feedback"></span>
                  <input type="submit" hidden="hidden"/>
              </form>

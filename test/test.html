@@ -72,6 +72,7 @@
 <script src="../app/less/less.js"></script>
 <script src="../app/lib/framework/angular.js"></script>
 <script src="../app/lib/framework/angular-animate.js"></script>
+    <script src="../app/lib/framework/angular-resource.js"></script>
 <script>
 
     var domStr = "<p><strong>单发或的房间<a href='##'>fwefn2j</a></strong>收购热固铂二局和个人比古人<p>收购热固铂二局和个人比古人</p>";
@@ -84,11 +85,16 @@
        console.log(div.childNodes)
        return div.childNodes;
     }
-    var testApp = angular.module('testApp',['ngAnimate']);
-    testApp.controller('animationCtrl',function($scope){
+    var testApp = angular.module('testApp',['ngAnimate','ngResource']);
+    testApp.controller('animationCtrl',function($scope,$http,$resource){
           var items = $scope.items = [];
 
           $scope.addItem = function(){
+              console.log($resource('../app/data/news/news1.json',{},{
+                  get:{isArray:true}
+              }).get(function(data){
+                  console.log(data)
+              }));
               for(var i=0;i<10;i++){
                   items.push({id:i});
               }
@@ -100,8 +106,25 @@
              items.splice(index,1);
          }
     });
+   var oj = {
+        newsData : function(){
+            return sayHello();
+        },
+     　 productsData : function(){
+            alert(this.newsData())
+            return  this.newsData();
+        }
+    }
 
+    function sayHello(){
+        alert('helloww');
+    }
+    oj.productsData();
 
+    var a = [23,5,7,88,9];
+
+    a.splice(5,0,10);
+    alert(a);
 </script>
 </body>
 </html>

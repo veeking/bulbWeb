@@ -16,8 +16,9 @@
       padding: @padding-base-vertical @padding-base-horizontal;
       line-height: @line-height-base;
       text-decoration: none;
-      color: @pagination-color;
-      background-color: @pagination-bg;
+      color: @pagination-bg;
+//      background-color: @pagination-bg;
+      background-color: @back-color;
       border: 1px solid @pagination-border;
       margin-left: -1px;
     }
@@ -41,8 +42,8 @@
     &:hover,
     &:focus {
       z-index: 3;
-      color: @pagination-hover-color;
-      background-color: @pagination-hover-bg;
+      color: @pagination-bg;
+      background-color: @fore-color;
       border-color: @pagination-hover-border;
     }
   }
@@ -53,8 +54,8 @@
     &:hover,
     &:focus {
       z-index: 2;
-      color: @pagination-active-color;
-      background-color: @pagination-active-bg;
+      color: @pagination-bg;
+      background-color: @fore-color;
       border-color: @pagination-active-border;
       cursor: default;
     }
@@ -67,8 +68,8 @@
     > a,
     > a:hover,
     > a:focus {
-      color: @pagination-disabled-color;
-      background-color: @pagination-disabled-bg;
+      color: @gray-dark;
+      background-color: @fore-color;
       border-color: @pagination-disabled-border;
       cursor: @cursor-disabled;
     }

@@ -72,3 +72,34 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
   margin-top:@p10 + 2;
 }
 // 因为是共用的 所以前面归类为 commonVar.less 单独文件 @import引入即可);
+
+
+
+//分页
+.page{
+  ul {
+    .clearfix();
+    li {
+      display: inline;
+      a{
+        text-align: center;
+        background: @back-color;
+        color: #fff;
+        float: left;
+        line-height: 1.42857;
+        padding-left:@p10*2;
+        padding-right:@p10*2;
+        padding-top:@p10;
+        padding-bottom:@p10;
+        position: relative;
+        margin-right:2%;
+        &:active{
+          background:@fore-color;
+        }
+        &.pageActive {
+          background:@fore-color;
+        }
+      }
+    }
+  }
+}

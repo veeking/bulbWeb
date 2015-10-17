@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script>
+   var aa = [
+       {
+           "id":1,
+           "title":"MASTER LED 6.5-50W 2700K 12V MR16 36D",
+           "description":"MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
+           "img":"img/product/p1/led-p1.jpg",
+           "ingredients":[ // 详细参数(暂未确定)
+               {
+                   "a":1,
+                   "b":2,
+                   "c":3
+               }
+           ]
+       },
+       {
+           "id":2,
+           "title":"MASTER LED 2.5-90W 2700K 12V MR16 36D",
+           "description":"风微风 LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
+           "img":"img/product/p1/led-p2.jpg",
+           "ingredients":[ // 详细参数(暂未确定)
+               {
+                   "a":1,
+                   "b":2,
+                   "c":3
+               }
+           ]
+       },
+       {
+           "id":3,
+           "title":"很好认 LED 5.5-50W 2700K 12V MR16 36D",
+           "description":"核桃仁和他人 LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
+           "img":"img/product/p1/led-p3.jpg",
+           "ingredients":[ // 详细参数(暂未确定)
+               {
+                   "a":1,
+                   "b":2,
+                   "c":3
+               }
+           ]
+       },
+       {
+           "id":4,
+           "title":"哦开辟 LED 9.5-50W 2700K 12V MR16 36D",
+           "description":"MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
+           "img":"img/product/p1/led-p4.jpg",
+           "ingredients":[ // 详细参数(暂未确定)
+               {
+                   "a":1,
+                   "b":2,
+                   "c":3
+               }
+           ]
+       }
+   ];
+   var res = [];
+  res = aa.slice(0,aa.length-1)
+console.log(res)
+   var a1 = [23,5,788,9]
+   var a2 = [];
+   a2.concat(a1)
+   alert(a2);
+    function binSearch(arr,data){
+        var upData = arr.length - 1;
+        var lowData = 0;
+        while(lowData < upData){
+            var mid = Math.floor((lowData + upData)/2);
+            if(arr[mid] < data){
+                lowData =  mid + 1;
+            }else if(arr[mid] > data){
+                upData = mid - 1;
+            }else{  // 找到合适的就返回
+               return mid;
+            }
+        }
+        return -1;
+    } // end binSearch
+ </script>
+</body>
+</html>

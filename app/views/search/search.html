@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>搜索页</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .tab{
+            position: relative;!important;
+            width: 800px;
+            min-height: 600px;
+            margin:0 auto;
+            margin-top:20px;
+            overflow: hidden;
+        }
+        .tab .tab-item{
+            float: left;
+            width: 50%;
+        }
+        .tab .tab-item .tab-item-title{
+            width: 100%;
+            height: 40px;
+            border-left: 1px solid #fff;
+            line-height: 40px;
+            display: block;
+            text-align: center;
+            background: #222222;
+            color: #fff;;
+        }
+        .tab .tab-item .tabTitleActive{
+            background: #FEC60D;
+        }
+        .tab .tab-item .tab-item-title:hover{
+            background: #FEC60D;
+        }
+        .content{
+            position: absolute; !important;
+            padding: 8%;
+            width: 100%;
+            left: 0;
+            outline: 1px solid #222222;
+            z-index:98;
+        }
+        .content-item{
+            width:100%;
+            margin-bottom:20px;
+            z-index:98;
+        }
+        .content-item:after{
+            clear:both;
+            content: "";
+            height: 0;
+            visibility: hidden;
+            display: block;
+        }
+
+        .content-img,.content-txt{
+            float:left;
+        }
+        .content-img{
+            display: block;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #222222;
+        }
+        .content-img img{
+            width: 100%;
+        }
+        .page{
+             position: absolute;
+             bottom: 0;
+                width:100%;
+            z-index:60;
+        }
+        .page ul li{
+            display: inline;
+            z-index:60;
+        }
+        .page ul li a{
+            z-index:60;
+            background: #000000;
+            color: #fff;
+            padding: 10px;
+            float: left;
+            margin-right: 10px;
+        }
+        .page ul li a.pageActive{
+            background: #FEC60D;
+        }
+        .page ul li a:hover{
+            background: #FEC60D;
+        }
+    </style>
+</head>
+<body>
+<div ng-show="loaded" style="color:#fff;background: #FEC60D;width:200px;height:50px ">正在加载中....</div>
+<div class="tab">
+    <div ng-repeat="tab in tabs | orderBy:'listCount':true" class="tab-item">
+        <a class="tab-item-title" ng-click="changeTab($index)" ng-class="{tabTitleActive:currIndex == $index}">{{tab.typeTitle}}<span>({{tab.listCount }})</span></a>
+
+        <div class="content" ng-show="currIndex == $index">
+            <span ng-show="tab.listData.length==0" style="color: red;text-align: center;">Sorry,未找到...</span>
+            <div ng-repeat="tabList in tab.listData" class="content-item">
+                <a ng-hide="tabList.img == undefined" class="content-img"><img ng-src="{{tabList.img}}" /></a>
+                <div class="content-txt">
+                    <a href="{{tabList.url}}">{{tabList.title}}</a>
+                    <p>{{tabList.content}}</p>
+                </div>
+            </div> <!--end tabList-->
+            <div class="search-page">
+                <ul class="pagination pagination-lg">
+                    <li ng-repeat="page in tab.pages.pageItem" ng-class="{active:tab.pages.pageActive($index+1)}"><a href="javascript:void(0)" ng-click="tab.pages._pageLoad($index+1)">{{$index+1}}</a></li>
+                </ul>
+            </div> <!--END Page-->
+        </div> <!--end conetent-->
+
+
+    </div>
+</div>
+</body>
+</html>

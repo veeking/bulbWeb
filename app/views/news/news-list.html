@@ -16,22 +16,23 @@
         <div class="news-type-list">
             <ul class="news-list">
                 <li ng-repeat="newList in newLists">
-                    <a href="#/news/{{newsTypeUrl}}/{{newList.id}}"><span class="glyphicon glyphicon-triangle-right"></span>{{newList.title}}</a>
+                    <a href="#/news/{{newsTypeUrl}}/{{newList.id}}"><span class="glyphicon glyphicon-triangle-right"></span> {{newList.title}}</a>
                     <span class="date">{{newList.date}}</span>
                 </li>
             </ul>
 
 
-            <div class="news-page">
-                <ul>
+          <div class="news-page">
+            <div>
+                <ul class="pagination pagination-lg">
                     <li><a href="javascript:void(0);" ng-click="Pages.indexPage()">首页</a></li>
-                    <li ng-click="Pages.prevPage()"><a href="javascript:void(0);" ng-click="Pages.prevPage()">上一页</a></li>
-                    <li ng-repeat="page in Pages.pageItem"><a href="javascript:void();" ng-click="Pages.loadPage($index+1)" ng-class="{pageActive:Pages.pageActive($index+1)}">{{$index+1}}</a></li>
-                    <li ng-click="Pages.nextPage()"><a href="javascript:void(0);" ng-click="Pages.nextPage()">下一页</a></li>
-                    <li ng-click="Pages.lastPage()"><a href="javascript:void(0);" ng-click="Pages.lastPage()">尾页</a></li>
+                    <li><a href="javascript:void(0);" ng-click="Pages.prevPage()">上一页</a></li>
+                    <li ng-repeat="page in Pages.pageItem" ng-class="{active:Pages.pageActive($index+1)}"><a href="javascript:void(0);" ng-click="Pages.loadPage($index+1)">{{$index+1}}</a></li>
+                    <li><a href="javascript:void(0);" ng-click="Pages.nextPage()">下一页</a></li>
+                    <li><a href="javascript:void(0);" ng-click="Pages.lastPage()">尾页</a></li>
                 </ul>
             </div>
-
+          </div> <!--end news-page-->
         </div>
     </div>
 </div>

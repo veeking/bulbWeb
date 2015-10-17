@@ -122,41 +122,19 @@
        border-bottom: none;
      }
       a{
+        .text-overflow(80%);   // 响应时改为100%;
+        display: inline-block;
         color: @gray-light;
+        font-size:@font-size-base + 2;
       }
       span.date{
+        width: 10%;
         float: right;
         line-height:2;
       }
     }
   }
-  .news-page{
-    ul {
-      .clearfix();
-      li {
-        display: inline;
-        a{
-          text-align: center;
-          background: @back-color;
-          color: #fff;
-          float: left;
-          line-height: 1.42857;
-          padding-left:@p10*2;
-          padding-right:@p10*2;
-          padding-top:@p10;
-          padding-bottom:@p10;
-          position: relative;
-          margin-right:2%;
-          &:active{
-            background:@fore-color;
-          }
-          &.pageActive {
-            background:@fore-color;
-          }
-        }
-      }
-    }
-  }
+
 }
 .news-list-details{
   margin-bottom: @p10*5;
