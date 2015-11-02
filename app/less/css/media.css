@@ -160,6 +160,27 @@
     }
 }
 
+
+
+/*search*/
+@media (max-width: 992px){
+    .search-box .tab,.search-box .search-side{
+        width:100%;
+    }
+    .search-box .tab .tab-item .content .content-item .content-img img{
+        max-height: inherit;
+        min-height:inherit;
+        width: 100%;
+    }
+    .search-box .search-side{
+        margin-left:0;
+    }
+    .search-box .search-side{
+        display: none; !important;
+    }
+
+}
+
 /*foot*/
 @media(max-width: 992px){
     .copy-right,.social{

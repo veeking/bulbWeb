@@ -54,18 +54,19 @@
             }
 
         </style>
+
 </head>
-<body>
+<body ng-controller="testCtrl">
   <div class="header">
       头部
-      <a href="#/">首页</a>
-      <a href="#/news">资讯</a>
+      <a href="{{nav.url}}" ng-repeat="nav in navs">{{nav.name}}</a>
+
   </div>
   <div class="main">
       <div ng-view class="view-main"></div>
   </div>
   <div class="footer">尾部</div>
-
+  <script src="../app/less/less.js"></script>
   <script src="../app/lib/framework/angular.js"></script>
   <script src="../app/lib/framework/angular-route.js"></script>
 <script src="../app/lib/framework/angular-animate.js"></script>
@@ -92,6 +93,18 @@
                     redirectTo:'/'
              })
     });
+    viewApp.controller('testCtrl',function($scope){
+            $scope.navs = [
+                {
+                    name:"首页",
+                    url:'#/'
+                },
+                {
+                    name:"新闻",
+                    url:'#/news'
+                }
+            ]
+    })
     viewApp.controller('few',function($scope){
 
     })

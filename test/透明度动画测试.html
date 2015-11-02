@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="aTest">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div{
+          width: 300px;
+          height: 300px;
+          background: #FEC60D;
+            transition:0.5s linear all;
+        }
+
+        .show.ng-hide-add {
+            opacity: 1;
+        }
+        .show.ng-hide-add-active {
+            opacity: 0;
+        }
+        .show.ng-hide-remove {
+            opacity: 0;
+        }
+        .show.ng-hide-remove-active {
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body ng-controller="mainCtrl">
+   <div ng-hide="showMe" class="show"></div>
+   <button ng-click="changeShow()" style="position: absolute;top:320px;">qiehuan</button>
+<script src="../app/lib/framework/angular.js"></script>
+<script src="../app/lib/framework/angular-animate.js"></script>
+<script>
+    var testApp = angular.module('aTest',['ngAnimate']);
+
+    testApp.controller('mainCtrl',function($scope){
+        $scope.showMe = true;
+        $scope.changeShow = function(){
+            $scope.showMe = !$scope.showMe;
+        }
+    });
+</script>
+</body>
+</html>

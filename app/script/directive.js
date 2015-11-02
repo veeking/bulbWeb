@@ -97,12 +97,32 @@ bulbDirective.directive('sectionFormat',function(){  // 格式化文章内容
     } // end return
 });
 
-//bulbDirective.directive('adaptHeight',function(){
-//    return{
-//        restrict:"A",
-//        link : function(scope,element,attr){
-//               console.log($('.tab'))
-//               element.css({height:300});
-//        }
-//    }
-//})
+bulbDirective.directive('adaptHeight',function($rootScope){
+    var pageHeight;
+    var maxHeight = 0;
+    $rootScope.$on('$locationChangeStart',function(){
+        maxHeight = 0; // 如果路由发生了变化，则清空最大值，以便用于下一组的对比
+    });
+    return{
+        restrict:"A",
+        link : function(scope,element,attr){
+            scope.$watch('$last',function(oldEle){
+                 if(pageHeight == undefined){
+                    pageHeight = parseInt($('.search-page').css('height'));
+                 };
+
+                if(scope.$last){ // 筛选出 每组最后元素
+                    var aHeight = (element[0].offsetHeight + 50) + element[0].offsetTop +pageHeight;
+                    console.log('我是aheight' + aHeight)
+                    if(aHeight > maxHeight){
+                       maxHeight = aHeight;  // 两组 对比 找出最大值
+                    };
+                    console.log('我是maxHeight' + maxHeight)
+                    $('.tab').css('height',maxHeight); //取最大值作为高度
+
+                }
+            })
+
+        }
+    }
+})

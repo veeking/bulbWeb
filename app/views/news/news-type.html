@@ -1,12 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Document</title>
-    <link rel="stylesheet/less" href="less/news.less"/>
 
-</head>
-<body>
 <div class="news-top" ng-include="'views/news/news-top.html'"></div>
 <div class="news-type">
     <div ng-repeat="newsTypeMenu in newsType" class="news-type-item" ng-hide="$index >= 6">
@@ -18,10 +10,3 @@
         </a>
     </div>
 </div>
-
-
-
-<!-- end news-type-->
-<script src="less/less.js"></script>
-</body>
-</html>

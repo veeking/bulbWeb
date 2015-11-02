@@ -53,9 +53,9 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
     // 列表数据 无依赖
      //搜索
     $scope.tabs = [];
-    $scope.loaded = true;
     var oldWord = null;
     var cache = $cacheFactory('cache');
+    $scope.hotWords = ["LED","新闻","产品","家居产品","传统灯光","服务","照明方案","新型灯泡"];
     $scope.search = function(){
       if($scope.searchWord ==" ") return false;
       if(arguments[0] != undefined){ //页面刷新的时候传入的参数值
@@ -63,7 +63,6 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
       };
       var keyWord = $scope.searchWord;
       $location.path('search').search({'word':keyWord});
-      console.log('url改变');
 
       var newsType = $scope.newsType;
       var productsType = $scope.productsType;
@@ -80,9 +79,10 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
            showTypeData:productsType
          }
       ];
-//        localStorage.clear() 数据改变后记得重置下缓存
+//        localStorage.clear();
       function _startSearch(options){   // 执行搜索 :1、获取数据  2、匹配数据
-            options.map(function(option,index){
+           $scope.loaded = false; // 加载中图标
+           options.map(function(option,index){
                 //缓存  还是推荐用localStorge吧  $cacheFactory不建议存储大容量的内容
                 var cacheData = localStorage.getItem('searchData'+index);
                 if(!cacheData){
@@ -94,15 +94,18 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
                     });
                 }else{
                     console.log("有缓存")
-                    cacheData = JSON.parse(cacheData);
-                    _matchData(option,cacheData,index);
+                    $timeout(function(){  // 模拟加载
+                        cacheData = JSON.parse(cacheData);
+                        _matchData(option,cacheData,index);
+                    },1000)
                 }
             })
       };// END _startSearch();
          //singleFile 为每个文件的数组对象
       function _matchData(bigType,singleFile,posIndex){
               if(typeof bigType != "object") return false;
-              $scope.loaded = false;
+
+              $scope.loaded = true; // 成功后 删掉加载图
 
               var tmpTab = {
                   typeTitle : bigType.showTypeName,
@@ -135,7 +138,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
           // pageItem为分页每页数据
           // pageDataTemp为当前显示的临时数据
 
-          listPager = Pager(tmpTab.listData,2);
+          listPager = Pager(tmpTab.listData,5);
 
           tmpTab.pages = listPager; // 分页大对象
 
@@ -151,7 +154,8 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
           }else{  // 如果已存在 则更新替换
               $scope.tabs.splice(posIndex,1,tmpTab)
           }
-        console.log($scope.tabs)
+
+
      }// end _match
 
       function getData(type,dataType){
@@ -171,9 +175,21 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
         if(keyWord !== oldWord){  // 新旧对比 如果关键词不变 则按原样子 不执行搜索
            _startSearch(searchOption);
         }
+        if(!hasInArray($scope.searchWord,$scope.hotWords)){
+            $scope.hotWords.splice(0,0,$scope.searchWord); // 没重复值 插入
+            $scope.hotWords.splice($scope.hotWords.length-1,1); // 去掉末尾项
+        };
+        console.log( $scope.hotWords)
         oldWord = keyWord; // 更新旧关键词
     } // end $scope.search
-
+    function hasInArray(word,item){  // 判断是否存在某数是否存在某数组中
+        for(var i=0;i< item.length;i++){
+            if(word == item[i]){
+                return true;
+            }
+        }
+        return false;
+    } // end hasInArray
 });
 
 //搜索控制
@@ -320,6 +336,7 @@ bulbCtrl.controller('bulbNewsCtrl',function($scope){
 });
 bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
     var sideNavIndex = 0;
+    console.log($location.path())
     $scope.Side = {
         typeIcon : "glyphicon-bookmark",
         typeTxt : "新闻中心NEWS",

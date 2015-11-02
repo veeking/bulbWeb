@@ -5,13 +5,16 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!--Less.js编译.less文件并进行本地存储-->
     <link rel="stylesheet/less" href="less/main.less"/>
+    <link rel="stylesheet/less" href="less/intro.less"/>
+    <link rel="stylesheet/less" href="less/sidebar.less"/>
+    <link rel="stylesheet/less" href="less/news.less"/>
+    <link rel="stylesheet/less" href="less/product.less"/>
     <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
     <!--<link rel="stylesheet" href="less/css/main.css"/>-->
     <link rel="stylesheet" href="less/css/media.css"/>
     <title>Bulb App</title>
 </head>
 <body ng-controller="bulbMainCtrl">
-
   <div class="nav-mobile visible-xs" ng-class="{showNav:showNav}">
     <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
     <ul class="nav-mobile-menu" ng-hide="!showNav">
@@ -40,7 +43,7 @@
         </div> <!-- end head-inner-->
   </div><!--head-->
 
-  <div class="main container">
+  <div class="main container view-container">
         <div class="main-top row">
          <div class="nav col-md-8">
 
@@ -67,7 +70,7 @@
          </div><!--end search-->
 
       </div> <!--end main-top -->
-    <div ng-view></div>
+    <div ng-view class="view-frame"></div>
   </div><!--end main-->
   <div class="footer container-fluid">
       <div class="footer-inner container">
@@ -88,11 +91,12 @@
 
 
   <script src="less/less.js"></script>
-  <script src="lib/framework/jquery-1.9.1.js"></script>
-  <script src="lib/framework/angular.js"></script>
-  <script src="lib/framework/angular-resource.js"></script>
-  <script src="lib/framework/angular-route.js"></script>
-  <script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>
+  <script src="lib/framework/new/angular.js"></script>
+  <script src="lib/framework/new/angular-resource.js"></script>
+  <script src="lib/framework/new/angular-route.js"></script>
+  <script src="lib/framework/new/angular-animate.js"></script>
+  <script src="lib/framework/new/jquery.min.js"></script>
+  <!--<script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>-->
   <script src="script/app.js"></script>
   <script src="script/controllers.js"></script>
   <script src="script/directive.js"></script>

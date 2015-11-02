@@ -5970,3 +5970,41 @@ div a:focus {
   width: 100%;
   border-top: 5px solid #1f1f1f;
 }
+.side-bar {
+  height: 100%;
+  background-color: #1f1f1f;
+}
+.side-bar .side-bar-top {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #1f1f1f;
+  text-align: center;
+  color: #aaaaaa;
+  border-bottom: 1px solid #555555;
+}
+.side-bar .side-bar-top span {
+  font-size: 24px;
+}
+.side-bar .side-bar-middle ul {
+  margin-bottom: 0;
+}
+.side-bar .side-bar-middle ul li a {
+  height: 60px;
+  line-height: 60px;
+  display: block;
+  font-size: 18px;
+  color: #777777;
+  text-align: center;
+}
+.side-bar .side-bar-middle ul li a.sideNavActive {
+  color: #fff;
+  background: #fec60d;
+}
+.side-bar .side-bar-bottom {
+  display: none;
+  margin-top: 10px;
+}
+.side-bar .side-bar-bottom p {
+  text-align: center;
+}

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        .view-container {
+            position: relative;
+        }
+
+        .view-frame.ng-enter,
+        .view-frame.ng-leave {
+            background: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .view-frame.ng-enter {
+            -webkit-animation: 0.5s fade-in;
+            -moz-animation: 0.5s fade-in;
+            -o-animation: 0.5s fade-in;
+            animation: 0.5s fade-in;
+            z-index: 100;
+        }
+
+        .view-frame.ng-leave {
+            -webkit-animation: 0.5s fade-out;
+            -moz-animation: 0.5s fade-out;
+            -o-animation: 0.5s fade-out;
+            animation: 0.5s fade-out;
+            z-index: 99;
+        }
+
+        @keyframes fade-in {
+            from { left: 0; }
+            to { left: -100%; }
+        }
+
+
+        @keyframes fade-out {
+            from { left: -100%; }
+            to { left: 0; }
+        }
+
+    </style>
+</head>
+<body>
+    <div ng-view class="view-frame"></div>
+
+   <script src="../app/lib/framework/new/angular.js"></script>
+   <script src="../app/lib/framework/new/angular-route.js"></script>
+   <script src="../app/lib/framework/new/angular-resource.js"></script>
+   <script src="../app/lib/framework/new/angular-animate.js"></script>
+   <script src="ajs/app.js"></script>
+   <script src="ajs/ctrl.js"></script>
+</body>
+</html>
