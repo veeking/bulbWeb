@@ -55,15 +55,11 @@
     }
  });
 
-bulbDirective.directive('sectionFormat',function(){  // 格式化文章内容
+bulbDirective.directive('formatSection',function(){  // 格式化文章内容
     return{
        restrict:"A",
        replace : true,
        transclude : true,
-       template : "<div ng-transclude>{{cont}}</div>",
-       scope:{
-           cont:"=sectionFormat"
-       },
        controller : function($scope,$attrs){
            this.parseDom = function(strDom){  // 将没有p标签包围的文字围起来
                var domDiv = document.createElement('div');
@@ -84,7 +80,7 @@ bulbDirective.directive('sectionFormat',function(){  // 格式化文章内容
        },
        link : function(scope,element,attrs,sectionCtrl){
               // 因为是接收内容是异步请求，所以需要监控变量是否发生变化
-              var unwatch = scope.$watch('cont',function(content){
+              var unwatch = scope.$watch('newDetails.content',function(content){
                     if(content){ //一共会执行两次  为了避免第一次出现undefined，需要判断是否不为undefined，接收到时取消监控
                       unwatch();//第一次是异步还没返回内容的时候undefined，第二次是成功接收到内容后
                       var sections = sectionCtrl.parseDom(content);
@@ -125,4 +121,31 @@ bulbDirective.directive('adaptHeight',function($rootScope){
 
         }
     }
-})
+});
+bulbDirective.directive('realSrc',function(ResManage){
+    return{
+        restrict:"A",
+        scope:{
+            realSrc:"@"  // 将realSrc值单项绑定到控制器里
+        },
+        link:function(scope,element){
+            var parentEle = element.parent();
+            var laodEle = document.createElement('img');
+            var loadClassName = "loadingImg";
+//            parentEle.css({position:'relative'});
+            laodEle.src = "img/loading.gif";
+            laodEle.className = loadClassName;
+            parentEle.append(laodEle);
+            scope.$watch('realSrc',function(){ // 监听控制器对realSrc值做出的更新
+                var realSrc = scope.realSrc;
+                ResManage.loadImg(realSrc,function(){
+                    element.attr('src',realSrc); // 成功加载图片后设置真实图片地址
+                    $('.'+ loadClassName).animate({'opacity':0},60,function(){
+                        $(this).hide();// 隐藏loading图
+                        element.css('opacity', 1); //显示真实图片
+                    })
+                });
+            });
+        }
+    }
+});

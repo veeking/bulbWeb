@@ -103,3 +103,19 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
     }
   }
 }
+.loadingImg(@w:50px,@h:50px){
+  img{
+    opacity:0;
+    .transition(opacity,0.2s,linear);
+  }
+  img.loadingImg{
+    width: @w;
+    min-width:@w;
+    max-width:@w;
+    height: @w;
+    position: absolute;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0; // 居中
+    opacity: 1;
+  }
+}

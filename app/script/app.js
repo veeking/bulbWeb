@@ -17,25 +17,45 @@ bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpPr
          templateUrl : 'views/news/news-type.html',
          controller:'bulbNewsCtrl'
       }).
-      when('/news/:newsType',{
+      when('/news/:type',{
           templateUrl : 'views/news/news-list.html',
-          controller:'bulbNewsListCtrl'
+          controller:'bulbNewsListCtrl',
+          resolve:{
+              newsData : function(ReqLoader){
+                  return ReqLoader('news');
+              }
+          } // end resolve
       }).
-      when('/news/:newsType/:id',{
+      when('/news/:type/:id',{
               templateUrl : 'views/news/news-detail.html',
-              controller:'bulbNewsDetailCtrl'
+              controller:'bulbNewsDetailCtrl',
+              resolve:{
+                  newsData : function(ReqLoader){
+                      return ReqLoader('news');
+                  }
+              } // end resolve
       }).
       when('/products',{
               templateUrl : 'views/product/product-type.html',
               controller:'bulbProductsCtrl'
       }).
-      when('/products/:productsType',{
+      when('/products/:type',{
               templateUrl : 'views/product/product-list.html',
-              controller:'bulbProductsListCtrl'
+              controller:'bulbProductsListCtrl',
+              resolve:{
+                  productsData : function(ReqLoader){
+                      return ReqLoader('products');
+                  }
+              } // end resolve
       }).
-      when('/products/:productsType/:id',{
+      when('/products/:type/:id',{
               templateUrl : 'views/product/product-detail.html',
-              controller:'bulbProductsDetailCtrl'
+              controller:'bulbProductsDetailCtrl',
+              resolve:{
+                  productsData : function(ReqLoader){
+                      return ReqLoader('products');
+                  }
+              } // end resolve
       }).
       when('/search',{
               templateUrl : 'views/search/search.html',

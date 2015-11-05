@@ -2,30 +2,25 @@
  * Created by king on 2015/9/13.
  */
 var bulbService = angular.module('bulbService',['ngResource']);
-bulbService.factory('DataLoad',function($resource){
+bulbService.factory('BulbReq',function($resource){
     return $resource('data/:type/:typeData.json',{},{
         get: {isArray: true ,cache:true}
     }); // 注意路径也是相对于main.html位置来定位的
 });
+bulbService.factory('ReqLoader',function($q,$location,BulbReq){
+    return function(type){
+        var delay = $q.defer();
+        var path = $location.path();
+        var paramsType = path.split('/')[2];
+        BulbReq.get({type:type,typeData:paramsType},function(dataList){
+            delay.resolve(dataList);
+        },function(){
+            console.log('数据列表读取错误');
+        });
+        return delay.promise;
+    };
+});
 
-//bulbService.factory('bulbData',function($q,DataLoad){
-//    var loaded = false;
-//
-//    var saveKey = function(keyWord){
-//        keyWord
-//    }
-//    var getData = function(type,dataType){
-//        console.log(dataType)
-//        var promises = dataType.map(function(eachData){
-//            return DataLoad.get({type:type,typeData:eachData.navType}).$promise;
-//        });
-//        return $q.all(promises);
-//    }
-//    return{
-//      loaded : loaded,
-//      getData :getData
-//    }
-//});
 
 //Pager服务三大要素:
 // @var pageItem 是分页页数
@@ -90,57 +85,41 @@ bulbService.factory('Pager',function($routeParams,$route,$location){
         return Pager;
     } // end function
 });
+bulbService.factory('ResManage',function(){
+     return{
+        loaded : true,
+        loadedCount: 0, // 已完成的加载数
+        totalCount : 0, // 资源数
+        loadImg : function(url,handler){
+            this.totalCount++;
+            this.loaded = false;
+            var _that = this;
+            var image = new Image(); // 图片对象 会生成一个img的DOM结构
+            image.src = url;
+            image.onload = function(){
+                handler();
+                _that.itemLoaded();
+            }
+        },
+        itemLoaded:function(){
+            this.loadedCount++;
+            if(this.loadedCount === this.totalCount){
+               this.loaded = true;
+               console.log('所有图片加载完成')
+            }
+        },
+        setTypeImg : function(option){
+            var i;
+            var imgDir = option.imgDir;
+            var imgExtName = option.imgExtName;
+            var typeData = option.typeData;
+            for(i=0;i < typeData.length;i++){
+                typeData[i].typeImg = imgDir + typeData[i].navType + imgExtName;
+            } // end for
+        }
+     };
+});
 
-// 备份
-//bulbService.factory('Pager',function($routeParams,$location){
-//    return function(pageData,pageCount){
-//        var Pager = {
-//            currPage : parseInt($routeParams.page),
-//            sizePage : pageCount,
-//            dataLen : pageData.length,
-//            pageLen : 0,
-//            currentPageItems : 0,
-//            pageItem : null,  // 页数：总列表数据，用于生成数字连接
-//            pageDataTemp : null,  //页数据： 临时显示的列表数据
-//            _calLoad : function(){
-//
-//             this.pageLen = Math.ceil(this.dataLen / pageCount)
-//             this.currentPageItems = pageData.slice(0,this.pageLen)
-//             this.pageItem = this.currentPageItems;
-//
-//             var _calLoadPage = (this.currPage - 1) * pageCount; // 读取规律0 , 2 , 4
-//             this.pageDataTemp = pageData.slice(_calLoadPage, _calLoadPage + pageCount);  // 0,2  2,4  4,6
-//
-//            },
-//            indexPage : function(){
-//                $location.search('page',1);
-//            },
-//            lastPage : function(){
-//                $location.search('page',this.pageLen);
-//            },
-//            nextPage : function(){
-//                if(this.currPage < this.pageLen){
-//                    $location.search('page',++this.currPage);
-//                }
-//            },
-//            prevPage : function(){
-//                if(this.currPage > 1){
-//                    $location.search('page',--this.currPage);
-//                }
-//            },
-//            loadPage : function(pageIndex){
-//                $location.search('page',pageIndex);
-//            },
-//            pageActive : function(index){
-//                return this.currPage === index;
-//            }
-//       } // end pages
-//        Pager._calLoad();  // 默认调用一次 加载第一页
-//        return Pager;
-//    } // end function
-//});
-//bulbService.factory('news')
-//
 
 
 

@@ -3,7 +3,7 @@
         <carousel interval="20000">
             <slide ng-repeat="slide in slides">
                 <a href="###">
-                    <img ng-src="{{slide.src}}"/>
+                    <img real-src="{{slide.src}}"/>
                     <div class="slider-txt-box" ng-class="{sliderTxtActive:slideActive($index)}">
                         <span class="glyphicon glyphicon-pushpin"></span>
                         <span class="slider-txt">{{slide.txt}}</span>
@@ -21,7 +21,7 @@
     <div class="info-cont">
         <div class="col-md-8">
             <div class="cont-img" ng-repeat="infoCont in infoConts">
-                <img ng-src="{{infoCont.src}}"/>
+                <img real-src="{{infoCont.src}}"/>
             </div>
         </div>
         <div class="col-md-4">
@@ -40,17 +40,17 @@
 
     <div class="productItem-cont">
 
-        <div class="p-left col-md-4">
-            <a href="###" class="p-item p-right-item">
-                <img ng-src="{{pLeft.img}}"/>
-                <span>{{pLeft.txt}}</span>
-            </a>
-        </div>
+        <!--<div class="p-left col-md-4">-->
+            <!--<a href="###" class="p-item p-right-item">-->
+                <!--<img real-src="{{pLeft.img}}"/>-->
+                <!--<span>{{pLeft.txt}}</span>-->
+            <!--</a>-->
+        <!--</div>-->
 
-        <div class="p-right col-md-8">
-            <a href="###" ng-repeat="pRight in pRights" class="p-item p-left-item">
-                <img ng-src="{{pRight.img}}"/>
-                <span>{{pRight.txt}}</span>
+        <div class="p-item-box">
+            <a href="###" ng-repeat="pItem in pItems" class="p-item" ng-class="{firstItem:$index === 0}">
+                <img real-src="{{pItem.img}}"/>
+                <span>{{pItem.txt}}</span>
             </a>
         </div>
 

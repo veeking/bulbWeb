@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div ng-controller="mainCtrl">
+        <div ng-controller="oneCtrl">
+            {{page.data}}
+            <button ng-click="changeModel()">one变</button>
+        </div>
+        <div ng-controller="twoCtrl">
+            {{page.data}}
+            <button ng-click="changeModel()">two变</button>
+        </div>
+    </div>
+<script src="../app/lib/framework/angular.js"></script>
+<script>
+    var testApp = angular.module('testApp',[]);
+    testApp.controller('mainCtrl',function($scope){
+
+
+    });
+    testApp.controller('oneCtrl',function($scope){
+        $scope.page = {};
+        $scope.page.data = "我是子控制器";
+
+        $scope.changeModel = function(){
+            $scope.page.data = "我是子按钮改变后的"
+        }
+    });
+    testApp.controller('twoCtrl',function($scope){
+        $scope.page = {};
+        $scope.page.data = "我是二子控制器";
+        $scope.changeModel = function(){
+            $scope.page.data = "我是二子按钮改变后的"
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,34 +1,48 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>news列表页</title>
-    <link rel="stylesheet/less" href="less/news.less"/>
+<div class="product-type-pList row">
+    <div class="side col-md-3" ng-include="'views/sidebar/sidebar.html'">
+    </div> <!--end type-side-->
 
-</head>
-<body>
-<div class="news-type-list">
+    <div class="type-pList col-md-9">
+        <div class="product-pList">
+             <div class="pList-top">
+                 <h3>{{nowTypeName}}类型产品列表</h3>
+                 <!--<div></div> 产品搜索-->
+             </div><!--end pList-top -->
 
-    <ul class="news-list">
-     <li ng-repeat="newList in newLists">
-         <a href="#/news/{{newsTypeUrl}}/{{newList.id}}">{{newList.title}}</a>
-     </li>
-    </ul>
+             <div class="pList-main row">
+                 <div ng-repeat="pList in pLists" class="pList-item col-md-3">
+                     <div class="pList-item-inner">
+                          <!--<div class="loading" style="position: absolute;opacity: 1;"><img src="img/loading.gif" alt="加载中.."/></div>-->
+                          <div class="item-img">
+                             <a href="#/products/{{nowType}}/{{pList.id}}">
+                                 <img real-src="{{pList.img}}" alt="{{pList.title}}"/>
+                             </a>
+                          </div> <!--end pList-img-->
+
+                         <div class="item-txt">
+                             <a href="#/products/{{nowType}}/{{pList.id}}">
+                                {{pList.title}}
+                             </a>
+                         </div> <!--end pList-txt-->
+                     </div>
+                 </div>
+
+             </div><!--end pList-main -->
+
+        </div> <!--end produt-pList -->
+
+        <div class="product-page">
+            <ul class="pagination pagination-lg">
+                <li><a href="javascript:void(0);" ng-click="Pages.indexPage()">首页</a></li>
+                <li><a href="javascript:void(0);" ng-click="Pages.prevPage()">上一页</a></li>
+                <li ng-repeat="page in Pages.pageItem" ng-class="{active:Pages.pageActive($index+1)}"><a href="javascript:void(0);" ng-click="Pages.loadPage($index+1)">{{$index+1}}</a></li>
+                <li><a href="javascript:void(0);" ng-click="Pages.nextPage()">下一页</a></li>
+                <li><a href="javascript:void(0);" ng-click="Pages.lastPage()">尾页</a></li>
+            </ul>
+        </div> <!--end product-page-->
+
+    </div> <!--end type-pList-->
 
 
-     <div class="news-page">
-         <ul>
-             <li ng-click="Pages.indexPage()">首页</li>
-             <li ng-click="Pages.prevPage()">上一页</li>
-             <li ng-repeat="page in Pages.pageItem" ng-click="Pages.loadPage($index+1)" ng-class="{pageActive:Pages.pageActive($index+1)}">{{$index+1}}</li>
-             <li ng-click="Pages.nextPage()">下一页</li>
-             <li ng-click="Pages.lastPage()">尾页</li>
-         </ul>
-     </div>
 
-</div>
-
-<!-- end news-type-->
-<script src="less/less.js"></script>
-</body>
-</html>
+</div><!-- end product-type-->

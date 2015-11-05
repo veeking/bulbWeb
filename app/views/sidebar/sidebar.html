@@ -1,6 +1,6 @@
 <div class="side-bar" ng-controller="bulbSideCtrl">
        <div class="side-bar-top">
-           <!--<span class="glyphicon {{Side.typeIcon}}"></span>-->
+           <span class="glyphicon {{Side.typeIcon}}" ng-hide="Side.typeIcon == undefined"></span>
            <span>{{Side.typeTxt}}</span>
        </div><!--end side-top-->
        <div class="side-bar-middle">

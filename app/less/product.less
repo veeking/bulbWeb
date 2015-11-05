@@ -1,2 +1,134 @@
 @import "bootstrapLess/bootstrap.less";
 @import "common.less"; //多页面共用模块
+
+.product-type{
+  margin-top:@p10 * 5;
+  .p-type-title{
+    color: @back-color;
+    font-size: 26px;
+    line-height: 95%;
+    overflow: hidden;
+    padding: 1px 0 14px;
+  }
+  .p-type-main{
+    .clearfix();
+    .item{
+      float: left;
+      height: 184px;
+      margin: 0 0.70175439% 8px 0;
+      padding: 0;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      width:19.4%;
+      .border(1px,solid,@gray-small-light);
+      &:last-child{
+        margin-right:0;
+      }
+      &:hover .imagediv{
+        transform:scale(2,2);
+        -webkit-transform:scale(2,2);
+      }
+      .imagediv{
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 45px;
+        min-height: 75px;
+        text-align: center;
+        .transition(transform,0.4s,ease-out);
+      }
+      .linkdiv {
+        margin-bottom: 10px;
+        margin-top: 10px;
+        a{
+          color: @back-color;
+        }
+      }
+    }
+  }
+};
+
+//list
+.product-type-pList{
+  .type-pList{
+    padding-right:0;
+    padding-left:0;
+    float:right;
+    width:72%;
+    .product-pList{
+      margin-top:@p10 * 2;
+      .pList-top{
+        h3{
+          font-family: gs_light_regular;
+          font-weight: normal;
+          margin-bottom: 9px;
+          margin-top: 8px;
+        }
+      } // end top
+      .pList-main{
+         margin-top: @p10*2;
+         overflow:auto;
+         .clearfix();
+        .pList-item{
+          .border(1px,solid,@gray-small-light);
+          float: left;
+          height: 170px;
+          margin: 7px 1.2642225% 3px 0;
+          overflow: hidden;
+          padding: 0;
+          position: relative;
+          width: 24.05183312%;
+          &:last-child{
+            margin-right:0;
+          }
+          .pList-item-inner{
+            height: 100%;
+            position: relative;
+            .item-img{
+              text-align: center;
+              width: 100%;
+              height: 135px;
+              overflow: hidden;
+              .loadingImg();
+              img{
+                opacity:0;
+                width:85%;
+                .transition(opacity,0.2s,linear);
+              }
+            } // end item-img
+            .item-txt{
+              @h:30px;
+              bottom: 0;
+              height: @h;
+              line-height: @h;
+              background:@back-color;
+              position: absolute;
+              vertical-align: middle;
+              text-align: center;
+              width:100%;
+              .transition(height,0.3s,ease-out);
+              a{
+                white-space:nowrap;
+                overflow:hidden;
+                width: 85%;
+                margin:0 auto;
+                display: inline-block;
+                color: #fff;
+              }
+            }
+          }
+          &:hover .item-txt{
+            background:@fore-color;
+            height:60px;
+            line-height:2;
+          }
+          &:hover .item-txt a{
+            white-space:normal;
+            overflow:hidden;
+          }
+        }
+      } // end main
+    }
+  } // end type-list
+
+}

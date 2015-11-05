@@ -57,7 +57,28 @@
         width: 100%;
     }
 }
-/*main -> item*/
+
+/*main -> 产品推荐 item*/
+@media(max-width: 992px){
+  .main .main-productItem .productItem-cont .p-item-box .p-item.firstItem{
+         width: 100%;
+  }
+  .main .main-productItem .productItem-cont .p-item-box .p-item{
+         /*按照-0.6的边距来算  99.4%*/
+      width:49.7%;
+  }
+    .main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(1){
+        width:34.5%;
+    }
+    .main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(2){
+        width:64.9%;
+    }
+
+    .main .main-productItem .productItem-cont .p-item-box .p-item:nth-child(even){
+        margin-left: 0;
+    }
+}
+/*main -> point*/
 @media(max-width: 992px){
     .main .main-point .point-cont .col-md-12 div.point-cont-item:nth-child(even){
             margin-right:0;
@@ -179,6 +200,53 @@
         display: none; !important;
     }
 
+}
+
+/*product-type 产品类型页*/
+
+@media (max-width: 992px) {
+    .product-type .p-type-main .item:hover .imagediv{
+        transform:scale(1.2,1.2);
+        -webkit-transform:scale(1.2,1.2);
+    }
+    .product-type .p-type-main .item .imagediv{
+        margin-top:30px;
+    }
+    .product-type .p-type-main .item {
+        height: 160px;
+    }
+}
+@media (max-width: 768px){
+    .product-type .p-type-main .item {
+      width:100%;
+      margin-right:0;
+    }
+}
+
+/*product-type 产品列表页*/
+@media (max-width: 992px) {
+    .product-type-pList .type-pList {
+        float: left;
+        width: 100%;
+    }
+}
+@media (max-width: 768px) {
+    .product-type-pList .type-pList .product-pList .pList-main .pList-item{
+            width: 49.3%;
+    }
+    .product-type-pList .type-pList .product-pList .pList-main .pList-item .pList-item-inner .item-img img {
+        width: 65%;
+    }
+    .product-type-pList .type-pList .product-pList .pList-main .pList-item:nth-child(even){
+        margin-right: 0;
+    }
+}
+
+/*sidebar*/
+@media (max-width: 992px) {
+    .side{
+        margin-bottom:20px;
+    }
 }
 
 /*foot*/

@@ -1,17 +1,19 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>product-type</title>
-    <link rel="stylesheet/less" href="less/product.less"/>
-
-</head>
-<body>
 <div class="product-type">
+    <div class="p-type-title">按产品类型浏览</div>
+    <div class="p-type-main row">
+        <div class="item" ng-repeat="productType in productsType">
+            <div class="imagediv">
+                <div>
+                    <a href="{{productType.navUrl}}">
+                        <img width="80" ng-src="{{productType.typeImg}}">
+                    </a>
+                </div>
+            </div>
 
-</div>
+            <div class="linkdiv">
+                <a href="{{productType.navUrl}}">{{productType.navName}}</a>
+            </div>
 
-<!-- end news-type-->
-<script src="less/less.js"></script>
-</body>
-</html>
+        </div> <!--end item-->
+    </div> <!--end p-type-main-->
+</div>  <!--end product-type-->

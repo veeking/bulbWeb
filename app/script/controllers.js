@@ -2,7 +2,7 @@
 // controller
 
 var bulbCtrl = angular.module('bulbCtrl',[]);
-bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,DataLoad,Pager){
+bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,ReqLoader,Pager){
     $scope.moveCurrent = 0;
     $scope.newsType = [  // 新闻分类数据  与news文件夹文件名和数量耦合
         {
@@ -23,19 +23,29 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
     ];
     $scope.productsType = [  // 产品分类数据
         {
-            "navName":"产品分类1",
+            "navName":"LED灯源",
             "navType":"p1",
             "navUrl":"#/products/p1?page=1"
         },
         {
-            "navName":"产品分类2",
+            "navName":"传统灯源",
             "navType":"p2",
             "navUrl":"#/products/p2?page=1"
         },
         {
-            "navName":"产品分类3",
+            "navName":"家居灯源",
             "navType":"p3",
             "navUrl":"#/products/p3?page=1"
+        },
+        {
+            "navName":"室外灯源",
+            "navType":"p4",
+            "navUrl":"#/products/p4?page=1"
+        },
+        {
+            "navName":"照明电器",
+            "navType":"p5",
+            "navUrl":"#/products/p5?page=1"
         }
     ];
 
@@ -55,7 +65,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
     $scope.tabs = [];
     var oldWord = null;
     var cache = $cacheFactory('cache');
-    $scope.hotWords = ["LED","新闻","产品","家居产品","传统灯光","服务","照明方案","新型灯泡"];
+    $scope.hotWords = ["LED","新闻","产品","家居产品","传统灯光","服务","照明方案","新型灯泡"]; // 默认列表
     $scope.search = function(){
       if($scope.searchWord ==" ") return false;
       if(arguments[0] != undefined){ //页面刷新的时候传入的参数值
@@ -124,7 +134,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
                    if(data.title.indexOf(keyWord) != -1){
                        tmpTab.listData.push(data);
                        tmpTab.listData.forEach(function(data,listIndex){
-                           // 为了避免后面的覆盖前面 所以筛选没有设置的才进行url设置
+                           // 为了避免后面的覆盖前面 所以筛选出没有设置的才进行url设置
                             if(!data.url){
                                data.url = "#/" + listBigType + "/" + listDataType + "/" + data.id;
                             }
@@ -166,7 +176,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
 
 
         var promises = dataType.map(function(eachData){  // 循环处理
-          return DataLoad.get({type:type,typeData:eachData.navType}).$promise;
+          return ReqLoader.get({type:type,typeData:eachData.navType}).$promise;
         });  // 单个返回$promise对象以便于all处理 ，不写$promise的话返回的是整个$resource资源 无法获取到正确的数据
         return $q.all(promises);
       }; // end getData
@@ -298,12 +308,11 @@ bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
         }
     ];
 
-
-    $scope.pLeft = {
-        "img":"img/index-product/p1.jpg",
-        "txt":"玄关过道"
-    };
-    $scope.pRights = [
+    $scope.pItems = [
+        {
+            "img":"img/index-product/p1.jpg",
+            "txt":"玄关过道"
+        },
         {
             "img":"img/index-product/p2.jpg",
             "txt":"厨房"
@@ -326,27 +335,35 @@ bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
 bulbCtrl.controller('bulbIntroCtrl',function($scope){
 
 });
-bulbCtrl.controller('bulbNewsCtrl',function($scope){
-    var i;
-    var imgPreSrc = 'img/list-type/';
-    var imgType = '.jpg';
-    for(i=0;i < $scope.newsType.length;i++){ // 加载分类图片
-        $scope.newsType[i].img = imgPreSrc + "l" + (i+1) + imgType;
-    }
+bulbCtrl.controller('bulbNewsCtrl',function($scope,ResManage){
+    var typeImgOpt = {
+        imgDir:'img/list-type/',
+        imgExtName:'.jpg',
+        typeData:$scope.newsType
+    };
+    ResManage.setTypeImg(typeImgOpt);
 });
 bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
     var sideNavIndex = 0;
-    console.log($location.path())
-    $scope.Side = {
-        typeIcon : "glyphicon-bookmark",
-        typeTxt : "新闻中心NEWS",
-        sideNavs : $scope.newsType
+    var sideTypeData = {};
+    if($location.path().indexOf('news') > -1){
+        sideTypeData = {
+            typeTxt : "新闻中心NEWS",
+            sideNavs : $scope.newsType
+        };
+    }else{
+        sideTypeData = {
+            typeIcon : "glyphicon-tint",
+            typeTxt : "产品中心",
+            sideNavs : $scope.productsType
+        };
     };
-
+    $scope.Side = sideTypeData;
     $scope.activeSideNav = function(index){
         sideNavIndex = index;
-        var nowPath = $routeParams.newsType;
+        var nowPath = $routeParams.type;
         var nowUrl = $scope.Side.sideNavs[index].navUrl;
+
         if(nowUrl.indexOf(nowPath) !=-1){  // 根据url和path是否匹配来定位当前
             return true;
         }else{
@@ -354,40 +371,39 @@ bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
         }
   } // end activeSlideNav
 });
-bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,$location,DataLoad,Pager){
-    var newsType = $routeParams.newsType;
-    var pageData = []; // 用于临时存放当前页的所有数据列表，便于模拟显示数据列表
-    $scope.Pages = {};  // 与Pager 构造对象对应
-
-    pageData = DataLoad.get({type:'news',typeData:newsType},function(news){
-        $scope.newsTypeUrl = newsType;
-        $scope.Pages = Pager(news,2);
-        $scope.newLists = $scope.Pages.pageDataTemp;
-    });
+bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,newsData,Pager){
+    var newsType = $routeParams.type;
+    $scope.newsTypeUrl = newsType;
+    $scope.Pages = Pager(newsData,2); // 分页数据
+    $scope.newLists = $scope.Pages.pageDataTemp; // 列表数据
 });
-bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,$q,DataLoad){
-    var _loadDetail = function(){  // promise封装
-       var deferred = $q.defer();
-        DataLoad.get({type:'news',typeData:$routeParams.newsType},function(news){
-         deferred.resolve(news[$routeParams.id-1]);
-       });
-       return deferred.promise;
-    }; // end _loadDetail
-
-    var detailPromise = _loadDetail().then(function(data){
-          $scope.newDetails = data;
-          if($scope.newDetails.content){
-             $scope.content = $scope.newDetails.content;
-          }
-    });
+bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,newsData){
+          $scope.newDetails = newsData[$routeParams.id - 1];
+//          if($scope.newDetails.content){
+//              $scope.content = $scope.newDetails.content;
+//          }
 });
 
 //产品
-bulbCtrl.controller('bulbProductsCtrl',function($scope){
-
+bulbCtrl.controller('bulbProductsCtrl',function($scope,ResManage){
+    var typeImgOpt = {
+        imgDir:'img/product-type/',
+        imgExtName:'.jpg',
+        typeData:$scope.productsType
+    };
+    ResManage.setTypeImg(typeImgOpt);
 });
-bulbCtrl.controller('bulbProductsListCtrl',function($scope){
-
+bulbCtrl.controller('bulbProductsListCtrl',function($scope,$routeParams,productsData,Pager){
+    var nowType = $routeParams.type;
+    $scope.Pages = Pager(productsData,4)
+    $scope.pLists = $scope.Pages.pageDataTemp;
+    $scope.productsType.forEach(function(p,index){
+            if(p.navType.indexOf(nowType) > -1){
+               $scope.nowTypeName = p.navName;  //取标题
+               $scope.nowType = p.navType;
+                return false;
+            }
+    });
 });
 bulbCtrl.controller('bulbProductsDetailCtrl',function($scope){
 
