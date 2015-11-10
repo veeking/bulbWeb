@@ -18,7 +18,7 @@
   <div class="nav-mobile visible-xs" ng-class="{showNav:showNav}">
     <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
     <ul class="nav-mobile-menu" ng-hide="!showNav">
-        <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:$index == moveCurrent}" ng-mouseover="moveSelect($index)">
+        <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:moveCurrent == $index}" ng-click="moveSelect($index)">
             <a href="#/{{navMenu.navUrl}}">{{navMenu.navName}}</a>
         </li>
     </ul>
@@ -63,9 +63,8 @@
 
          <div class="search col-md-4">
              <form class="form-group" ng-submit="search()">
-                 <input type="text" ng-model="searchWord" class="form-control" placeholder="请输入关键字.." required/>
-                 <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                 <input type="submit" hidden="hidden"/>
+                 <input type="text" ng-model="searchWord" class="s-txt form-control" placeholder="请输入关键字.." required/>
+                 <input type="submit" class="s-sub btn btn-default" value="搜 索"/>
              </form>
          </div><!--end search-->
 
@@ -91,13 +90,14 @@
 
 
   <script src="less/less.js"></script>
+  <script src="lib/framework/new/jquery.js"></script>
   <script src="lib/framework/new/angular.js"></script>
+  <script src="lib/framework/new/angular-animate.js"></script>
   <script src="lib/framework/new/angular-resource.js"></script>
   <script src="lib/framework/new/angular-route.js"></script>
-  <script src="lib/framework/new/angular-animate.js"></script>
-  <script src="lib/framework/new/jquery.min.js"></script>
   <!--<script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>-->
   <script src="script/app.js"></script>
+  <script src="script/animations.js"></script>
   <script src="script/controllers.js"></script>
   <script src="script/directive.js"></script>
   <script src="script/services.js"></script>

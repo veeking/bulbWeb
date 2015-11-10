@@ -1,7 +1,7 @@
 /**
  * Created by veeking on 2015/7/27.
  */
-var bulbApp = angular.module('bulbApp',['ngRoute','ngAnimate','bulbCtrl','bulbDirective','bulbService']);
+var bulbApp = angular.module('bulbApp',['ngRoute','bulbAnimate','bulbCtrl','bulbDirective','bulbService']);
 bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvider){
 //      $httpProvider.defaults.cache = true; // 缓存http请求 ，同类型请求只触发一次
       $routeProvider.

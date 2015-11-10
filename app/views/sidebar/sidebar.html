@@ -2,10 +2,12 @@
        <div class="side-bar-top">
            <span class="glyphicon {{Side.typeIcon}}" ng-hide="Side.typeIcon == undefined"></span>
            <span>{{Side.typeTxt}}</span>
+
+           <a href="javascript:void(0);" class="menu-down slide-point glyphicon glyphicon-chevron-down"></a>
        </div><!--end side-top-->
-       <div class="side-bar-middle">
+       <div class="side-bar-middle" slide-expand="menu-down">
            <ul>
-               <li ng-repeat="sideNav in Side.sideNavs">
+               <li ng-repeat="sideNav in Side.sideNavs" class="liItem">
                    <a href="{{sideNav.navUrl}}" ng-class="{sideNavActive:activeSideNav($index)}">{{sideNav.navName}} <span class="glyphicon glyphicon-chevron-right"></span></a>
                </li>
            </ul>

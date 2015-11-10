@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html ng-app="testApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+            .coll{
+                width: 500px;
+            }
+        .top,.content{
+            width:100%;
+        }
+        .top{
+            height:40px;
+            background: #953b39;
+        }
+        .content{
+            border: 1px solid #000;
+        }
+        ul li{
+            height: 40px;
+            background: #262626;
+            border-bottom: 1px solid #101010;
+            color: #fff;;
+        }
+    </style>
+</head>
+<body>
+   <div class="coll" ng-controller="tCtrl">
+        <div class="top" click-expand>我是标题</div>
+        <div class="content">
+            <ul>
+                <li ng-repeat="t in ts">{{t.txt}}</li>
+            </ul>
+        </div>
+   </div>
+<script src="../app/lib/framework/jquery-1.9.1.js"></script>
+<script src="../app/lib/framework/angular.js"></script>
+<script>
+    var testApp = angular.module('testApp',[]);
+    testApp.controller('tCtrl',function($scope){
+        $scope.ts = [
+            {
+                'txt':"订单"
+            },
+            {
+                'txt':"订单2"
+            },
+            {
+                'txt':"订单3"
+            }
+        ]
+    })
+    testApp.directive('clickExpand',function($timeout){
+        return{
+            restrict:"AE",
+            link:function(scope,element,attr){
+                    var toggle = true;
+                $timeout(function(){
+                        var totalLen =$('li').length;
+                        var totalHeight= $('li').height();
+
+                    element.bind('click',function(){
+                        if(toggle){
+                            $('.content').animate({height:0},function(){
+                                $(this).hide()
+                            })
+                        }else{
+                            $('.content').show()
+                            $('.content').animate({height:totalHeight * totalLen})
+                        }
+                        toggle = !toggle;
+                    });
+                 })
+            }
+        }
+    })
+</script>
+</body>
+</html>

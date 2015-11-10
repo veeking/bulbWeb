@@ -2,52 +2,252 @@
     {
         "id":1,
         "title":"家居灯光灯源1",
-        "content":"家居灯光灯源1 样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
-        "img":"img/product/p3/h-p1.jpg",
-        "ingredients":[  
+        "smallTitle":"200 Lumens - 2700K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
+        "price":32,
+        "field":"普通家居照明",
+        "brand":"奥利弗",
+        "version":"200 Lumens - 2700K",
+        "content":"<img src='img/product/p3/cont/c1.jpg'/>产品led-700-r30-27（k2l9支持可调光,且价格实惠,具备LED高品质照明R30特征。为了取代一个60瓦的白炽灯泡，LED的科比R30是理想的轨道或隐藏式照明应用.MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所<ul><li>发出零紫外线辐射，对敏感显示器照明极佳</li><li>在潮湿的地方，湿度是一个因素</li><li>up to 25000小时，lowers维修费用</li><li>符合RoHS标准，不含铅、汞</li><li>支持平滑，均匀调光</li></ul>",
+        "imgCollect":["img/product/p3/h-p6.jpg","img/product/p3/h-p2.jpg","img/product/p3/h-p4.jpg","img/product/p3/h-p1.jpg"],
+        "ingredients":[
             {
-                "a":1,
-                "b":2,
-                "c":3
+                "name":"主要参数",
+                "info":[
+                    {
+                        "infoKey":"型号",
+                        "infoValue":"VEU0"
+                    },
+                    {
+                        "infoKey":"功率",
+                        "infoValue":"30"
+                    },
+                    {
+                        "infoKey":"电压",
+                        "infoValue":"AC90-265V"
+                    },
+                    {
+                        "infoKey":"频率范围",
+                        "infoValue":"47-63Hz "
+                    },
+                    {
+                        "infoKey":"LED光源",
+                        "infoValue":"30×1w"
+                    },
+                    {
+                        "infoKey":"发光效率",
+                        "infoValue":"110"
+                    }
+                ]
+            },
+            {
+                "name":"尺寸数据",
+                "info":[
+                    {
+                        "infoKey":"净重",
+                        "infoValue":"118.0g"
+                    },
+                    {
+                        "infoKey":"长度",
+                        "infoValue":"1212.0 mm"
+                    },
+                    {
+                        "infoKey":"宽度",
+                        "infoValue":"1212.0mm"
+                    },
+                    {
+                        "infoKey":"直径",
+                        "infoValue":"28 mm"
+                    }
+                ]
             }
         ]
     },
     {
         "id":2,
         "title":"家居灯光灯源22D",
-        "content":"风家居灯光灯源1样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
-        "img":"img/product/p3/h-p2.jpg",
-        "ingredients":[  
+        "smallTitle":"200 Lumens - 2700K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
+        "price":41,
+        "field":"普通家居照明",
+        "brand":"奥利弗",
+        "version":"200 Lumens - 2700K",
+        "content":"<img src='img/product/p3/cont/c1.jpg'/>产品led-700-r30-27（k2l9支持可调光,且价格实惠,具备LED高品质照明R30特征。为了取代一个60瓦的白炽灯泡，LED的科比R30是理想的轨道或隐藏式照明应用.MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所<ul><li>发出零紫外线辐射，对敏感显示器照明极佳</li><li>在潮湿的地方，湿度是一个因素</li><li>up to 25000小时，lowers维修费用</li><li>符合RoHS标准，不含铅、汞</li><li>支持平滑，均匀调光</li></ul>",
+        "imgCollect":["img/product/p3/h-p5.jpg","img/product/p3/h-p2.jpg","img/product/p3/h-p4.jpg","img/product/p3/h-p1.jpg"],
+        "ingredients":[
             {
-                "a":1,
-                "b":2,
-                "c":3
+                "name":"主要参数",
+                "info":[
+                    {
+                        "infoKey":"型号",
+                        "infoValue":"VEU0"
+                    },
+                    {
+                        "infoKey":"功率",
+                        "infoValue":"30"
+                    },
+                    {
+                        "infoKey":"电压",
+                        "infoValue":"AC90-265V"
+                    },
+                    {
+                        "infoKey":"频率范围",
+                        "infoValue":"47-63Hz "
+                    },
+                    {
+                        "infoKey":"LED光源",
+                        "infoValue":"30×1w"
+                    },
+                    {
+                        "infoKey":"发光效率",
+                        "infoValue":"110"
+                    }
+                ]
+            },
+            {
+                "name":"尺寸数据",
+                "info":[
+                    {
+                        "infoKey":"净重",
+                        "infoValue":"118.0g"
+                    },
+                    {
+                        "infoKey":"长度",
+                        "infoValue":"1212.0 mm"
+                    },
+                    {
+                        "infoKey":"宽度",
+                        "infoValue":"1212.0mm"
+                    },
+                    {
+                        "infoKey":"直径",
+                        "infoValue":"28 mm"
+                    }
+                ]
             }
         ]
     },
     {
         "id":3,
         "title":"家居灯光灯源333",
-        "content":"家居灯光灯源1 传统灯源 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
-        "img":"img/product/p3/h-p3.jpg",
-        "ingredients":[  
+        "smallTitle":"200 Lumens - 2700K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
+        "price":35,
+        "field":"普通家居照明",
+        "brand":"奥利弗",
+        "version":"200 Lumens - 2700K",
+        "content":"<img src='img/product/p3/cont/c1.jpg'/>产品led-700-r30-27（k2l9支持可调光,且价格实惠,具备LED高品质照明R30特征。为了取代一个60瓦的白炽灯泡，LED的科比R30是理想的轨道或隐藏式照明应用.MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所<ul><li>发出零紫外线辐射，对敏感显示器照明极佳</li><li>在潮湿的地方，湿度是一个因素</li><li>up to 25000小时，lowers维修费用</li><li>符合RoHS标准，不含铅、汞</li><li>支持平滑，均匀调光</li></ul>",
+        "imgCollect":["img/product/p3/h-p1.jpg","img/product/p3/h-p2.jpg","img/product/p3/h-p4.jpg","img/product/p3/h-p5.jpg"],
+        "ingredients":[
             {
-                "a":1,
-                "b":2,
-                "c":3
+                "name":"主要参数",
+                "info":[
+                    {
+                        "infoKey":"型号",
+                        "infoValue":"VEU0"
+                    },
+                    {
+                        "infoKey":"功率",
+                        "infoValue":"30"
+                    },
+                    {
+                        "infoKey":"电压",
+                        "infoValue":"AC90-265V"
+                    },
+                    {
+                        "infoKey":"频率范围",
+                        "infoValue":"47-63Hz "
+                    },
+                    {
+                        "infoKey":"LED光源",
+                        "infoValue":"30×1w"
+                    },
+                    {
+                        "infoKey":"发光效率",
+                        "infoValue":"110"
+                    }
+                ]
+            },
+            {
+                "name":"尺寸数据",
+                "info":[
+                    {
+                        "infoKey":"净重",
+                        "infoValue":"118.0g"
+                    },
+                    {
+                        "infoKey":"长度",
+                        "infoValue":"1212.0 mm"
+                    },
+                    {
+                        "infoKey":"宽度",
+                        "infoValue":"1212.0mm"
+                    },
+                    {
+                        "infoKey":"直径",
+                        "infoValue":"28 mm"
+                    }
+                ]
             }
         ]
     },
     {
         "id":4,
         "title":"家居灯光灯源455",
-        "content":"家居灯光灯源4455束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所。",
-        "img":"img/product/p3/h-p4.jpg",
-        "ingredients":[  
+        "smallTitle":"200 Lumens - 2700K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
+        "price":39,
+        "field":"普通家居照明",
+        "brand":"奥利弗",
+        "version":"200 Lumens - 2700K",
+        "content":"<img src='img/product/p3/cont/c1.jpg'/>产品led-700-r30-27（k2l9支持可调光,且价格实惠,具备LED高品质照明R30特征。为了取代一个60瓦的白炽灯泡，LED的科比R30是理想的轨道或隐藏式照明应用.MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所<ul><li>发出零紫外线辐射，对敏感显示器照明极佳</li><li>在潮湿的地方，湿度是一个因素</li><li>up to 25000小时，lowers维修费用</li><li>符合RoHS标准，不含铅、汞</li><li>支持平滑，均匀调光</li></ul>",
+        "imgCollect":["img/product/p3/h-p4.jpg","img/product/p3/h-p2.jpg","img/product/p3/h-p6.jpg","img/product/p3/h-p1.jpg"],
+        "ingredients":[
             {
-                "a":1,
-                "b":2,
-                "c":3
+                "name":"主要参数",
+                "info":[
+                    {
+                        "infoKey":"型号",
+                        "infoValue":"VEU0"
+                    },
+                    {
+                        "infoKey":"功率",
+                        "infoValue":"30"
+                    },
+                    {
+                        "infoKey":"电压",
+                        "infoValue":"AC90-265V"
+                    },
+                    {
+                        "infoKey":"频率范围",
+                        "infoValue":"47-63Hz "
+                    },
+                    {
+                        "infoKey":"LED光源",
+                        "infoValue":"30×1w"
+                    },
+                    {
+                        "infoKey":"发光效率",
+                        "infoValue":"110"
+                    }
+                ]
+            },
+            {
+                "name":"尺寸数据",
+                "info":[
+                    {
+                        "infoKey":"净重",
+                        "infoValue":"118.0g"
+                    },
+                    {
+                        "infoKey":"长度",
+                        "infoValue":"1212.0 mm"
+                    },
+                    {
+                        "infoKey":"宽度",
+                        "infoValue":"1212.0mm"
+                    },
+                    {
+                        "infoKey":"直径",
+                        "infoValue":"28 mm"
+                    }
+                ]
             }
         ]
     }

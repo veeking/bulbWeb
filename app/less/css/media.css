@@ -130,6 +130,7 @@
           line-height: 50px;
     }
     .main .main-other .other-list .list ul li span{
+           font-size: 0;
            height: 100%;
     }
     .main .main-other .other-list .list ul li a{
@@ -180,7 +181,16 @@
         padding-top: 15%;
     }
 }
-
+/*列表页*/
+@media (max-width: 992px){
+    .main-news .news-list-main{
+        float: none;
+        width: 100%;
+    }
+    .main-news .news-list-main .news-type-list .news-list li a {
+        width: 65%;
+    }
+}
 
 
 /*search*/
@@ -235,11 +245,17 @@
             width: 49.3%;
     }
     .product-type-pList .type-pList .product-pList .pList-main .pList-item .pList-item-inner .item-img img {
-        width: 65%;
+            width: 65%;
     }
     .product-type-pList .type-pList .product-pList .pList-main .pList-item:nth-child(even){
-        margin-right: 0;
+            margin-right: 0;
     }
+
+    .product-type-pList .type-pList .product-pList .pList-top .pList-search {
+        width: 100%;
+        float:left;
+    }
+
 }
 
 /*sidebar*/
@@ -247,7 +263,53 @@
     .side{
         margin-bottom:20px;
     }
+    .side-bar .side-bar-top a.menu-down{
+        display: block;
+    }
+    .side-bar .side-bar-middle{
+        overflow: hidden;
+        height: 0;
+    }
 }
+/*产品详情页*/
+@media(max-width: 992px){
+    .product-detail .p-detail-box{
+        float: none;
+        width: 100%;
+    }
+    .product-detail .p-detail-box .p-detail .p-detail-top .p-img .p-img-mainImg {
+        height: 460px;
+    }
+    .product-detail .p-detail-box .p-detail .p-detail-top .p-info {
+        margin-top:20px;
+        margin-left:0;
+        padding-left: 0;
+        padding-right: 0;
+        width: 100%;
+    }
+    .product-detail .p-detail-box .p-detail .p-detail-top .p-info .p-info-block .buy{
+         width:100%;
+     }
+    .product-detail .p-detail-box .p-detail .p-detail-top .p-info .p-info-block .price{
+         width:100%;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .product-detail .p-detail-box .p-detail .p-detail-body .body-detail .expand{
+        margin-bottom:1px;
+    }
+    .product-detail .p-detail-box .p-detail .p-detail-body .body-detail .expand .expand-content {
+        padding-top: 0;
+        overflow: hidden;  /*只有元素被收缩时 才会触发slide滑动动画*/
+        height: 0;/*桌面端默认是有height值的 所以无法触发height动画 */
+    }
+    .product-detail .p-detail-box .p-detail .p-detail-body .body-detail .expand .expand-content ul li {
+        width: 100%;
+    }
+}
+
 
 /*foot*/
 @media(max-width: 992px){

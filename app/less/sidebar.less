@@ -1,26 +1,42 @@
 @import "bootstrapLess/bootstrap.less";
 @import "common.less"; //多页面共用模块
 .side-bar{
-  height:100%;
-  background-color: @back-color;
   .side-bar-top{
     @m:30px;
     width: 100%;
     padding-top: @p10 * 2;
     padding-bottom: @p10 * 2;
     background-color: @back-color;
+    position: relative;
     text-align: center;
     color:@gray-small-light;
     .border(bottom,1px,solid,@gray);
-//    .border(bottom,2px,dotted,@gray-light);
     span{
       font-size:@font-size-h3;
     }
     span.glyphicon{
        top:3px;
     }
+    a.menu-down{
+      @h:75px;
+      height: 100%;
+      line-height:@h;
+      vertical-align:middle;
+      position: absolute;
+      right: 0;
+      display: none;
+      width:20%;
+      font-size:@font-size-large + 4;
+      color:#fff;
+      cursor: pointer;
+      .border(left,1px,solid,@gray-light);
+      &:hover,&:active{
+        background: @fore-color;
+      }
+    }
   }
   .side-bar-middle{
+    .transition(height,0.4s,linear);
     ul{
       margin-bottom:0;
       li{
@@ -29,6 +45,7 @@
           height: @h;
           line-height: @h;
           display:block;
+          background:@back-color;
           font-size:@font-size-large;
           color:@gray-light;
           text-align: center;

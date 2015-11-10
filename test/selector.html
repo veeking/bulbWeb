@@ -12,38 +12,47 @@
     </style>
 </head>
 <body ng-controller="mainCtrl">
-<selector-child>
-    <div ng-view class="viewFrame"></div>
-    <div class="testClass">我是没有任何指令的</div>
-</selector-child>
+<div>
+    <div class="listClass" ng-repeat="aa in aas">
+        <span>{{aa.name}}</span>
+        <div ng-repeat="cont in aa.cont">
+            <span>{{cont.title}}</span>
+            <span>{{cont.text}}</span>
+        </div>
+    </div>
+</div>
 <script src="../app/lib/framework/jquery-1.9.1.js"></script>
 <script src="../app/lib/framework/angular.js"></script>
 <script>
     var myApp = angular.module('testApp',[]);
     myApp.controller('mainCtrl',function($scope,$timeout){
-            $scope.aas = [
-                {
-                    'text':"ds",
-                },
-                {
-                    'text':"ds2",
-                },
-                {
-                    'text':"ds3",
-                }
-            ];
 
-    });
-    myApp.directive('selectorChild', function ($timeout) {
-        return {
-                restrict: "E",
-                replace:true,
-                template:'  <div class="listClass" ng-repeat="aa in aas">{{aa.text}}</div>',
-                link: function (scope,element,attr) {
-                   console.log(element.find('div'));
-                   console.log('测试');
-                }
-        };
+        $scope.aas = [
+            {
+                "name":"产品信息",  //// end ingredients
+                "cont":[
+                    {
+                      "title":"型号",
+                      "text":"大口径佛考核"
+                    },
+                    {
+                        "title":"电压",
+                        "text":"222v"
+                    }
+                ]
+
+            },
+            {
+                "name":"产品参数",
+                "cont":[
+                    {
+                        "title":"型号1",
+                        "text":"大口2径佛考核"
+                    }
+                ]
+            }
+        ]
+
     });
 </script>
 </body>

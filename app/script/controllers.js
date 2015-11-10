@@ -4,6 +4,10 @@
 var bulbCtrl = angular.module('bulbCtrl',[]);
 bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,ReqLoader,Pager){
     $scope.moveCurrent = 0;
+    $scope.moveSelect = function(index){ // 移动导航
+        $scope.moveCurrent = index;
+        $scope.showNav = false; //  每次点击导航后 导航栏隐藏
+    };
     $scope.newsType = [  // 新闻分类数据  与news文件夹文件名和数量耦合
         {
             "navName":"新闻分类1",
@@ -344,6 +348,7 @@ bulbCtrl.controller('bulbNewsCtrl',function($scope,ResManage){
     ResManage.setTypeImg(typeImgOpt);
 });
 bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
+    $scope.isMenuHide = true;
     var sideNavIndex = 0;
     var sideTypeData = {};
     if($location.path().indexOf('news') > -1){
@@ -370,10 +375,19 @@ bulbCtrl.controller('bulbSideCtrl',function($scope,$routeParams,$location){
             return false;
         }
   } // end activeSlideNav
+
+
 });
 bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,newsData,Pager){
-    var newsType = $routeParams.type;
-    $scope.newsTypeUrl = newsType;
+    var nowType = $routeParams.type;
+    $scope.newsType.forEach(function(n){
+        if(n.navType == nowType){
+            $scope.newsTypeName = n.navName;  //取标题
+            $scope.newsTypeUrl = nowType;
+            return false;
+        }
+    });
+//    $scope.newsTypeUrl = newsType;
     $scope.Pages = Pager(newsData,2); // 分页数据
     $scope.newLists = $scope.Pages.pageDataTemp; // 列表数据
 });
@@ -395,16 +409,20 @@ bulbCtrl.controller('bulbProductsCtrl',function($scope,ResManage){
 });
 bulbCtrl.controller('bulbProductsListCtrl',function($scope,$routeParams,productsData,Pager){
     var nowType = $routeParams.type;
-    $scope.Pages = Pager(productsData,4)
+    $scope.Pages = Pager(productsData,16)
     $scope.pLists = $scope.Pages.pageDataTemp;
-    $scope.productsType.forEach(function(p,index){
-            if(p.navType.indexOf(nowType) > -1){
+    $scope.productsType.forEach(function(p){
+            if(p.navType == nowType){
                $scope.nowTypeName = p.navName;  //取标题
-               $scope.nowType = p.navType;
-                return false;
+               $scope.nowType = nowType;
+               return false;
             }
     });
 });
-bulbCtrl.controller('bulbProductsDetailCtrl',function($scope){
-
+bulbCtrl.controller('bulbProductsDetailCtrl',function($scope,$routeParams,productsData){
+        $scope.pDetail = productsData[$routeParams.id - 1];
+        $scope.mainImg = $scope.pDetail.imgCollect[0];//默认主图显示第一章
+        $scope.setImage = function(img) {
+              $scope.mainImg = img;
+        };
 });

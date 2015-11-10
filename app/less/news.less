@@ -102,40 +102,57 @@
   }
 } // end news-type
 
-.news-type-list{
-  li{
-    cursor:pointer;
-  }
-  .news-list{
-//    .border(bottom,1px,solid,@gray-small-light);
-    li{
-       padding: @p10;
-      .border(bottom,1px,solid,@gray-small-light);
-     &:hover,&:active{
-       background:@back-color;
-      }
-     &:hover a,&:active a,&:hover span,&:active span,&:hover a span.glyphicon,&:active a span.glyphicon{
-        color: #fff;
-      }
-     &:last-child{
-       border-bottom: none;
-     }
-      a{
-        .text-overflow(80%);   // 响应时改为100%;
-        display: inline-block;
-        color: @gray-light;
-        font-size:@font-size-base + 2;
-      }
-      span.date{
-        width: 10%;
-        float: right;
-        line-height:2;
-      }
+// 资讯列表页开始
+.main-news{
+ .news-list-main{
+   padding-left: 0;
+   padding-right: 0;
+   float:right;
+   width: 73%;
+  .news-type-top{
+    h3{
+      margin-top:0;
     }
   }
+  .news-type-list{
+    li{
+      cursor:pointer;
+    }
+    .news-list{
+      //    .border(bottom,1px,solid,@gray-small-light);
+      li{
+        padding: @p10;
+        padding-left:0;
+        .border(bottom,1px,solid,@gray-small-light);
+        &:hover,&:active{
+          background:@back-color;
+        }
+        &:hover a,&:active a,&:hover span,&:active span,&:hover a span.glyphicon,&:active a span.glyphicon{
+          color: #fff;
+        }
+        &:last-child{
+          border-bottom: none;
+        }
+        a{
+          .text-overflow(80%);   // 响应时改为100%;
+          display: inline-block;
+          color: @gray-light;
+          font-size:@font-size-base + 2;
+        }
+        span.date{
+          float: right;
+          line-height:2;
+        }
+      }
+    }
 
-}
+  }
+ }
+}// end news-list-main 列表页结束
+.main-detail-news{
 .news-list-details{
+ padding-left:0;
+ padding-right:0;
   margin-bottom: @p10*5;
   .section{
     padding:@p10+5;
@@ -179,3 +196,4 @@
     }
   }
 }
+} // end main-detail-new

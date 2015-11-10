@@ -60,6 +60,10 @@ bulbDirective.directive('formatSection',function(){  // 格式化文章内容
        restrict:"A",
        replace : true,
        transclude : true,
+       template:"<div ng-transclude>{{cont}}</div>",
+       scope:{
+           cont:"=formatSection" // 对应指令结果值
+       },
        controller : function($scope,$attrs){
            this.parseDom = function(strDom){  // 将没有p标签包围的文字围起来
                var domDiv = document.createElement('div');
@@ -80,7 +84,7 @@ bulbDirective.directive('formatSection',function(){  // 格式化文章内容
        },
        link : function(scope,element,attrs,sectionCtrl){
               // 因为是接收内容是异步请求，所以需要监控变量是否发生变化
-              var unwatch = scope.$watch('newDetails.content',function(content){
+              var unwatch = scope.$watch('cont',function(content){
                     if(content){ //一共会执行两次  为了避免第一次出现undefined，需要判断是否不为undefined，接收到时取消监控
                       unwatch();//第一次是异步还没返回内容的时候undefined，第二次是成功接收到内容后
                       var sections = sectionCtrl.parseDom(content);
@@ -108,7 +112,7 @@ bulbDirective.directive('adaptHeight',function($rootScope){
                  };
 
                 if(scope.$last){ // 筛选出 每组最后元素
-                    var aHeight = (element[0].offsetHeight + 50) + element[0].offsetTop +pageHeight;
+                    var aHeight = (element[0].scrollHeight + 50) + element[0].offsetTop +pageHeight;
                     console.log('我是aheight' + aHeight)
                     if(aHeight > maxHeight){
                        maxHeight = aHeight;  // 两组 对比 找出最大值
@@ -147,5 +151,63 @@ bulbDirective.directive('realSrc',function(ResManage){
                 });
             });
         }
+    }
+});
+bulbDirective.directive('slideExpand',function($timeout){
+    return{
+        restrict:"A",
+        link:function(scope,element,attr){
+            var toggle = false;
+            $('.' + attr.slideExpand).bind('click',function(){
+                toggle = !toggle;
+                element[0].style['height'] = toggle?element[0].scrollHeight + 'px':0;
+//              parentEle.slideToggle(); //jquery方法 简洁方便但性能不如css3
+                });
+//            scope.$on('$destory',function(){
+//                $('.slide-point').unbind('click');
+//            })
+        }
+    }
+});
+
+bulbDirective.directive('accordion',function(){
+    return {
+        restrict:"EA",
+        replace:true,
+        transclude:true,
+        template:"<div ng-transclude></div>",
+        controller:function($scope){
+            var expands = [];
+            this.addExpand = function(expand){
+                 expands.push(expand);
+            }
+        } // end controller
+    }
+});
+bulbDirective.directive('expander',function(){
+    return {
+        restrict:"EA",
+        replace:true,
+        transclude:true,
+        require:"^?accordion",
+        scope:{
+            title:"=expanderTitle"
+        },
+        template:"<div class='expand'>" +
+            "<div class='expand-top'><span class='expand-top-point' ng-class='{active:toggleShow}' ng-click='toggleExpand()'>+</span><h4>{{title}}</h4></div>" +
+            "<div class='expand-content' ng-model='toggleShow' ng-transclude>" +
+            "</div><!--end expand-content-->" +
+            "</div>",
+        link:function(scope,element,attr,accrodionCtrl){
+             scope.toggleShow = false;
+             var slideCont = angular.element(element[0].querySelector('.expand-content'));
+             var slidePoint = angular.element(element[0].querySelector('.expand-top-point'));
+             accrodionCtrl.addExpand(scope);
+             scope.toggleExpand = function(){
+                 scope.toggleShow = !scope.toggleShow;
+                 scope.toggleShow?slidePoint.html('-'):slidePoint.html('+'); // 切换+-图标
+                 slideCont[0].style['height'] = scope.toggleShow?slideCont[0].scrollHeight + 'px':0;
+             }
+        } // end link
     }
 });

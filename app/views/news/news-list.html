@@ -1,7 +1,10 @@
 <div class="main-news row">
 
     <div class="side col-md-3" ng-include="'views/sidebar/sidebar.html'"></div>
-    <div class="col-md-9">
+    <div class="news-list-main col-md-9">
+        <div class="news-type-top">
+            <h3>{{newsTypeName}}列表</h3>
+        </div>
         <div class="news-type-list">
             <ul class="news-list">
                 <li ng-repeat="newList in newLists">

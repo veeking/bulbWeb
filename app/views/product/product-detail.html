@@ -1,27 +1,88 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>新闻详情</title>
-    <link rel="stylesheet/less" href="less/news.less"/>
-</head>
-<body>
-  <div class="container" style="text-align: center;">
-      <div class="row">
-         <p>{{newDetails.title}}</p>
-      </div>
-      <div class="row">
-          <p>
-             <span>{{newDetails.author}}</span>
-             <span>{{newDetails.date}}</span>
-          </p>
-      </div>
-      <div class="row">
-          <p>
-              {{newDetails.content}}
-          </p>
-      </div>
+  <div class="product-detail">
+      <div class="side col-md-3" ng-include="'views/sidebar/sidebar.html'">
+      </div> <!--end type-side-->
+
+     <div class="p-detail-box col-md-9">
+        <div class="detail-intro row">
+          <h3>产品详情</h3>
+        </div>
+
+         <div class="p-detail">
+             <div class="p-detail-top row">
+                 <div class="p-img col-md-5">
+                     <div class="p-img-mainImg">
+                         <div class="img-item slideImg" ng-repeat="img in pDetail.imgCollect | limitTo:4 track by $index" ng-class="{active:mainImg==img}">
+                             <img real-src="{{img}}">
+                         </div>
+                     </div>  <!--p-img-mainImg-->
+                     <div class="p-img-thumbImg">
+                          <ul>
+                             <li ng-repeat="img in pDetail.imgCollect | limitTo:4 track by $index"  ng-class="{indexActive:mainImg==img}">
+                                 <img real-src="{{img}}" ng-click="setImage(img)">
+                             </li>
+                         </ul>
+                     </div><!--end p-img-thumbImg-->
+                 </div> <!--end p-img-->
+                 <div class="p-info col-md-7">
+                    <div class="p-info-txt">
+                        <h3>{{pDetail.title}}</h3>
+                        <h4>{{pDetail.smallTitle}}</h4>
+                        <div class="txt-desc">
+                           <div class="txt-desc-item">
+                               <strong>产品品牌</strong>
+                               <span>{{pDetail.brand}}</span>
+                           </div>
+                            <div class="txt-desc-item">
+                                <strong>产品型号</strong>
+                                <span>{{pDetail.version}}</span>
+                            </div>
+                            <div class="txt-desc-item">
+                                <strong>应用领域</strong>
+                                <span>{{pDetail.field}}</span>
+                            </div>
+                        </div>
+                    </div>  <!--end p-info-txt-->
+
+                     <div class="p-info-block">
+                         <div class="price">
+                             <b>￥{{pDetail.price}}</b>
+                             <span>元</span>
+                         </div>
+                         <button class="buy btn btn-default">
+                             <span class="glyphicon glyphicon-earphone"></span>
+                             联系购买
+                         </button>
+                     </div> <!--end p-info-block-->
+
+                 </div><!--end p-info-->
+             </div>  <!--end p-detail-top -->
+            <div class="p-detail-body">
+                <div class="body-info">
+                    <div class="body-info-title">
+                        <h4>产品描述</h4>
+                    </div><!--end body-info-title-->
+                    <div class="body-info-content" format-section="pDetail.content">
+                    </div>
+                </div> <!--end body-info-->
+
+                  <accordion class="body-detail">
+                       <expander ng-repeat="expand in pDetail.ingredients"
+                                 expander-title="expand.name">
+                         <ul>  <!--expander里面的内容可以自定义 复用性超高-->
+                           <li ng-repeat='info in expand.info'>
+                               <strong>{{info.infoKey}}</strong>
+                               <span>{{info.infoValue}}</span>
+                            </li>
+                        </ul>
+                       </expander>
+                 </accordion>  <!--end body-detail-->
+
+
+            </div><!--end p-detail-body -->
+
+         </div><!--end p-detail-->
+     </div> <!--end p-detail-box-->
+
+
+
   </div>
-<script src="less/less.js"></script>
-</body>
-</html>

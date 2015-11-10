@@ -1,5 +1,5 @@
 @fore-color:@brand-primary;
-@back-color:#1F1F1F;
+@back-color:@brand-default;
 @my-font-color:#D0D0D0;
 @middleMargin:0 auto;
 @p30:30px;
@@ -75,6 +75,8 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
 
 
 
+//公共组件块 样式区域
+
 //分页
 .page{
   ul {
@@ -103,6 +105,56 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
     }
   }
 }
+
+
+//expand
+.expandTop(@h:50px,@fontSize:@font-size-base){
+  .expand-top{
+    color: #fff;
+    .clearfix();
+    h4,.expand-top-point{
+      display: block;
+      float:left;
+      height: @h;
+      line-height: @h;
+    }
+    h4{
+      width: 92%;
+      padding-left:@p10 + 5;
+      background: @back-color;
+      margin-top:0;
+      margin-bottom:0;
+      letter-spacing: 1px;
+    }
+    .expand-top-point{
+      cursor: pointer;
+      background:@gray;
+      width: 8%;
+      text-align: center;
+      font-size:@fontSize;
+      &:hover,&:active{
+        background: @fore-color;
+      }
+      &.active{
+        background: @fore-color;
+      }
+    }
+  } // end desktop  expand-top
+  @media (max-width: 768px) {
+    .expand-top{
+      h4{
+        width: 85%;
+      }
+      .expand-top-point{
+        width: 15%;
+      }
+    }
+  }// end mobile expand-top
+
+}
+
+
+//loading
 .loadingImg(@w:50px,@h:50px){
   img{
     opacity:0;

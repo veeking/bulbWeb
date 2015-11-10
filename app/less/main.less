@@ -43,9 +43,12 @@
   ul.nav-mobile-menu{
     li{
       .transition(all,0.3s,ease-out);
-      border: 1px solid @gray-darker;
+      .border(1px,solid,@gray-darker);
+      &:hover{
+        .border(right,8px,solid,@fore-color);
+      }
       &.activeNav{
-        border-right: 8px solid @fore-color;
+        .border(right,8px,solid,@fore-color);
       }
     }
   }
@@ -126,9 +129,6 @@
           border: none;
           color:@white-color;
           text-shadow:0 1px 0px rgba(0,0,0,0.2);
-          &.btn-default{
-            background: @back-color;
-          }
           span.glyphicon{
             margin-right:@p10;
           }
@@ -167,7 +167,7 @@
           }
           &.navActive a.navItemLink {
             color: @gray-base;
-            border-right: none;
+//            border-right: none;
           }
           &:hover ul.nav-menu-two {
             display: block;
@@ -227,18 +227,27 @@
     // end big-nav
 
     .search {
-      margin-top: @h - 5;
+      @m:@h - 5;
+      margin-top: @m;
+      margin-bottom: @m - 8;
       .form-group {
         margin-bottom: 0;
+        .clearfix();
         input {
           height: 38px;
-          color: @gray;
           border-color: @gray-lighter;
           box-shadow: none;
         }
-        span.glyphicon {
-          font-size: @font-size-large - 2;
-          right: 22px;
+        .s-txt,.s-sub{
+          float: left;
+        }
+        .s-txt{
+          color: @gray;
+          width: 70%;
+          border-right:none;
+        }
+        .s-sub{
+          width:30%;
         }
       }
     }
@@ -316,7 +325,7 @@
           text-align: center;
           a{
             .transition(color,0.4s,linear);
-            font-size:@font-size-large * 2;
+            font-size:@font-size-h1 + 4 ; // ~40px
             color:@back-color;
             &.selectActive{
               color: @fore-color;

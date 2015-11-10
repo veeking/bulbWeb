@@ -1,4 +1,4 @@
-<div class="main-news row">
+<div class="main-detail-news row">
     <div class="col-md-3" class="side" ng-include="'views/sidebar/sidebar.html'"></div>
     <div class="col-md-9 news-list-details">
         <div class="section">
@@ -11,8 +11,7 @@
 
                 <div class="article">
                     <div class="article-img" ng-hide="newDetails.img == undefined"><img ng-src="{{newDetails.img}}"/></div>
-                     <div class="article-txt" format-section>
-                         {{newDetails.content}}
+                     <div class="article-txt" format-section="newDetails.content">
                      </div>
                 </div>
 
