@@ -1,0 +1,76 @@
+
+<div class="contact">
+      <div class="contact-top row">
+          <h3>联系我们</h3>
+      </div>
+
+      <div class="contact-map row" id="mapd">
+         <contact-map class="map-box"></contact-map>
+      </div> <!--end contact-map-->
+      <div class="contact-main row">
+          <div class="main-form col-md-8">
+
+              <div class="contact-caption row">
+                  <div class="caption-text">在线留言</div>
+                  <div class="caption-line"></div>
+              </div> <!--end about-caption-->
+
+              <div class="contact-form">
+                  <form ng-submit="sendMsg()">
+                      <div class="f-top row">
+                          <div class="col-md-4">
+                              <input type="text" ng-model="contactForm.name" placeholder="您的昵称" required/>
+                          </div>
+                          <div class="col-md-4">
+                              <input type="text" ng-model="contactForm.email" placeholder="您的联系方式" required/>
+                          </div>
+                          <div class="col-md-4">
+                              <input type="text" ng-model="contactForm.other" placeholder="话题相关" required/>
+                          </div>
+                      </div>
+                      <div class="f-bottom row">
+                          <textarea ng-model="contactForm.message" required placeholder="您的留言信息"cols="30" rows="5"></textarea>
+                      </div>
+                      <div class="success-send" ng-show="sendStatus.success">
+                           提交成功
+                      </div>
+                      <div class="error-send" ng-show="sendStatus.error">
+                           提交失败,错误:{{errMsg}}
+                      </div>
+                      <button class="btn btn-primary" type="submit" ng-disabled="sendStatus.disOn">提交</button>
+                  </form>
+              </div>
+
+          </div>
+          <div class="main-contact col-md-4">
+              <div class="contact-caption row">
+                  <div class="caption-text">联系方式</div>
+                  <div class="caption-line"></div>
+              </div> <!--end about-caption-->
+
+              <div class="contact-box">
+                  <ul class="contact-list">
+                      <li>
+                          <span class="glyphicon glyphicon-map-marker"></span>
+                          <span class="list-info">
+                              广东省佛山市XX区XX街XX号
+                          </span>
+                      </li>
+                      <li>
+                          <span class="glyphicon glyphicon-phone"></span>
+                          <span class="list-info">
+                              (0123)888881818
+                          </span>
+                      </li>
+                      <li>
+                          <span class="glyphicon glyphicon-envelope"></span>
+                          <span class="list-info">
+                              helloWorldEmail@163.com
+                          </span>
+                      </li>
+                  </ul>
+              </div> <!--end contact-box-->
+          </div> <!--end main-contact -->
+
+      </div><!--end contact-main-->
+  </div>

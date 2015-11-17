@@ -211,3 +211,32 @@ bulbDirective.directive('expander',function(){
         } // end link
     }
 });
+bulbDirective.directive('backTop',function() {
+    return{
+        restrict: "A",
+        link:function(scope,element,attr){
+            element.bind('click',function(){
+                window.scrollTo(0,0);
+           })
+        }
+    }
+});
+bulbDirective.directive('contactMap',function($q,$timeout,angularMap){
+    return{
+        restrict: "EA",
+        transclude: true,
+        scope: true,
+        replace: true,
+        template: "<div id='mapBox' ng-transclude></div>",
+        controller: function () {
+            this.initMap = angularMap.initMap;
+        },
+        link: function (scope, element, attr, mapCtrl) {
+            var pos = {
+                lng:113.121191,
+                lat:23.024436
+            };
+            mapCtrl.initMap('mapBox',pos);
+        }
+    }
+})

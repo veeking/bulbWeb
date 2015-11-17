@@ -81,12 +81,16 @@
 /*main -> point*/
 @media(max-width: 992px){
     .main .main-point .point-cont .col-md-12 div.point-cont-item:nth-child(even){
-            margin-right:0;
+         margin-right:0;
     }
     .main .main-point .point-cont .col-md-12 div.point-cont-item{
          width:48.6%;
          margin-bottom:20px;
      }
+    .main .main-point .point-cont .col-md-12 div.point-cont-item .read-more a span {
+        height: 40px;
+        line-height: 40px;
+    }
 }
 @media(max-width: 768px){
     .main .main-point .point-cont .col-md-12 div.point-cont-item{
@@ -104,36 +108,36 @@
     .main .main-other .other-news{
          width: 65%
      }
-    .main .main-other .other-list{
+    .main .other-list{
         margin-left:5%;
         width: 30%;
     }
 }
 
 @media(max-width: 768px){
-    .main .main-other .other-news,.main .main-other .other-list{
+    .main .main-other .other-news,.main .other-list{
       width: 100%;
       float: none;
     }
-    .main .main-other .other-list{
+    .main .other-list{
         margin-top:20px;
         margin-left:0;
     }
-    .main .main-other .other-list .list{
+    .main .other-list .list{
         margin-top:20px;
     }
-    .main .main-other .other-list .list ul li{
+    .main .other-list .list ul li{
           width: 100%;
           margin-bottom: 10px;
           background: #1F1F1F;
           height: 50px;
           line-height: 50px;
     }
-    .main .main-other .other-list .list ul li span{
+    .main .other-list .list ul li .listIcon{
            font-size: 0;
            height: 100%;
     }
-    .main .main-other .other-list .list ul li a{
+    .main .other-list .list ul li a{
            color: #fff;
     }
 }
@@ -310,6 +314,18 @@
     }
 }
 
+
+/*关于我们*/
+@media(max-width: 992px){
+        .col-md-6{
+            padding-right:0;
+        }
+}
+@media(max-width: 768px){
+    .about .about-other .other-intro .intro-expand .expand-content .content-info {
+        margin-left: 15%;
+    }
+}
 
 /*foot*/
 @media(max-width: 992px){

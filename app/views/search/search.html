@@ -7,7 +7,7 @@
         <div class="content" ng-show="currIndex == $index">
             <div ng-show="tab.listData.length==0" class="not-found"><span>Sorry,未找到...</span></div>
             <div ng-repeat="tabList in tab.listData" class="content-item"  adapt-height>
-                <a ng-hide="tabList.img == undefined" class="content-img"><img ng-src="{{tabList.img}}" /></a>
+                <a ng-hide="tabList.imgCollect[0] == undefined" class="content-img"><img ng-src="{{tabList.imgCollect[0]}}" /></a>
                 <div class="content-txt">
                     <a href="{{tabList.url}}" class="txt-title">{{tabList.title}}</a>
                     <p class="txt-cont">{{tabList.content}}</p>

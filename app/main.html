@@ -4,97 +4,162 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <!--Less.js编译.less文件并进行本地存储-->
+    <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet/less" href="less/main.less"/>
-    <link rel="stylesheet/less" href="less/intro.less"/>
-    <link rel="stylesheet/less" href="less/sidebar.less"/>
-    <link rel="stylesheet/less" href="less/news.less"/>
-    <link rel="stylesheet/less" href="less/product.less"/>
-    <link rel="stylesheet/less" href="less/bootstrapLess/bootstrap.less"/>
-    <!--<link rel="stylesheet" href="less/css/main.css"/>-->
+    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
     <link rel="stylesheet" href="less/css/media.css"/>
-    <title>Bulb App最新</title>
+    <title>BulbX照明</title>
+    <style>
+        .spinner {
+            margin: 100px auto;
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 10px;
+        }
+
+        .spinner > div {
+            background-color: #2995CC;
+            height: 100%;
+            width: 6px;
+            display: inline-block;
+
+            -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+            animation: stretchdelay 1.2s infinite ease-in-out;
+        }
+
+        .spinner .rect2 {
+            -webkit-animation-delay: -1.1s;
+            animation-delay: -1.1s;
+        }
+
+        .spinner .rect3 {
+            -webkit-animation-delay: -1.0s;
+            animation-delay: -1.0s;
+        }
+
+        .spinner .rect4 {
+            -webkit-animation-delay: -0.9s;
+            animation-delay: -0.9s;
+        }
+
+        .spinner .rect5 {
+            -webkit-animation-delay: -0.8s;
+            animation-delay: -0.8s;
+        }
+
+        @-webkit-keyframes stretchdelay {
+            0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+            20% { -webkit-transform: scaleY(1.0) }
+        }
+
+        @keyframes stretchdelay {
+            0%, 40%, 100% {
+                transform: scaleY(0.4);
+                -webkit-transform: scaleY(0.4);
+            }  20% {
+                   transform: scaleY(1.0);
+                   -webkit-transform: scaleY(1.0);
+               }
+        }
+    </style>
 </head>
 <body ng-controller="bulbMainCtrl">
-  <div class="nav-mobile visible-xs" ng-class="{showNav:showNav}">
-    <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger" ng-click="showNav = !showNav"></button>
-    <ul class="nav-mobile-menu" ng-hide="!showNav">
+  <div class="nav-mobile visible-xs">
+    <ul class="nav-mobile-menu">
         <li ng-repeat="navMenu in navMenus" ng-class="{activeNav:moveCurrent == $index}" ng-click="moveSelect($index)">
             <a href="#/{{navMenu.navUrl}}">{{navMenu.navName}}</a>
         </li>
     </ul>
  </div><!--end nav-mobile-->
-  <div class="head container-fluid">
+
+<div class="app-main" ng-class="{showNav:showNav}">
+    <div class="head container-fluid">
+        <button class="nav-mobile-btn glyphicon glyphicon-menu-hamburger visible-xs" ng-click="showNav = !showNav"></button>
         <div class="head-inner container">
             <div class="logo col-md-8">
                 <h1>
-                    <a href="/index">BUIB<font color="#FEC60D">X·</font></a>
+                    <a href="/index">BUIB<b>X·</b></a>
                     <span>THE BEST QUILITY PRODUCT!</span>
                 </h1>
             </div>
             <!--end logo-->
             <div class="other col-md-4">
-                 <P>WWW.BULBX.COM</P>
-                 <div class="other-box">
-                     <button class="btn btn-primary"><span class="glyphicon glyphicon-bell"></span>服务中心</button>
-                     <button class="btn btn-default"><span class="glyphicon glyphicon-earphone"></span>联系我们</button>
-                 </div>
+                <P>WWW.BULBX.COM</P>
+                <div class="other-box">
+                    <button class="btn btn-primary"><span class="glyphicon glyphicon-bell"></span>服务中心</button>
+                    <button class="btn btn-default"><span class="glyphicon glyphicon-earphone"></span>联系我们</button>
+                </div>
             </div>
             <!--end other-->
         </div> <!-- end head-inner-->
-  </div><!--head-->
+    </div><!--head-->
 
-  <div class="main container view-container">
+    <div class="main container view-container">
         <div class="main-top row">
-         <div class="nav col-md-8">
+            <div class="nav col-md-8">
 
-             <ul class="nav-menu hidden-xs">
-                 <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:$index == moveCurrent}" ng-click="moveSelect($index)">
-                     <a href="#/{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
-                     <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
-                     <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
-                         <li ng-repeat="navChildTwo in navMenu.navChild"><a href="{{navChildTwo.navUrl}}">{{navChildTwo.navName}}</a></li>
-                     </ul>  <!--end nav-menu-two -->
+                <ul class="nav-menu hidden-xs">
+                    <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:moveCurrent == $index && moveCurrent > 0}" ng-click="moveSelect($index)">
+                        <a href="#/{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
+                        <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
+                        <ul class="nav-menu-two" ng-hide="navMenu.navChild.length < 1">
+                            <li ng-repeat="navChildTwo in navMenu.navChild"><a href="{{navChildTwo.navUrl}}">{{navChildTwo.navName}}</a></li>
+                        </ul>  <!--end nav-menu-two -->
 
-                 </li>
-             </ul><!--end nav-menu-->
+                    </li>
+                </ul><!--end nav-menu-->
 
 
-         </div><!--end nav-->
+            </div><!--end nav-->
 
-         <div class="search col-md-4">
-             <form class="form-group" ng-submit="search()">
-                 <input type="text" ng-model="searchWord" class="s-txt form-control" placeholder="请输入关键字.." required/>
-                 <input type="submit" class="s-sub btn btn-default" value="搜 索"/>
-             </form>
-         </div><!--end search-->
+            <div class="search col-md-4">
+                <form class="form-group" ng-submit="search()">
+                    <input type="text" ng-model="searchWord" class="s-txt form-control" placeholder="请输入关键字,如 LED" required/>
+                    <input type="submit" class="s-sub btn btn-default" value="搜 索"/>
+                </form>
+            </div><!--end search-->
 
-      </div> <!--end main-top -->
-    <div ng-view class="view-frame"></div>
-  </div><!--end main-->
-  <div class="footer container-fluid">
-      <div class="footer-inner container">
-         <div class="copy-right col-md-8">
-             <a href="###">BUIBX</a>
-             <span> © 2015 | XXX版权所有</span>
-         </div>
-         <div class="social col-md-4">
-             <a href="###" class="glyphicon glyphicon-phone"></a>
-             <a href="###" class="glyphicon glyphicon-heart"></a>
-             <a href="###" class="glyphicon glyphicon-star"></a>
-             <a href="###" class="glyphicon glyphicon-cloud"></a>
-         </div>
-      </div>
-      <a class="back-top glyphicon glyphicon-triangle-top visible-lg" href="#top"></a>
-  </div>
-  <!--end footer-->
+        </div> <!--end main-top -->
+        <div ng-view class="view-frame">
+            <div class="spinner">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+        </div>
+    </div><!--end main-->
+    <div class="footer container-fluid">
+        <div class="footer-inner container">
+            <div class="copy-right col-md-8">
+                <a href="###">BUIBX</a>
+                <span> © 2015 | XXX版权所有</span>
+            </div>
+            <div class="social col-md-4">
+                <a href="javascript:void(0)" class="glyphicon glyphicon-phone"></a>
+                <a href="javascript:void(0)" class="glyphicon glyphicon-heart"></a>
+                <a href="javascript:void(0)" class="glyphicon glyphicon-star"></a>
+                <a href="javascript:void(0)" class="glyphicon glyphicon-cloud"></a>
+            </div>
+        </div>
+        <a class="back-top glyphicon glyphicon-triangle-top visible-lg" back-top href="javascript:void(0)"></a>
+    </div>
+    <!--end footer-->
+
+</div>  <!--end app-main-->
+
 
 
   <script src="less/less.js"></script>
+  <script src="http://api.map.baidu.com/api?v=1.5&ak=uRQK0TQ85K4IZUKzFqLsiLz7"></script>
   <script src="lib/framework/new/jquery.js"></script>
   <script src="lib/framework/new/angular.js"></script>
   <script src="lib/framework/new/angular-animate.js"></script>
   <script src="lib/framework/new/angular-resource.js"></script>
   <script src="lib/framework/new/angular-route.js"></script>
+
   <!--<script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>-->
   <script src="script/app.js"></script>
   <script src="script/animations.js"></script>

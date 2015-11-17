@@ -1,0 +1,150 @@
+.contact{
+  .col-md-8{
+     padding-left: 0;
+     padding-right: 20px;
+  }
+  .contact-top{
+    .topOne();
+  }
+  .contact-caption{
+    .captionOne();
+    margin-top: @p10*2 + 5;
+  }
+
+  .contact-map{
+
+    .map-box{
+      width: 100%;
+      min-width: 100%;
+      overflow: hidden;
+      background-color: @gray-lighter;
+      height:400px;
+      min-height:350px;
+      .border(1px,solid,@gray-lighter);
+    }
+    .anchorBL{
+      display:none;
+    }
+  }  // end map
+.main-form{
+  .contact-form{
+    .clearfix();
+     input,textarea{
+       background-color: @gray-lighter;
+       padding: @p10;
+       border: none;
+       display: block;
+       font-size:@font-size-base;
+       line-height: 1.42857;
+       width: 100%;
+     }
+     .f-top{
+       .col-md-4{
+         width: 31.3333%;
+         margin-right:3%;
+         &:last-child{
+           margin-right:0;
+         }
+       } //end .col-md-4
+       input{
+          margin-bottom:@p10 * 2;
+       }
+     }
+     .f-bottom{
+       textarea{
+        max-width: 100%;
+        min-width: 100%;
+       }
+     }
+    .success-send,.error-send{
+      @h:35px;
+      height:@h;
+      overflow: hidden;
+      line-height:@h;
+      width: 100%;
+      color: #fff;
+      text-align: center;
+    }
+    .success-send{
+      background: @brand-success;
+    }
+    .error-send{
+      background: @brand-danger;
+    }
+    button{
+      @h:40px;
+      height:@h;
+      float: right;
+      border: none;
+      padding-left: @p10*3;
+      padding-right: @p10*3;
+      .transition(background,0.3s,ease-out);
+      &:hover,&:active{
+        background-color: @back-color;
+      }
+    }
+  } // end contact-form
+  // 媒体响应区域
+  @media (max-width:992px){
+    &{
+      padding-right: 0;
+      .contact-form{
+        .f-top{
+          .col-md-4{
+            width: 100%;
+            margin-right: 0;
+            input{
+              padding-top: @p10+5;
+              padding-bottom: @p10+5;
+            }
+          }
+        }
+        button{
+          width: 100%;
+          height: 55px;
+        }
+      }
+    }
+  }//end media
+ }//end main-form
+  .main-contact{
+    .contact-box{
+      .contact-list{
+         li{
+           @h:66px;
+           width: 100%;
+           .clearfix;
+           span{
+             display:block;
+             float: left;
+             color: @back-color;
+             height:@h;
+             line-height: @h;
+           }
+           .glyphicon{
+             top:0;
+             cursor: pointer;
+             width: 20%;
+             background: @fore-color;
+             font-size:@font-size-large;
+             color:@gray-lighter;
+             text-align: center;
+           }
+           .list-info{
+             .text-overflow();
+             width: 80%;
+             padding-left:8%;
+             padding-right:8%;
+             text-align:left;
+             background-color: @back-color;
+             color: #fff;
+           }
+           &:hover .glyphicon,&:active .glyphicon{
+             .transition(background,0.3s,linear);
+             background-color: @back-color;
+           }
+         }
+      }
+    }
+  }
+} // end contact

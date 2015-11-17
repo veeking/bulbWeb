@@ -103,6 +103,7 @@ bulbService.factory('ResManage',function(){
         },
         itemLoaded:function(){
             this.loadedCount++;
+            console.log('图片已加载'+this.loadedCount)
             if(this.loadedCount === this.totalCount){
                this.loaded = true;
                console.log('所有图片加载完成')
@@ -119,7 +120,34 @@ bulbService.factory('ResManage',function(){
         }
      };
 });
-
+bulbService.factory('angularMap',function(){
+    var defaultPos,map,mapBox;
+    function initMap(mapId,pos){
+        mapBox = mapId;
+        getMap();
+        setDefaultPos(pos);
+        addMarker();
+    }
+    function setDefaultPos(pos){
+        defaultPos = new BMap.Point(pos.lng,pos.lat);
+        map.centerAndZoom(defaultPos,18);
+    }
+    function getMap(){
+        if(!map){
+         map = new BMap.Map(mapBox);
+        }
+        return map;
+    }
+    function addMarker(){
+        var marker = new BMap.Marker(defaultPos);
+        map.addControl(new BMap.NavigationControl());
+        map.addOverlay(marker);
+        marker.setAnimation(BMAP_ANIMATION_BOUNCE);
+    }
+    return{
+      initMap:initMap
+    }
+});
 
 
 

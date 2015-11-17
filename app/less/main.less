@@ -1,59 +1,96 @@
 @import "bootstrapLess/bootstrap.less";
 @import "common.less"; //多页面共用模块
-
+@import "sidebar.less";
+@import "news.less";
+@import "product.less";
+@import "about.less";
+@import "contact.less";
+body,html{
+  font-family:"Arial";
+}
 //开始!!!
 //移动导航
-.nav-mobile{
-  @navH:100px;
-  @navW:118px;
-  z-index:200;
+@navH:100px;
+@navW:118px;
+.app-main{
+  background: #fff;
+  bottom: 0;
+  left: 0;
   position: absolute;
   right: 0;
-  //  transform:translateX(@navW);
-  top: 6px;
-  .transition(all,0.4s,ease-out);
-  .clearfix();
-  &.showNav{
+  top: 0;
+  width: 100%;
+  height:100%;
+  .transition(transform,300ms,ease-out);
+  -moz-transform:translate3d(0,0,0);
+  -webkit-transform:translate3d(0,0,0);
+  transform:translate3d(0,0,0);
+  z-index:201;
+  .nav-mobile-btn{
+    position: absolute;
     right:0;
-    //    transform:translateX(0px);
-    //    -webkit-transform:translateX(0px);
-  }
-  button.nav-mobile-btn{
+    top:6px;
+    z-index:1000;
     display: block;
-    border: 1px solid @gray-dark;
     font-size: @font-size-h1;
-    &:active{
+    background:@gray-dark;
+    text-align: center;
+    border:none;
+    color: @my-font-color;
+    height: @navH;
+    line-height:@navH;
+    width:@navW;
+    &:hover,&:active{
       color:#fff;
       background-color: @fore-color;
     }
   }
-  button.nav-mobile-btn,ul.nav-mobile-menu{
-    float: left;
+  &.showNav{
+    -webkit-transform:translate3d(-@navW,0,0);
+    -moz-transform:translate3d(-@navW,0,0);
+    transform:translate3d(-@navW,0,0);
+    overflow:hidden;
   }
-  button.nav-mobile-btn,ul.nav-mobile-menu li a{
-    background:@back-color;
+}
+.nav-mobile{
+  z-index:200;
+  position: absolute;
+  right: 0;
+  top: 0;
+  ul.nav-mobile-menu li a{
+    background:@gray-dark;
     text-align: center;
     display: block;
     color: @my-font-color;
     height: @navH;
     line-height: @navH;
-    padding-left: @p10 * 3;
-    padding-right: @p10 * 3;
+    width:100%;
   }
   ul.nav-mobile-menu{
     li{
-      .transition(all,0.3s,ease-out);
+      width:@navW;
+      .transition(border,0.3s,linear);
       .border(1px,solid,@gray-darker);
       &:hover{
         .border(right,8px,solid,@fore-color);
       }
+      &:hover a{
+        background:@fore-color;
+      }
       &.activeNav{
         .border(right,8px,solid,@fore-color);
+      }
+      &.activeNav a{
+        background:@fore-color;
+      }
+      &:first-child{
+        .border(top,6px,solid,@fore-color);
       }
     }
   }
 } // end nav-mobile
- .hide-animate(){
+
+ .hideAnimate-opacity(){
     &.ng-hide-add{
        opacity: 1;
     }
@@ -73,7 +110,7 @@
   margin-top:@p10 * 2;
   vertical-align: middle;
   .transition(opacity,0.4s,ease-out);
-  .hide-animate();
+  .hideAnimate-opacity();
   img{
     display: block;
     width: 100%;
@@ -86,7 +123,7 @@
   .border(top,6px,solid,@fore-color);
   padding-top:@p30;
   padding-bottom:@p30;
-  background:#2B2B2B;
+  background:@back-color;
   color:@white-color;
   .head-inner{
     padding-top:@p30 - 10;
@@ -101,6 +138,10 @@
           font-size:72px;
           text-decoration: none;
           color:@white-color;
+          b{
+            font-weight:normal;
+            color: @fore-color;
+          }
         }
         span{
           font-size:@font-size-base;
@@ -129,6 +170,12 @@
           border: none;
           color:@white-color;
           text-shadow:0 1px 0px rgba(0,0,0,0.2);
+          &.btn-default{
+            background-color: @gray-dark;
+            &:hover,&:active{
+              background-color: @gray-darker;
+            }
+          }
           span.glyphicon{
             margin-right:@p10;
           }
@@ -139,6 +186,7 @@
 } // end head
 
 .main{
+  background:#fff;
   .main-top {
     @h: 30px;
     .nav {
@@ -151,9 +199,9 @@
           position: relative;
           &:first-child{
             background-color: @fore-color;
-          }
-          &.navActive {
-            color: @gray-base;
+            a.navItemLink{
+              color:#fff;
+            }
           }
           & a.navItemLink:hover {
             color: @gray-base;
@@ -352,8 +400,6 @@
           cursor: pointer;
           .loadingImg();
           img{
-            display: block;
-            height:100%;
             width: 100%;
           }
         }
@@ -367,18 +413,13 @@
           color:@gray-light;
           font-weight:bold;
         }
-        div.cont-txt,div.cont-txt-main{
+        .cont-txt,.cont-txt-main{
           width:100%;
           line-height:2;
           margin-top:25px;
         }
-        button{
+        .cont-more{
           margin-top:@p10 - 2;
-          font-size:@font-size-large;
-          padding-left: @p10*2 + 5;
-          padding-right: @p10*2+ 5;
-          padding-top: @p10 - 5;
-          padding-bottom: @p10 - 5;
         }
       } // end col-md-4
     }
@@ -530,14 +571,22 @@
             font-size:@font-size-small;
             letter-spacing:1px;
             line-height:2;
+            .border(bottom,3px,dotted,@gray-lighter);
+            padding-bottom: @p10 + 5;
           }
-          button{
-            .new-btn();
-            display:block;
-            &:hover{
-              background:@fore-color;
+          .read-more{
+            margin-top: -2px;
+            a{
+              float: right;
+              width: 50px;
+              span{
+                width: 100%;
+                &:hover,&:active{
+                  background:@back-color;
+                }
+              }
             }
-          }
+          } // end read-more
         } // end point-cont-item
       }
     }
@@ -563,6 +612,7 @@
 
 
         .news-cont-txt {
+          margin-bottom:@p10*2;
           span{
             line-height: 1.5;
             white-space:nowrap;
@@ -594,7 +644,7 @@
       } // end new-cont
     } // end other-news
   }  // end main-other
-  .other-list{
+  .other-list{  //  与搜索页共用
     width: 23%;
     overflow: hidden;
     .list{
@@ -605,7 +655,7 @@
         li{
           margin-bottom:@p10*2;
           .clearfix();
-          span.listIcon{
+          .listIcon{
             display: block;
             padding-left:@p10 - 5;
             padding-right:@p10 - 5;
@@ -628,6 +678,14 @@
               color: @fore-color;
             }
           }
+          @media(max-width: 992px){
+            &:hover,&:active{
+              background: @fore-color;
+            }
+            &:hover a,&:active a{
+              color:#fff;
+            }
+          } //end media 992px
         }
       }
     }

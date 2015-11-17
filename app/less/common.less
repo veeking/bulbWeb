@@ -71,44 +71,113 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
   font-weight:bold;
   margin-top:@p10 + 2;
 }
+.read-more{
+  a{
+   @h:36px;
+   display: block;
+   height: @h;
+   color: #fff;
+   width:150px;
+    .clearfix();
+    span{
+      float: left;
+      display: block;
+      text-align: center;
+      height: 100%;
+      line-height: @h;
+      .transition(background-color,0.3s,linear);
+    }
+    .read-more-txt{
+      background-color:@back-color;
+      width: 70%;
+    }
+    .glyphicon{
+      width:30%;
+      background-color: @fore-color;
+      top: 0;
+    }
+    &:hover .read-more-txt,&:active .read-more-txt{
+      background-color: @fore-color;
+    }
+  }
+}  // end read-more
 // 因为是共用的 所以前面归类为 commonVar.less 单独文件 @import引入即可);
+
+//公共标题类别1
+.topOne(){
+  border-left:10px solid @fore-color;
+  margin-bottom:@p10*3 + 5;
+  margin-top:@p10*3;
+  h3{
+    margin: 0;
+    padding-left: @p10*2;
+    padding-top: @p10;
+    padding-bottom: @p10;
+    color: @back-color;
+    border-bottom: 2px solid @gray-lighter;
+  }
+}
+
+.captionOne(){
+  position: relative;
+  height: 30px;
+  margin-bottom: @p10 + 5;
+  .clearfix();
+  .caption-text{
+    position: absolute;
+    z-index:9;
+    background-color: #fff;
+    color: @back-color;
+    font-size:@font-size-large + 2;
+    font-weight: lighter;
+    padding-right: @p10*2;
+  }
+  .caption-line{
+    position:absolute;
+    top: 12px;
+    height: 5px;
+    width: 100%;
+    border-bottom: 5px solid @gray-lighter;
+    background-color: #fff;
+  }
+};
 
 
 
 //公共组件块 样式区域
 
 //分页
-.page{
-  ul {
-    .clearfix();
-    li {
-      display: inline;
-      a{
-        text-align: center;
-        background: @back-color;
-        color: #fff;
-        float: left;
-        line-height: 1.42857;
-        padding-left:@p10*2;
-        padding-right:@p10*2;
-        padding-top:@p10;
-        padding-bottom:@p10;
-        position: relative;
-        margin-right:2%;
-        &:active{
-          background:@fore-color;
-        }
-        &.pageActive {
-          background:@fore-color;
-        }
-      }
-    }
-  }
-}
+//.page{
+//  ul {
+//    .clearfix();
+//    li {
+//      display: inline;
+//      a{
+//        text-align: center;
+//        background: @back-color;
+//        color: #fff;
+//        float: left;
+//        line-height: 1.42857;
+//        padding-left:@p10*2;
+//        padding-right:@p10*2;
+//        padding-top:@p10;
+//        padding-bottom:@p10;
+//        position: relative;
+//        margin-right:2%;
+//        &:active{
+//          background:@fore-color;
+//        }
+//        &.pageActive {
+//          background:@fore-color;
+//        }
+//      }
+//    }
+//  }
+//}
 
 
 //expand
-.expandTop(@h:50px,@fontSize:@font-size-base){
+.expandTop(@h:50px,@contSize:@font-size-base,@titleSize:@font-size-h4,@topBg:@back-color){
   .expand-top{
     color: #fff;
     .clearfix();
@@ -120,8 +189,9 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
     }
     h4{
       width: 92%;
+      font-size:@titleSize;
       padding-left:@p10 + 5;
-      background: @back-color;
+      background: @topBg;
       margin-top:0;
       margin-bottom:0;
       letter-spacing: 1px;
@@ -131,7 +201,7 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
       background:@gray;
       width: 8%;
       text-align: center;
-      font-size:@fontSize;
+      font-size:@contSize;
       &:hover,&:active{
         background: @fore-color;
       }
@@ -150,7 +220,10 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
       }
     }
   }// end mobile expand-top
-
+  .expand-content{
+    .transition(height,0.3s,linear);
+    overflow: hidden;
+  }
 }
 
 

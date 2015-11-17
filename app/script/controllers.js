@@ -2,12 +2,13 @@
 // controller
 
 var bulbCtrl = angular.module('bulbCtrl',[]);
-bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,ReqLoader,Pager){
-    $scope.moveCurrent = 0;
+bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,BulbReq,ReqLoader,Pager){
+    $scope.moveCurrent = -1;
     $scope.moveSelect = function(index){ // 移动导航
         $scope.moveCurrent = index;
         $scope.showNav = false; //  每次点击导航后 导航栏隐藏
     };
+
     $scope.newsType = [  // 新闻分类数据  与news文件夹文件名和数量耦合
         {
             "navName":"新闻分类1",
@@ -56,10 +57,10 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
 
     $scope.navMenus = [
         {"navIdv":1,"navName":"首 页","navUrl":"/","navChild":[]},
-        {"navId":2,"navName":"概 况","navUrl":"intro","navChild":[]},
+        {"navId":2,"navName":"简 介","navUrl":"about","navChild":[]},
         {"navId":3,"navName":"资 讯","navUrl":"news","navChild":$scope.newsType},
         {"navId":4,"navName":"产 品","navUrl":"products","navChild":$scope.productsType},
-        {"navId":5,"navName":"关于我们","navUrl":"about","navChild":[]}
+        {"navId":5,"navName":"联系我们","navUrl":"contact","navChild":[]}
     ];
    //数据依赖说明
     // [searchOption搜索数据依赖 分类数据和列表数据]
@@ -93,7 +94,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
            showTypeData:productsType
          }
       ];
-//        localStorage.clear();
+      localStorage.clear();
       function _startSearch(options){   // 执行搜索 :1、获取数据  2、匹配数据
            $scope.loaded = false; // 加载中图标
            options.map(function(option,index){
@@ -108,10 +109,10 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
                     });
                 }else{
                     console.log("有缓存")
-                    $timeout(function(){  // 模拟加载
+//                    $timeout(function(){  // 模拟加载
                         cacheData = JSON.parse(cacheData);
                         _matchData(option,cacheData,index);
-                    },1000)
+//                    },1000)
                 }
             })
       };// END _startSearch();
@@ -180,7 +181,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
 
 
         var promises = dataType.map(function(eachData){  // 循环处理
-          return ReqLoader.get({type:type,typeData:eachData.navType}).$promise;
+          return BulbReq.get({type:type,typeData:eachData.navType}).$promise;
         });  // 单个返回$promise对象以便于all处理 ，不写$promise的话返回的是整个$resource资源 无法获取到正确的数据
         return $q.all(promises);
       }; // end getData
@@ -315,29 +316,69 @@ bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
     $scope.pItems = [
         {
             "img":"img/index-product/p1.jpg",
-            "txt":"玄关过道"
+            "txt":"玄关过道",
+            "url":"#/products/p1?page=1"
         },
         {
             "img":"img/index-product/p2.jpg",
-            "txt":"厨房"
+            "txt":"厨房",
+            "url":"#/products/p2?page=1"
         },
         {
             "img":"img/index-product/p3.jpg",
-            "txt":"卧室"
+            "txt":"卧室",
+            "url":"#/products/p3?page=1"
         },
         {
             "img":"img/index-product/p4.jpg",
-            "txt":"客厅"
+            "txt":"客厅",
+            "url":"#/products/p4?page=1"
         },
         {
             "img":"img/index-product/p5.jpg",
-            "txt":"餐厅"
+            "txt":"餐厅",
+            "url":"#/products/p5?page=1"
         }
     ]
 
 });  // end controller
-bulbCtrl.controller('bulbIntroCtrl',function($scope){
-
+bulbCtrl.controller('bulbAboutCtrl',function($scope){
+        $scope.aboutInfos = [
+            {
+              title:"企业文化",
+              content:"企业文化是企业传承和发展的基因。今天我们正面临愈加激烈的全球化竞争，企业不仅要在技术、产品、市场、资本等方面展开竞争，更要形成有竞争力的人文优势，不断的通过吸收与融合，使组织进行系统的提升和修正，以适应更加复杂多变的竞争环境并获得持续的发展空间。bulb倡导具有的包容性和开放性的企业文化，强调团队协作，同时激励创新。"
+            },
+            {
+                title:"技术实力",
+                content:"bulb照明专注于LED应用领域关键技术研发，独步创新多项专利技术，打造符合国际水准的高效LED照明系列产品，已实现多项业界领先核心技术突破，拥有最先进的关键LED照明专利技术,目前已申请20余项专利，在灯具结构、散热系统、发光角度等方面均实现行业领先。"
+            },
+            {
+                title:"品牌理念",
+                content:"光环境专家”是bulb的品牌核心理念，bulb以专业、专注的精神，为客户创造优美、舒适、安全、节能的光环境，为客户提供优质的照明应用解决方案，并以已之力，推动照明产业健康、快速的向前发展。持续、有效的品牌推广不断积累和提高bulb的品牌价值，bulb品牌被社会各界广泛认知、认同和喜爱，在国际国内各大专业展会上。bulb的高端品牌形象，吸引了行业以及社会各界的目光。"
+            },
+            {
+                title:"生产基地",
+                content:"强大的生产制造能力是bulb的核心竞争优势，产品丰富、品类齐全、规模庞大的bulb制造体系形成，支撑bulb的产业扩张和市场拓展。广东惠州bulb工业园、重庆万州bulb工业园、浙江江山基地和上海青浦基地相继投入使用，bulb照明完成在全国的战略布局。"
+            }
+        ];
+    $scope.aboutPrimarys= [
+        {
+           name:"LED",
+           count:80
+        },
+        {
+            name:"室内灯泡",
+            count:90
+        },
+        {
+            name:"室外灯泡",
+            count:85
+        },
+        {
+            name:"照明电器",
+            count:70
+        }
+    ]
 });
 bulbCtrl.controller('bulbNewsCtrl',function($scope,ResManage){
     var typeImgOpt = {
@@ -387,15 +428,11 @@ bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,newsData,Pag
             return false;
         }
     });
-//    $scope.newsTypeUrl = newsType;
     $scope.Pages = Pager(newsData,2); // 分页数据
     $scope.newLists = $scope.Pages.pageDataTemp; // 列表数据
 });
 bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,newsData){
           $scope.newDetails = newsData[$routeParams.id - 1];
-//          if($scope.newDetails.content){
-//              $scope.content = $scope.newDetails.content;
-//          }
 });
 
 //产品
@@ -425,4 +462,29 @@ bulbCtrl.controller('bulbProductsDetailCtrl',function($scope,$routeParams,produc
         $scope.setImage = function(img) {
               $scope.mainImg = img;
         };
+});
+
+bulbCtrl.controller('bulbContactCtrl',function($scope,$timeout,$http){
+    $scope.sendStatus = {
+          success : false,
+          error : false,
+          disOn:false,
+      }
+
+    $scope.sendMsg = function(){
+          $scope.sendStatus.disOn = true;
+          $http.post('/sendMessage',$scope.contactForm).success(function(msg){
+              $scope.sendStatus.success = true;
+              $scope.sendStatus.disOn = false;
+              console.log(msg)
+          }).error(function(errData){
+              $scope.sendStatus.error = true;
+              $scope.sendStatus.disOn = false;
+              $scope.errMsg = errData;
+          });
+          $timeout(function(){
+            $scope.sendStatus.success = false;
+            $scope.sendStatus.error = false;
+          },800);
+      }
 });

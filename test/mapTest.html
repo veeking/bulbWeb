@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #mapBox{
+            height: 300px;
+            width:100%;
+        }
+    </style>
+</head>
+<body>
+<div id="mapBox"></div>
+<script src="../app/lib/framework/jquery-1.9.1.js"></script>
+<script>
+    var om = document.getElementById('mapBox');
+    var sPath = 'http://api.map.baidu.com/api?v=1.5&ak=uRQK0TQ85K4IZUKzFqLsiLz7&callback=hello';
+    $.getScript(sPath);
+    function hello(){
+        alert(1)
+    }
+
+
+</script>
+</body>
+</html>

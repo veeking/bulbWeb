@@ -1,0 +1,61 @@
+
+ <div class="about">
+      <div class="about-top row">
+          <h3>关于企业</h3>
+      </div>
+      <div class="about-intro row">
+         <div class="intro-img col-md-6">
+             <img src="img/about/about.jpg" alt="关于我们图片说明"/>
+         </div>
+
+         <div class="intro-txt col-md-6">
+
+             <div class="about-caption row">
+                 <div class="caption-text">企业简介</div>
+                 <div class="caption-line"></div>
+             </div> <!--end about-caption-->
+
+             <div class="txt-info">
+                <p>
+                  bulb照明股份有限公司成立于2015年的bulb照明，以“提供照明系统解决方案，改善人类生活品质和生存环境”为使命，以“勇担责任，持续创新，做照明系统解决方案的领导者”为愿景，是一家专业照明的公司，以商业照明为核心，辅以家居灯饰、户外照明等LED照明产品，以核心产品带动发展，打造全面、优质的LED照明产品线。产品主要包括：LED光源、家居灯、射灯、筒灯及智能控制系统等。
+                </p>
+                 <p>
+                   围绕“智在应用”的品牌核心策略定位，搭建“光智慧应用体系”服务平台，在产品设计、产品制造、业务客服、照明设计、哥弟等服装连锁，、佛山万科园等精装地产的照明领域提供系统照明服务，并为市政办公楼、银行、医院、学校、金融、娱乐场所等众多场所提供专业的照明系统解决方案。
+                 </p>
+             </div>
+         </div>
+      </div> <!--end about-intro-->
+    <div class="about-other row">
+        <div class="other-intro col-md-6">
+
+            <div class="about-caption row">
+                <div class="caption-text">企业概况</div>
+                <div class="caption-line"></div>
+            </div>
+
+            <accordion class="intro-expand">
+                <expander ng-repeat="aboutInfo in aboutInfos"
+                          expander-title="aboutInfo.title">
+
+                     <div class="content-info">
+                        <p>{{aboutInfo.content}}</p>
+                     </div>
+
+                </expander>
+            </accordion>
+        </div> <!--end other-intro -->
+        <div class="other-primary col-md-6">
+            <div class="about-caption row">
+                <div class="caption-text">主打产品</div>
+                <div class="caption-line"></div>
+            </div> <!--end caption-->
+          <div class="primary-box">
+              <div class="primary-item" ng-repeat="aboutPrimary in aboutPrimarys">
+                  <span class="primary-item-title">{{aboutPrimary.name}} {{aboutPrimary.count}}%</span>
+                  <div class="primary-item-content" ng-style="{'width':{{aboutPrimary.count}} + '%'}"></div>
+              </div>
+          </div> <!--end primary-box-->
+        </div><!--end other-primary -->
+    </div>
+
+ </div>

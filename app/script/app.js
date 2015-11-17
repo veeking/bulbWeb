@@ -9,9 +9,13 @@ bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpPr
         templateUrl:'views/index.html',  // 相对于main的位置
         controller:'bulbIndexCtrl'
       }).
-      when('/intro',{
-        templateUrl : 'views/intro/intro.html',
-        controller:'bulbIntroCtrl'
+      when('/about',{
+        templateUrl : 'views/about/about.html',
+        controller:'bulbAboutCtrl'
+      }).
+      when('/contact',{
+        templateUrl : 'views/contact/contact.html',
+        controller:'bulbContactCtrl'
       }).
       when('/news',{
          templateUrl : 'views/news/news-type.html',
