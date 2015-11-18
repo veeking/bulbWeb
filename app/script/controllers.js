@@ -488,3 +488,11 @@ bulbCtrl.controller('bulbContactCtrl',function($scope,$timeout,$http){
           },800);
       }
 });
+//
+bulbCtrl.controller('bulbMessageCtrl',function($scope,loadMsg){
+    loadMsg().then(function(msgData){
+         $scope.msgs = msgData;
+    },function(errData){
+         $scope.msgErrData = errData;
+    });
+});

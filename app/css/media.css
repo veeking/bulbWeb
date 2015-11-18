@@ -44,7 +44,7 @@
          /*设置最大高度  让超出此高度的元素隐藏*/
     }
     .main .main-info .info-cont .col-md-4 div.cont-txt-main{
-       max-height:80px;
+       max-height:120px;
     }
 }
 @media (min-width: 768px) and (max-width: 992px) {
@@ -61,18 +61,18 @@
 /*main -> 产品推荐 item*/
 @media(max-width: 992px){
   .main .main-productItem .productItem-cont .p-item-box .p-item.firstItem{
-         width: 100%;
+      height:450px;
+      width: 100%;
   }
   .main .main-productItem .productItem-cont .p-item-box .p-item{
          /*按照-0.6的边距来算  99.4%*/
+      height:200px;
       width:49.7%;
   }
-    .main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(1){
-        width:34.5%;
-    }
-    .main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(2){
-        width:64.9%;
-    }
+  .main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(1),.main .main-productItem .productItem-cont .p-item-box .p-item:nth-last-child(2){
+      width:49.7%;
+  }
+
 
     .main .main-productItem .productItem-cont .p-item-box .p-item:nth-child(even){
         margin-left: 0;

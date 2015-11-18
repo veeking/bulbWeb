@@ -1,0 +1,71 @@
+<style>
+   .message-item{
+       margin-bottom: 10px;
+   }
+   .msg-top-item{
+       border: 1px solid #EEEEEE;
+   }
+    .msg-top-item div{
+        display: inline-block;
+        height:40px;
+        line-height: 40px;
+        color: #fff;
+        text-align: center;
+    }
+    .m-left{
+        width: 20%;
+        background:#2995CC;
+    }
+   .m-right{
+       width: 78.5%;
+       background:#414146;
+   }
+    .msg-cont-box{
+    }
+    .msg-cont{
+        padding: 20px;
+        background: #EEEEEE;
+    }
+</style>
+  <div class="liveMessage">
+        <h2>留言列表</h2>
+        <div class="message-item" ng-repeat="msg in msgs">
+            <div class="alert alert-warning" ng-hide="msgs.length > 0">
+                目前没有留言,{{msgErrData}}
+            </div>
+            <h3>
+                {{$index+1}}
+            </h3>
+            <div class="row  msg-top">
+                <div class="col-md-4 msg-top-item">
+                    <div class="m-left">
+                        姓名:
+                    </div>
+                    <div class="m-right">
+                        {{msg.name}}
+                    </div>
+                </div>
+                <div class="col-md-4 msg-top-item">
+                    <div class="m-left">
+                        联系:
+                    </div>
+                    <div class="m-right">
+                        {{msg.email}}
+                    </div>
+                </div>
+                <div class="col-md-4 msg-top-item">
+                    <div class="m-left">
+                        其它:
+                    </div>
+                    <div class="m-right">
+                        {{msg.other}}
+                    </div>
+                </div>
+            </div>
+            <div class="row msg-cont-box">
+                <div class="col-md-12 msg-cont">
+                    {{msg.message}}
+                </div>
+            </div>
+        </div>
+  </div>

@@ -40,8 +40,12 @@ function writeFile(filePath,writeData){
 }
 function readFile(filePath){
    var defer = Q.defer();
-   fs.readFile(filePath,function(err,data){
-      if(err) throw err;
+   fs.readFile(filePath,'utf-8',function(err,data){
+      if(err){
+         defer.reject(errMsg);
+         throw err;
+      }
+       console.log(data)
        defer.resolve(data);
    });
     return defer.promise;
@@ -54,10 +58,16 @@ function hasInArray(item,arr){
     }
     return false;
 }
+app.get('/getMessage',function(req,res){
+    readFile(filePath).then(function(data){
+        res.send(data);
+    },function(errMsg){
+        res.end(errMsg);
+    })
+})
 app.post('/sendMessage',function(req,res){
     if(liveMsgBox.length > 0){
         if(!hasInArray(req.body,liveMsgBox)){
-            console.log('不重复')
             liveMsgBox.push(req.body);
         }else{
             var repeatErr = new Error();

@@ -65,6 +65,23 @@ bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpPr
               templateUrl : 'views/search/search.html',
               controller:'bulbSearchCtrl'
       }).
+      when('/message',{
+              templateUrl : 'views/message/message.html',
+              controller:'bulbMessageCtrl',
+              resolve:{
+                  loadMsg:function($q,$http){
+                    return function(){
+                      var defer = $q.defer();
+                      $http.get('/getMessage').success(function(data){
+                          defer.resolve(data);
+                      },function(err){
+                          defer.reject(err);
+                      })
+                      return defer.promise;
+                    }
+                  } // end loadMsg
+              }
+      }).
       otherwise({
         redirectTo: '/'
      });
