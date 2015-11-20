@@ -2,7 +2,7 @@
 // controller
 
 var bulbCtrl = angular.module('bulbCtrl',[]);
-bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$routeParams,$timeout,$q,BulbReq,ReqLoader,Pager){
+bulbCtrl.controller('bulbMainCtrl',function($scope,$location,$timeout,$q,Pager,GetData){
     $scope.moveCurrent = -1;
     $scope.moveSelect = function(index){ // 移动导航
         $scope.moveCurrent = index;
@@ -68,8 +68,6 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
     // 列表数据 无依赖
      //搜索
     $scope.tabs = [];
-    var oldWord = null;
-    var cache = $cacheFactory('cache');
     $scope.hotWords = ["LED","新闻","产品","家居产品","传统灯光","服务","照明方案","新型灯泡"]; // 默认列表
     $scope.search = function(){
       if($scope.searchWord ==" ") return false;
@@ -77,6 +75,7 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
          $scope.searchWord = arguments[0];
       };
       var keyWord = $scope.searchWord;
+      var oldWord = null;
       $location.path('search').search({'word':keyWord});
 
       var newsType = $scope.newsType;
@@ -99,16 +98,16 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
            $scope.loaded = false; // 加载中图标
            options.map(function(option,index){
                 //缓存  还是推荐用localStorge吧  $cacheFactory不建议存储大容量的内容
-                var cacheData = localStorage.getItem('searchData'+index);
+                var cacheData = localStorage.getItem('searchData_'+option.showType);
                 if(!cacheData){
-                    console.log('没缓存')
-                    getData(option.showType,option.showTypeData).then(function(singleFile){
+                    console.log('搜索数据没缓存')
+                    GetData.getAllData(option.showType,option.showTypeData).then(function(singleFile){
                         var stringData = JSON.stringify(singleFile);  //
-                        localStorage.setItem('searchData'+index,stringData); // 0,1分别对应像一个的新闻和产品缓存
+                        localStorage.setItem('searchData_'+option.showType,stringData); // 0,1分别对应像一个的新闻和产品缓存
                         _matchData(option,singleFile,index)
                     });
                 }else{
-                    console.log("有缓存")
+                    console.log("搜索数据有缓存")
 //                    $timeout(function(){  // 模拟加载
                         cacheData = JSON.parse(cacheData);
                         _matchData(option,cacheData,index);
@@ -164,8 +163,8 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
           }
 
 
-          if($scope.tabs.length < (posIndex+1)){  // 第一次时推入
-              $scope.tabs.push(tmpTab);  // 为空时
+          if($scope.tabs.length < (posIndex+1)){  // 第一次为空时推入
+              $scope.tabs.push(tmpTab);
           }else{  // 如果已存在 则更新替换
               $scope.tabs.splice(posIndex,1,tmpTab)
           }
@@ -173,18 +172,6 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
 
      }// end _match
 
-      function getData(type,dataType){
-         if(Object.prototype.toString.call(dataType) != "[object Array]"){
-             alert("参数类型错误");
-             return false;
-         };
-
-
-        var promises = dataType.map(function(eachData){  // 循环处理
-          return BulbReq.get({type:type,typeData:eachData.navType}).$promise;
-        });  // 单个返回$promise对象以便于all处理 ，不写$promise的话返回的是整个$resource资源 无法获取到正确的数据
-        return $q.all(promises);
-      }; // end getData
 
 
         if(keyWord !== oldWord){  // 新旧对比 如果关键词不变 则按原样子 不执行搜索
@@ -194,7 +181,6 @@ bulbCtrl.controller('bulbMainCtrl',function($scope,$cacheFactory,$location,$rout
             $scope.hotWords.splice(0,0,$scope.searchWord); // 没重复值 插入
             $scope.hotWords.splice($scope.hotWords.length-1,1); // 去掉末尾项
         };
-        console.log( $scope.hotWords)
         oldWord = keyWord; // 更新旧关键词
     } // end $scope.search
     function hasInArray(word,item){  // 判断是否存在某数是否存在某数组中
@@ -217,20 +203,59 @@ bulbCtrl.controller('bulbSearchCtrl',function($scope,$location,$routeParams){
 });
 
 //首页index区域
-bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
-    $scope.slides = [
-        {
-            "src":"img/slide-1.jpg",
-            "txt":"图片说明测试1"
-        },
-        {
-            "src":"img/slide-2.jpg",
-            "txt":"图片说明测试2"
-        },{
-            "src":"img/slide-3.jpg",
-            "txt":"图片说明测试3"
-        }
-    ];
+bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout,GetData){
+    var bigType = 'news';
+    var twoType;
+    var loadCache = localStorage.getItem('searchData_'+ bigType);
+    var indexHotData = [];
+    var indexOtherData = [];
+    var indexSlideData = [];
+    var preUrl;
+
+    localStorage.clear();
+    if(!loadCache){
+        console.log('首页数据无缓存');
+        GetData.getAllData(bigType,$scope.newsType).then(function(singleDirData){
+           var stringData = JSON.stringify(singleDirData);
+           localStorage.setItem('searchData_'+bigType,stringData);
+           _setIndexData(singleDirData);
+        });
+    }else {
+        console.log('首页数据有缓存');
+        loadCache = JSON.parse(loadCache);
+        _setIndexData(loadCache);
+//        console.log(loadCache);
+    } // end loadCahe
+
+
+    function _setIndexData(dirData){
+        dirData.forEach(function(singleFileData,dIndex){
+            twoType = $scope.newsType[dIndex].navType;
+            preUrl = "#/" + bigType + "/" + twoType + "/";
+            indexOtherData.push({content:singleFileData[0].content});
+            indexSlideData.push(
+                {
+                    src:singleFileData[0].imgCollect[0],
+                    txt:singleFileData[0].title,
+                    url:preUrl + singleFileData[0].id
+                });
+            singleFileData.forEach(function(eacheData,sIndex){
+                if(dIndex == 0){
+                    var url = preUrl + eacheData.id;
+                    indexHotData.push({
+                       title:eacheData.title,
+                       url:url
+                    })
+                }
+            })// end singleFileData for
+
+        }); // end dirData for
+
+        $scope.otherNews = indexOtherData;
+        $scope.hotNews = indexHotData;
+        $scope.slides = indexSlideData;
+    } //end setIndexData
+
     $scope.infoConts = [
         {
             "src":"img/info/i1.jpg",
@@ -273,71 +298,31 @@ bulbCtrl.controller('bulbIndexCtrl',function($scope,$timeout){
         }
     ];
 
-
-    $scope.otherNews = [
-        {
-            "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息1"
-        },
-        {
-            "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息2"
-        },
-        {
-            "content":"灯体是金属漆加烤漆喷涂,外观上精致简约,设计细腻,流畅线条勾勒出灯泡的质感,富有时尚的科技气息3"
-        }
-    ]
-
-    $scope.hotNews = [
-        {
-            "name":"飞利浦灯泡1"
-        },
-        {
-            "name":"飞利浦漆漆灯泡1"
-        },
-        {
-            "name":"飞利浦漆漆加烤漆灯泡1"
-        },
-        {
-            "name":"加烤漆灯泡灯泡1"
-        },
-        {
-            "name":"飞利飞利浦漆漆加烤漆灯的绯闻绯闻二个人个人泡泡1"
-        },
-        {
-            "name":"利浦漆漆加烤漆灯泡灯泡1"
-        },
-        {
-            "name":"飞利浦灯飞烤漆灯泡泡1"
-        },
-        {
-            "name":"飞利浦灯泡1"
-        }
-    ];
-
     $scope.pItems = [
         {
             "img":"img/index-product/p1.jpg",
-            "txt":"玄关过道",
-            "url":"#/products/p1?page=1"
+            "txt":"传统",
+            "url":"#/products/p2?page=1"
         },
         {
             "img":"img/index-product/p2.jpg",
-            "txt":"厨房",
-            "url":"#/products/p2?page=1"
+            "txt":"户外",
+            "url":"#/products/p4?page=1"
         },
         {
             "img":"img/index-product/p3.jpg",
             "txt":"卧室",
-            "url":"#/products/p3?page=1"
+            "url":"#/products/p5?page=1"
         },
         {
             "img":"img/index-product/p4.jpg",
-            "txt":"客厅",
-            "url":"#/products/p4?page=1"
+            "txt":"公共",
+            "url":"#/products/p1?page=1"
         },
         {
             "img":"img/index-product/p5.jpg",
-            "txt":"餐厅",
-            "url":"#/products/p5?page=1"
+            "txt":"家居",
+            "url":"#/products/p3?page=1"
         }
     ]
 
@@ -428,7 +413,7 @@ bulbCtrl.controller('bulbNewsListCtrl',function($scope,$routeParams,newsData,Pag
             return false;
         }
     });
-    $scope.Pages = Pager(newsData,2); // 分页数据
+    $scope.Pages = Pager(newsData,8); // 分页数据
     $scope.newLists = $scope.Pages.pageDataTemp; // 列表数据
 });
 bulbCtrl.controller('bulbNewsDetailCtrl',function($scope,$routeParams,newsData){
@@ -476,7 +461,6 @@ bulbCtrl.controller('bulbContactCtrl',function($scope,$timeout,$http){
           $http.post('/sendMessage',$scope.contactForm).success(function(msg){
               $scope.sendStatus.success = true;
               $scope.sendStatus.disOn = false;
-              console.log(msg)
           }).error(function(errData){
               $scope.sendStatus.error = true;
               $scope.sendStatus.disOn = false;

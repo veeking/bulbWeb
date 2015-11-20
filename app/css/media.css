@@ -18,18 +18,18 @@
 /*main -> slide*/
 @media (max-width: 1200px){
     .main .main-slider .slider .carousel ul.carousel-inner{
-        height: 300px;
+        height: 400px;
     }
 }
 @media (min-width: 768px) and (max-width: 992px) {
     .main .main-slider .slider .carousel ul.carousel-inner{
-        height: 250px;
+        height: 300px;
     }
 }
                  /*小于768时*/
 @media (max-width: 768px){
     .main .main-slider .slider .carousel ul.carousel-inner{
-        height: 200px;
+        height: 270px;
     }
 }
 
@@ -44,7 +44,7 @@
          /*设置最大高度  让超出此高度的元素隐藏*/
     }
     .main .main-info .info-cont .col-md-4 div.cont-txt-main{
-       max-height:120px;
+       max-height:115px;
     }
 }
 @media (min-width: 768px) and (max-width: 992px) {
@@ -202,10 +202,8 @@
     .search-box .tab,.search-box .search-side{
         width:100%;
     }
-    .search-box .tab .tab-item .content .content-item .content-img img{
-        max-height: inherit;
-        min-height:inherit;
-        width: 100%;
+    .search-box .tab .tab-item .content .content-item .content-txt{
+        width:65%;
     }
     .search-box .search-side{
         margin-left:0;
@@ -215,7 +213,17 @@
     }
 
 }
+@media (max-width: 768px){
+    .search-box .tab .tab-item .content .content-item .content-img {
+        margin-right:4%;
+        height: 100px;
+        width: 110px;
+    }
 
+    .search-box .tab .tab-item .content .content-item .content-txt{
+        width:59%;
+    }
+}
 /*product-type 产品类型页*/
 
 @media (max-width: 992px) {

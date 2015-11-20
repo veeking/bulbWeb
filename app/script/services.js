@@ -7,6 +7,22 @@ bulbService.factory('BulbReq',function($resource){
         get: {isArray: true ,cache:true}
     }); // 注意路径也是相对于main.html位置来定位的
 });
+bulbService.factory('GetData',function($q,BulbReq){
+    function getAllData(type,dataType){
+        if(Object.prototype.toString.call(dataType) != "[object Array]"){
+            alert("参数类型错误");
+            return false;
+        };
+        var promises = dataType.map(function(eachData){  // 循环处理
+            return BulbReq.get({type:type,typeData:eachData.navType}).$promise;
+        });  // 单个返回$promise对象以便于all处理 ，不写$promise的话返回的是整个$resource资源 无法获取到正确的数据
+        return $q.all(promises);
+    }
+    return{
+        getAllData:getAllData
+    }
+});
+
 bulbService.factory('ReqLoader',function($q,$location,BulbReq){
     return function(type){
         var delay = $q.defer();
@@ -103,10 +119,8 @@ bulbService.factory('ResManage',function(){
         },
         itemLoaded:function(){
             this.loadedCount++;
-            console.log('图片已加载'+this.loadedCount)
-            if(this.loadedCount === this.totalCount){
+            if(this.loadedCount === this.totalCount){// 所有已加载完成
                this.loaded = true;
-               console.log('所有图片加载完成')
             }
         },
         setTypeImg : function(option){
@@ -133,9 +147,7 @@ bulbService.factory('angularMap',function(){
         map.centerAndZoom(defaultPos,18);
     }
     function getMap(){
-        if(!map){
-         map = new BMap.Map(mapBox);
-        }
+        map = new BMap.Map(mapBox);
         return map;
     }
     function addMarker(){
@@ -148,6 +160,5 @@ bulbService.factory('angularMap',function(){
       initMap:initMap
     }
 });
-
 
 

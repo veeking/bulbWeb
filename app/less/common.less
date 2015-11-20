@@ -71,12 +71,34 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
 }
 
 //公共二级抽象类区域
+.hideAnimate-opacity(){
+  &.ng-hide-add{
+    opacity: 1;
+  }
+  &.ng-hide-add-active{
+    opacity: 0;
+  }
+  &.ng-hide-remove{
+    opacity: 0;
+  }
+  &.ng-hide-remove-active{
+    opacity: 1;
+  }
+}
+
+.view-frame{ // ng-view加载效果
+  .transition(opacity,200ms);
+  .hideAnimate-opacity();
+};
 .view-loading{  // ng-view加载模板前laoding效果
   margin: 100px auto;
-  width: 50px;
+  width: 55px;
   height: 60px;
   text-align: center;
   font-size:0;
+  display: block;
+  .transition(opacity,200ms,ease-out);
+  .hideAnimate-opacity();
   div{
     background-color: @fore-color;
     height: 100%;

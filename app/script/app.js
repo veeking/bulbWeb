@@ -86,3 +86,16 @@ bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpPr
         redirectTo: '/'
      });
 }]);
+bulbApp.run(['$rootScope','$window','$timeout','$location',function($rootScope,$window,$timeout,$location){
+    $rootScope.showViewLoading = true;
+    $rootScope.hideView = false;
+    $rootScope.$on('$locationChangeStart',function(){ // 每次页面跳转时，新页面从顶部开始
+          $window.scrollTo(0,0); // 每次页面跳转时，跳到顶部
+          $rootScope.hideView = true;
+          $rootScope.showViewLoading = false;
+    });
+    $rootScope.$on('$routeChangeSuccess',function(){ // 每次页面跳转时，新页面从顶部开始
+        $rootScope.showViewLoading = true;
+        $rootScope.hideView = false;
+    });
+}]);

@@ -113,11 +113,9 @@ bulbDirective.directive('adaptHeight',function($rootScope){
 
                 if(scope.$last){ // 筛选出 每组最后元素
                     var aHeight = (element[0].scrollHeight + 50) + element[0].offsetTop +pageHeight;
-                    console.log('我是aheight' + aHeight)
                     if(aHeight > maxHeight){
                        maxHeight = aHeight;  // 两组 对比 找出最大值
                     };
-                    console.log('我是maxHeight' + maxHeight)
                     $('.tab').css('height',maxHeight); //取最大值作为高度
 
                 }
@@ -136,11 +134,10 @@ bulbDirective.directive('realSrc',function(ResManage){
             var parentEle = element.parent();
             var laodEle = document.createElement('img');
             var loadClassName = "loadingImg";
-//            parentEle.css({position:'relative'});
             laodEle.src = "img/loading.gif";
             laodEle.className = loadClassName;
             parentEle.append(laodEle);
-            scope.$watch('realSrc',function(){ // 监听控制器对realSrc值做出的更新
+//            scope.$watch('realSrc',function(){ // 监听控制器对realSrc值做出的更新
                 var realSrc = scope.realSrc;
                 ResManage.loadImg(realSrc,function(){
                     element.attr('src',realSrc); // 成功加载图片后设置真实图片地址
@@ -149,7 +146,7 @@ bulbDirective.directive('realSrc',function(ResManage){
                         element.css('opacity', 1); //显示真实图片
                     })
                 });
-            });
+//            });
         }
     }
 });
@@ -161,11 +158,7 @@ bulbDirective.directive('slideExpand',function($timeout){
             $('.' + attr.slideExpand).bind('click',function(){
                 toggle = !toggle;
                 element[0].style['height'] = toggle?element[0].scrollHeight + 'px':0;
-//              parentEle.slideToggle(); //jquery方法 简洁方便但性能不如css3
-                });
-//            scope.$on('$destory',function(){
-//                $('.slide-point').unbind('click');
-//            })
+               });
         }
     }
 });
@@ -221,11 +214,10 @@ bulbDirective.directive('backTop',function() {
         }
     }
 });
-bulbDirective.directive('contactMap',function($q,$timeout,angularMap){
+bulbDirective.directive('contactMap',function($q,$window,$http,angularMap){
     return{
-        restrict: "EA",
+        restrict: "E",
         transclude: true,
-        scope: true,
         replace: true,
         template: "<div id='mapBox' ng-transclude></div>",
         controller: function () {
@@ -236,7 +228,23 @@ bulbDirective.directive('contactMap',function($q,$timeout,angularMap){
                 lng:113.121191,
                 lat:23.024436
             };
-            mapCtrl.initMap('mapBox',pos);
-        }
+            var loadMapScript = function(){
+                      var mapScript = document.createElement('script');
+                      var mapScriptDom;
+                      mapScriptDom = document.getElementById('mapScript');
+                      mapScript.type = 'text/javascript';
+                      mapScript.id = "mapScript";
+                      mapScript.src = "http://api.map.baidu.com/api?v=1.5&ak=uRQK0TQ85K4IZUKzFqLsiLz7&callback=mapInit";
+                     if(mapScriptDom != null){  // 有重复的话替换掉
+                        document.body.replaceChild(mapScript,mapScriptDom);
+                     }else{
+                        document.body.appendChild(mapScript);
+                     }
+             }
+            loadMapScript();
+            $window.mapInit = function(){  // 定义全局地图回调方法，局部方法不会被地图api调用
+               mapCtrl.initMap('mapBox',pos);
+            }
+        } // end link
     }
 })

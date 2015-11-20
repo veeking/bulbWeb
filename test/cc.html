@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<span id="tv">0</span>
+<button id="tb">ceshi</button>
+<script>
+    var otv = document.getElementById('tv');
+    var otb = document.getElementById('tb');
+    var num = 0;
+    otb.addEventListener('click',function(){
+        ++num;
+          console.log(num)
+        if(num >= 3){
+            num = 0;
+        }
+        otv.innerHTML =num;
+    });
+</script>
+</body>
+</html>

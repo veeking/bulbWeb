@@ -127,14 +127,14 @@
     },
     {
         "id":3,
-        "title":"很好认 LED 5.5-50W 2700K 12V MR16 36D",
+        "title":"Xled LED 5.5-50W 2700K 12V MR16 36D",
         "smallTitle":"50W Lumens - 3000K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
         "price":41,
         "field":"普通家居照明",
         "brand":"斯奈德2",
         "version":"4001 Lumens - 3000K",
         "content":"<img src='img/product/p1/cont/c1.jpg'/>产品led-700-r30-27（k2l9支持可调光,且价格实惠,具备LED高品质照明R30特征。为了取代一个60瓦的白炽灯泡，LED的科比R30是理想的轨道或隐藏式照明应用.MASTER LED 光源发出类似卤素灯/ 白炽灯一样的柔和重点光束，是酒店业聚光照明和一般照明应用最理想的改型解决方案，特别适合用于公共区域，比如接待处、门厅、走廊、楼梯井和盥洗室等灯光需要时刻点亮的场所<ul><li>发出零紫外线辐射，对敏感显示器照明极佳</li><li>在潮湿的地方，湿度是一个因素</li><li>up to 25000小时，lowers维修费用</li><li>符合RoHS标准，不含铅、汞</li><li>支持平滑，均匀调光</li></ul>",
-        "imgCollect":["img/product/p1/led-p2.jpg","img/product/p1/led-p2.jpg","img/product/p1/led-p3.jpg","img/product/p1/led-p6.jpg"],
+        "imgCollect":["img/product/p1/led-p2.jpg","img/product/p1/led-p5.jpg","img/product/p1/led-p3.jpg","img/product/p1/led-p6.jpg"],
         "ingredients":[
             {
                 "name":"主要参数",
@@ -190,7 +190,7 @@
     },
     {
         "id":4,
-        "title":"哦开辟 LED 9.5-50W 2900K 12V MR16 36D",
+        "title":"哦led开辟 LED 9.5-50W 2900K 12V MR16 36D",
         "smallTitle":"700 Lumens - 2900K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
         "price":33,
         "field":"普通家居照明",
@@ -253,7 +253,7 @@
     },
     {
         "id":5,
-        "title":"哦开辟 LED 9.5-50W 2700K 12V MR16 36D",
+        "title":"哦开辟 LED 9.5-50W 2700K 12V MR16 36Dled",
         "smallTitle":"600 Lumens - 2700K Halogen White - 120 Volt - Polaroid PLA19-40.400.5.1S",
         "price":48,
         "field":"普通家居照明",

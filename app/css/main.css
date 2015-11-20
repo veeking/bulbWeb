@@ -5116,9 +5116,12 @@ div a:focus {
   background: #2995cc;
 }
 .side-bar .side-bar-middle {
-  transition: height 0.4s linear;
-  -webkit-transition: height 0.4s linear;
-  -moz-transition: height 0.4s linear;
+  transition: all 0.4s linear;
+  -webkit-transition: all 0.4s linear;
+  -moz-transition: all 0.4s linear;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
 }
 .side-bar .side-bar-middle ul {
   margin-bottom: 0;
@@ -5372,8 +5375,9 @@ div a:focus {
   margin-right: 0;
 }
 .product-type .p-type-main .item:hover .imagediv {
-  transform: scale(2, 2);
   -webkit-transform: scale(2, 2);
+  -moz-transform: scale(2, 2);
+  transform: scale(2, 2);
 }
 .product-type .p-type-main .item .imagediv {
   margin-left: auto;
@@ -5382,8 +5386,8 @@ div a:focus {
   min-height: 75px;
   text-align: center;
   transition: transform 0.4s ease-out;
-  -webkit-transition: transform 0.4s ease-out;
-  -moz-transition: transform 0.4s ease-out;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  -moz-transition: -moz-transform 0.4s ease-out;
 }
 .product-type .p-type-main .item .linkdiv {
   margin-bottom: 10px;
@@ -5849,9 +5853,12 @@ div a:focus {
   }
 }
 .product-detail .p-detail-box .p-detail .p-detail-body .body-detail .expand .expand-content {
-  transition: height 0.3s linear;
-  -webkit-transition: height 0.3s linear;
-  -moz-transition: height 0.3s linear;
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   overflow: hidden;
 }
 .product-detail .p-detail-box .p-detail .p-detail-body .body-detail .expand .expand-content {
@@ -6035,9 +6042,12 @@ div a:focus {
   }
 }
 .about .about-other .other-intro .intro-expand .expand-content {
-  transition: height 0.3s linear;
-  -webkit-transition: height 0.3s linear;
-  -moz-transition: height 0.3s linear;
+  transition: all 0.3s linear;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
   overflow: hidden;
 }
 .about .about-other .other-intro .intro-expand .expand-content {
@@ -6286,10 +6296,6 @@ div a:focus {
   -webkit-transition: background 0.3s linear;
   -moz-transition: background 0.3s linear;
   background-color: #414146;
-}
-body,
-html {
-  font-family: "Arial";
 }
 .app-main {
   background: #fff;
@@ -6611,8 +6617,8 @@ html {
 }
 .main .main-slider .slider .carousel ul.carousel-inner li a div.slider-txt-box {
   transition: transform 0.8s ease-out;
-  -webkit-transition: transform 0.8s ease-out;
-  -moz-transition: transform 0.8s ease-out;
+  -webkit-transition: -webkit-transform 0.8s ease-out;
+  -moz-transition: -moz-transform 0.8s ease-out;
   -webkit-transform: translate3d(500px, 0, 0);
   -moz-transform: translate3d(500px, 0, 0);
   transform: translate3d(500px, 0, 0);
@@ -6955,6 +6961,8 @@ html {
   margin-right: 0;
 }
 .main .main-point .point-cont .col-md-12 div.point-cont-item:hover a.glyphicon {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
   transform: rotate(360deg);
 }
 .main .main-point .point-cont .col-md-12 div.point-cont-item h4 {
@@ -6985,9 +6993,15 @@ html {
   color: #333333;
 }
 .main .main-point .point-cont .col-md-12 div.point-cont-item .cont-item-icon a {
-  transition: all 0.75s linear;
-  -webkit-transition: all 0.75s linear;
-  -moz-transition: all 0.75s linear;
+  -webkit-transition: -webkit-transform 0.6s;
+  -moz-transition: -moz-transform 0.6s;
+  -o-transition: -o-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s ease-out;
+  -webkit-transition: -webkit-transform 0.6s ease-out;
+  -moz-transition: -moz-transform 0.6s ease-out;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
   transform: rotate(0deg);
   display: block;
   float: left;

@@ -6,7 +6,7 @@
        var slideIn = function(element, className, done) {
            if(className != 'active') {
                return;
-           }
+           }  // -800 - 0 - 800 滑动
            element.css({
                left: 800,
                display:'block'

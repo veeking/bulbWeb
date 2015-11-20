@@ -26,7 +26,7 @@
         <div class="head-inner container">
             <div class="logo col-md-8">
                 <h1>
-                    <a href="/index">BUIB<b>X·</b></a>
+                    <a href="#/">BUIB<b>X·</b></a>
                     <span>THE BEST QUILITY PRODUCT!</span>
                 </h1>
             </div>
@@ -46,7 +46,7 @@
         <div class="main-top row">
             <div class="nav col-md-8">
 
-                <ul class="nav-menu hidden-xs">
+                  <ul class="nav-menu hidden-xs">
                     <li ng-repeat="navMenu in navMenus" class="navItem" ng-class="{navActive:moveCurrent == $index && moveCurrent > 0}" ng-click="moveSelect($index)">
                         <a href="#/{{navMenu.navUrl}}" class="navItemLink">{{navMenu.navName}}</a>
                         <span ng-show="navMenu.navChild.length >= 1" class="itemIcon">﹀</span>
@@ -68,14 +68,14 @@
             </div><!--end search-->
 
         </div> <!--end main-top -->
-        <div ng-view class="view-frame">
-            <div class="view-loading"> <!--加载前loading效果，加载后会被替换掉-->
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
-            </div>
+        <div class="view-loading" ng-hide="showViewLoading">
+            <div class="rect1"></div>
+            <div class="rect2"></div>
+            <div class="rect3"></div>
+            <div class="rect4"></div>
+            <div class="rect5"></div>
+        </div>  <!--end showViewLoading-->
+        <div ng-view class="view-frame" ng-hide="hideView">
         </div> <!--end ng-view-->
 
     </div><!--end main-->
@@ -97,14 +97,11 @@
 <a class="back-top glyphicon glyphicon-triangle-top visible-lg" back-top href="javascript:void(0)"></a>
 
   <script src="less/less.js"></script>
-  <script src="http://api.map.baidu.com/api?v=1.5&ak=uRQK0TQ85K4IZUKzFqLsiLz7"></script>
-  <script src="lib/framework/new/jquery.js"></script>
-  <script src="lib/framework/new/angular.js"></script>
-  <script src="lib/framework/new/angular-animate.js"></script>
-  <script src="lib/framework/new/angular-resource.js"></script>
-  <script src="lib/framework/new/angular-route.js"></script>
-
-  <!--<script src="lib/framework/ui-bootstrap-tpls-0.11.0.js"></script>-->
+  <script src="lib/framework/min/jquery.min.js"></script>
+  <script src="lib/framework/min/angular.min.js"></script>
+  <script src="lib/framework/min/angular-animate.min.js"></script>
+  <script src="lib/framework/min/angular-resource.min.js"></script>
+  <script src="lib/framework/min/angular-route.min.js"></script>
   <script src="script/app.js"></script>
   <script src="script/animations.js"></script>
   <script src="script/controllers.js"></script>

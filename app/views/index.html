@@ -2,12 +2,29 @@
     <div class="slider col-md-12">
         <carousel interval="20000">
             <slide ng-repeat="slide in slides">
-                <a href="###">
+                <a href="{{slide.url}}">
                     <img real-src="{{slide.src}}"/>
-                    <div class="slider-txt-box" ng-class="{sliderTxtActive:slideActive($index)}">
+
+                    <div class="slide-info-box hidden-xs">
+                        <div class="info-box-top" ng-class="{infoTopActive:slideActive($index)}">
+                            <h2 class="info-box-title">
+                                {{slide.txt}}
+                            </h2>
+                           <p class="info-box-cont">
+                              还在等什么,超值限购,拿起你的电话,只要998,马上带回家.
+                              <br>
+                              come on baby come on come on.
+                          </p>
+                        </div> <!--end info-box-top-->
+                        <div class="info-box-link" ng-class="{infoLinkActive:slideActive($index)}">
+                          <button class="btn btn-primary" href="{{slide.url}}">立即查看</button>
+                        </div><!--end info-box-link"-->
+                    </div> <!--end slide-info-box-->
+
+                    <div class="slider-txt-box visible-xs" ng-class="{sliderTxtActive:slideActive($index)}">
                         <span class="glyphicon glyphicon-pushpin"></span>
                         <span class="slider-txt">{{slide.txt}}</span>
-                    </div> <!--end slider-txt-->
+                    </div> <!--end <768->slider-txt-->
                 </a>
             </slide>
         </carousel>
@@ -46,13 +63,6 @@
     </div>
 
     <div class="productItem-cont">
-
-        <!--<div class="p-left col-md-4">-->
-            <!--<a href="###" class="p-item p-right-item">-->
-                <!--<img real-src="{{pLeft.img}}"/>-->
-                <!--<span>{{pLeft.txt}}</span>-->
-            <!--</a>-->
-        <!--</div>-->
 
         <div class="p-item-box">
             <a href="{{pItem.url}}" ng-repeat="pItem in pItems" class="p-item" ng-class="{firstItem:$index === 0}">
@@ -102,7 +112,7 @@
                 <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员风微风菲菲</span>
             </div>
             <div class="news-cont-main">
-                <a href="#/news/news1/1" ng-repeat="otherNew in otherNews">● {{otherNew.content}}</a>
+                <a href="javascript:void(0)" ng-repeat="otherNew in otherNews">● {{otherNew.content}}</a>
             </div>
             <div class="news-cont-txt">
                 <span>工业服务和生产制造专业人员工业服务和生产制造专业人员工业服务和生产制造专业人员</span>
@@ -121,9 +131,9 @@
         <h3>热点新闻</h3>
         <div class="list">
             <ul>
-                <li ng-repeat="hotNew in hotNews track by $index">
+                <li ng-repeat="hotNew in hotNews | limitTo:8 track by $index">
                     <span class="listIcon"> > </span>
-                    <a href="#/news/news1/1">{{hotNew.name}}</a>
+                    <a href="{{hotNew.url}}">{{hotNew.title}}</a>
                 </li>
             </ul>
         </div>
