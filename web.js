@@ -50,6 +50,7 @@ function readFile(filePath){
    });
     return defer.promise;
 }
+
 function hasInArray(item,arr){
     for(var i=0;i<arr.length;i++) {
         if(JSON.stringify(arr[i]) === JSON.stringify(item)){

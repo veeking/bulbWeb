@@ -2,46 +2,27 @@
  * Created by king on 2015/11/8.
  */
   var bulbAnimate = angular.module('bulbAnimate',['ngAnimate']);
-   bulbAnimate.animation('.slideImg', function() {
+   bulbAnimate.animation('.slideImg', function($timeout) {
        var slideIn = function(element, className, done) {
            if(className != 'active') {
                return;
-           }  // -800 - 0 - 800 滑动
-           element.css({
-               left: 800,
-               display:'block'
-           });
-
-           jQuery(element).animate({
-               left:0
-           }, done);
-
-           return function(cancel) {
-               if(cancel) {
-                   element.stop();
-               }
-           };
+           }  // -600 - 0 - 600 滑动
+           element.css('display','block');
+           move(element[0]).translate(600,0,0).end();
+           move(element[0]).translate(0,0,0).end();
        }
 
        var slideOut = function(element, className, done) {
            if(className != 'active') {
                return;
            }
-           element.css({
-               left: 0,
+           move(element[0]).translate(0,0,0).end();
+           move(element[0]).translate(-600,0,0).end(function(){
+               element.css('display','none');
+               move(element[0]).translate(600,0,0).end();
            });
 
-           jQuery(element).animate({
-               left: -800
-           }, done);
-
-           return function(cancel) {
-               if(cancel) {
-                   element.stop();
-               }
-           };
        }
-
        return {
            addClass: slideIn,
            removeClass: slideOut

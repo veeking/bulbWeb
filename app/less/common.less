@@ -89,6 +89,7 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
 .view-frame{ // ng-view加载效果
   .transition(opacity,200ms);
   .hideAnimate-opacity();
+  position: relative;
 };
 .view-loading{  // ng-view加载模板前laoding效果
   margin: 100px auto;
@@ -275,8 +276,8 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
 //loading
 .loadingImg(@w:50px,@h:50px){
   img{
-    opacity:0;
-    .transition(opacity,0.2s,linear);
+     opacity:0;
+    .transition(all,0.2s,linear);
   }
   img.loadingImg{
     width: @w;
@@ -287,5 +288,10 @@ ul li a:hover,ul li a:focus,div a:hover,div a:focus{
     margin: auto;
     top: 0; left: 0; bottom: 0; right: 0; // 居中
     opacity: 1;
+    visibility: visible;
+  }
+  img.hideLoadingImg{
+    opacity:0;
+    visibility: hidden;
   }
 }

@@ -99,6 +99,7 @@ bulbDirective.directive('formatSection',function(){  // 格式化文章内容
 
 bulbDirective.directive('adaptHeight',function($rootScope){
     var pageHeight;
+    var searchTab;
     var maxHeight = 0;
     $rootScope.$on('$locationChangeStart',function(){
         maxHeight = 0; // 如果路由发生了变化，则清空最大值，以便用于下一组的对比
@@ -107,24 +108,31 @@ bulbDirective.directive('adaptHeight',function($rootScope){
         restrict:"A",
         link : function(scope,element,attr){
             scope.$watch('$last',function(oldEle){
-                 if(pageHeight == undefined){
-                    pageHeight = parseInt($('.search-page').css('height'));
-                 };
-
                 if(scope.$last){ // 筛选出 每组最后元素
+                    searchTab = angular.element(element[0].parentNode.parentNode.parentNode.parentNode.querySelector('.tab'))[0];
+                    if(pageHeight == undefined){  // 分页高度
+                        pageHeight = parseInt(angular.element(element[0].parentNode.parentNode.querySelector('.search-page'))[0].offsetHeight);
+                    };
                     var aHeight = (element[0].scrollHeight + 50) + element[0].offsetTop +pageHeight;
                     if(aHeight > maxHeight){
                        maxHeight = aHeight;  // 两组 对比 找出最大值
                     };
-                    $('.tab').css('height',maxHeight); //取最大值作为高度
-
+                    searchTab.style['height'] = maxHeight + 'px';
                 }
             })
 
         }
     }
 });
-bulbDirective.directive('realSrc',function(ResManage){
+
+
+bulbDirective.directive('realSrc',function($window,$timeout,ResManage){
+    var loadClass = "loadingImg";
+    var hideloadClass = "hideLoadingImg";
+    function onLoad(element){ // src每成功加载一次 就替换掉隐藏加载图标
+        angular.element(element[0].parentNode.querySelector('.' + loadClass)).addClass(hideloadClass);
+        element.css('opacity',1);
+    }  // end onLoad
     return{
         restrict:"A",
         scope:{
@@ -133,21 +141,21 @@ bulbDirective.directive('realSrc',function(ResManage){
         link:function(scope,element){
             var parentEle = element.parent();
             var laodEle = document.createElement('img');
-            var loadClassName = "loadingImg";
             laodEle.src = "img/loading.gif";
-            laodEle.className = loadClassName;
+            laodEle.className = loadClass;
             parentEle.append(laodEle);
-//            scope.$watch('realSrc',function(){ // 监听控制器对realSrc值做出的更新
-                var realSrc = scope.realSrc;
-                ResManage.loadImg(realSrc,function(){
-                    element.attr('src',realSrc); // 成功加载图片后设置真实图片地址
-                    $('.'+ loadClassName).animate({'opacity':0},60,function(){
-                        $(this).hide();// 隐藏loading图
-                        element.css('opacity', 1); //显示真实图片
-                    })
-                });
-//            });
-        }
+            element.bind('load',function(){
+                // 不能用this,this指向了html标签本身，而我们需要传入的是jqlite对象
+                onLoad(element); //src更新一次传入当前element，以便删掉原先未加载element
+            });
+            scope.$watch('realSrc',function(){ // 监听控制器异步加载的图片列表数据的更新
+               element.attr('src',scope.realSrc); // 成功加载图片后设置真实图片地址
+            });
+            //说明:当DOM元素从页面中被移除时,将会在scope中触发$destory事件
+            scope.$on('$destroy', function(){
+                element.unbind('load');
+            });
+        } // end link
     }
 });
 bulbDirective.directive('slideExpand',function($timeout){
@@ -155,7 +163,8 @@ bulbDirective.directive('slideExpand',function($timeout){
         restrict:"A",
         link:function(scope,element,attr){
             var toggle = false;
-            $('.' + attr.slideExpand).bind('click',function(){
+            var slideBtn = angular.element(element[0].parentNode.querySelector('.' + attr.slideExpand));
+            slideBtn.bind('click',function(){
                 toggle = !toggle;
                 element[0].style['height'] = toggle?element[0].scrollHeight + 'px':0;
                });
@@ -204,6 +213,7 @@ bulbDirective.directive('expander',function(){
         } // end link
     }
 });
+
 bulbDirective.directive('backTop',function() {
     return{
         restrict: "A",

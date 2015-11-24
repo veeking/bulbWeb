@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #od{
+            width:200px;
+            height:200px;
+            background: #1b6d85;
+
+        }
+        #od2{
+            width:300px;
+            height:300px;
+            background: #953b39;
+            padding-top:1px;
+            margin: 0 auto;
+            transition:all 0.4s linear;
+        }
+        .showOd{
+            opacity: 1;
+            visibility: visible;
+         }
+        .hideOd{
+            opacity:0;
+            visibility: hidden;
+        }
+        button {
+            display: block;
+            width: 50px;
+            height: 50px;
+            /*visibility: hidden;*/
+        }
+
+        #od2-two{
+            width: 150px;
+            height: 150px;
+            background: #7a43b6;
+            margin-left:20px;
+            margin-top:20px;
+        }
+        .ds{
+            width: 300px;
+            height: 500px;
+            background:#FEC60D;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="od2">
+</div>
+ <div id="od">
+     <button id="er" href="www.baidu.com">测试</button>
+     <img alt=""/>
+ </div>
+<div id="od2" class="od2">
+    <div id="od2-two">de</div>
+</div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+ <div class="ds"></div>
+<!--<script src="js/jquery.transit.js"></script>-->
+ <script>
+     var od = document.getElementById('od');
+     var od2 = document.getElementById('od2');
+     var od2Two = document.getElementById('od2-two');
+     var obtn = document.getElementById('er');
+
+     isVisible()
+     function isVisible(){
+         var offsetY = document.body.scrollTop || document.documentElement.scrollTop;
+         var viewHeight = Math.max(document.documentElement.clientHeight,window.innerHeight || 0); // 兼容取合适值
+         var elementRect = od2.getBoundingClientRect();
+         var elementOffsetY = elementRect.top + offsetY; // 元素的绝对位置 = 元素的相对top值 + 滚动top;
+         var elemHeight = elementRect.height; // 元素的绝对位置 = 元素的相对top值 + 滚动top;
+         var isVisY;
+         if((elementOffsetY + elemHeight <= offsetY + viewHeight && elementOffsetY + elemHeight >= offsetY) || (elementOffsetY >= offsetY && elementOffsetY <= offsetY + viewHeight)){
+             isVisY = true;
+             console.log('元素在可视区')
+         }
+// 判断方法2：
+//      if(elementOffsetY <= offsetY){ // 元素顶部平行滚动条时
+//           if(elementOffsetY + elementHeight >= offsetY){
+////               console.log('滚动条顶部平行')
+//               isVisible = true;
+//           }
+//      }else if(elementOffsetY >= offsetY){// 不平行
+////          console.log(elementRect);
+//          if(elementOffsetY <= offsetY + viewHeight){
+////               console.log('可视区')
+//               isVisible = true;
+//           }
+//      }
+         return isVisY;
+     }
+     window.onscroll = function(){
+         isVisible()
+     }
+     window.onresize = function(){
+         isVisible()
+     }
+     function getView(ele){
+         var offTop = ele.offsetTop;
+         var current = ele.offsetParent;
+         while(current !== null){
+             offTop += current.offsetTop;
+             current = current.offsetParent;
+         }
+         return offTop;
+     }
+     obtn.onclick = function(){
+         od2.className = 'hideOd';
+
+     }
+
+     var x = 1,z=y=0;
+     function add(n){
+         return n = n+1;
+     }
+
+     function add(n){
+         return n = n+3;
+     }
+     y=add(x);
+     z=add(x);
+     console.log("x:" + x + "- y:" + y + "- z:" + z);
+ </script>
+</body>
+</html>

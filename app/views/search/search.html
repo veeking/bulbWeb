@@ -29,7 +29,7 @@
         <h3>热门搜索</h3>
         <div class="list">
             <ul>
-                <li ng-repeat="hotWord in hotWords track by $index">
+                <li ng-repeat="hotWord in hotWords | limitTo:8 track by $index">
                     <span class="listIcon"> > </span>
                     <a href="javascript:void(0);" ng-click="search(hotWord)">{{hotWord}}</a>
                 </li>

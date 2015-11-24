@@ -175,13 +175,21 @@
     .news-top .news-top-banner div.b-txt p span{
         font-size: 24px;
     }
-    .news-type .news-type-item{
+    .news-type-box .news-type{
+        float: none;
+        left:0;
+        position: relative;
+        width:100%;
+    }
+    .news-type-box .news-type .news-type-item{
         width: 100%;
+        right:0;
+        float: none;
         height: 250px;
         overflow: hidden;
-        margin-right: 0;
+        margin-right:0;
     }
-    .news-type div.news-type-item a{
+    .news-type-box .news-type div.news-type-item a{
         padding-top: 15%;
     }
 }

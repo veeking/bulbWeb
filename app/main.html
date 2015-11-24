@@ -3,10 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <!--Less.js编译.less文件并进行本地存储-->
     <link rel="shortcut icon" href="favicon/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet/less" href="less/main.less"/>
-    <!--<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
     <!--<link rel="stylesheet" href="css/main.css"/>-->
     <link rel="stylesheet" href="css/media.css"/>
     <title>BulbX照明</title>
@@ -68,7 +66,7 @@
             </div><!--end search-->
 
         </div> <!--end main-top -->
-        <div class="view-loading" ng-hide="showViewLoading">
+        <div class="view-loading" ng-hide="hideViewLoading">
             <div class="rect1"></div>
             <div class="rect2"></div>
             <div class="rect3"></div>
@@ -97,7 +95,8 @@
 <a class="back-top glyphicon glyphicon-triangle-top visible-lg" back-top href="javascript:void(0)"></a>
 
   <script src="less/less.js"></script>
-  <script src="lib/framework/min/jquery.min.js"></script>
+  <script src="lib/framework/min/move.min.js"></script>
+  <!--<script src="lib/framework/min/jquery.min.js"></script>-->
   <script src="lib/framework/min/angular.min.js"></script>
   <script src="lib/framework/min/angular-animate.min.js"></script>
   <script src="lib/framework/min/angular-resource.min.js"></script>
@@ -109,3 +108,4 @@
   <script src="script/services.js"></script>
 </body>
 </html>
+
