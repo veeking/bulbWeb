@@ -7,8 +7,8 @@
            if(className != 'active') {
                return;
            }  // -600 - 0 - 600 滑动
-           element.css('display','block');
-           move(element[0]).translate(600,0,0).end();
+//           element.css('display','block');
+           move(element[0]).set('display','block').translate(600,0,0).end();
            move(element[0]).translate(0,0,0).end();
        }
 
@@ -18,8 +18,7 @@
            }
            move(element[0]).translate(0,0,0).end();
            move(element[0]).translate(-600,0,0).end(function(){
-               element.css('display','none');
-               move(element[0]).translate(600,0,0).end();
+               move(element[0]).set('display','none').translate(600,0,0).end();
            });
 
        }
