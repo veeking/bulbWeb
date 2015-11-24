@@ -87,10 +87,12 @@ bulbApp.config(['$routeProvider','$httpProvider',function($routeProvider,$httpPr
      });
 }]);
 bulbApp.run(['$rootScope','$window','$timeout','$location',function($rootScope,$window,$timeout,$location){;
+    $rootScope.hideViewLoading = true;
+    $rootScope.hideView = false;
     $rootScope.$on('$locationChangeStart',function(){ // 每次页面跳转时，新页面从顶部开始
         $window.scrollTo(0,0); // 每次页面跳转时，跳到顶部
+        $rootScope.hideView = true;
         $timeout(function(){ // 自动执行$apply刷新
-            $rootScope.hideView = true;
             $rootScope.hideViewLoading = false;
         })
 
@@ -98,7 +100,7 @@ bulbApp.run(['$rootScope','$window','$timeout','$location',function($rootScope,$
     $rootScope.$on('$routeChangeSuccess',function(){ // 每次页面跳转时，新页面从顶部开始
         $timeout(function () {
            $rootScope.hideViewLoading = true;
-           $rootScope.hideView = false;
         });
+           $rootScope.hideView = false;
     })
 }]);
