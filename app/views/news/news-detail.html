@@ -8,9 +8,8 @@
                 <span class="date">时间: {{newDetails.date}}</span>
             </div>
             <div class="section-content">
-
                 <div class="article">
-                    <div class="article-img" ng-hide="newDetails.imgCollect> 0"><img ng-src="{{newDetails.imgCollect[0]}}"/></div>
+                    <div class="article-img" ng-hide="!newDetails.imgCollect"><img ng-src="{{newDetails.imgCollect[0]}}"/></div>
                      <div class="article-txt" format-section="newDetails.content">
                      </div>
                 </div>
